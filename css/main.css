@@ -2,3 +2,16 @@
 body {
   padding-top: 100px;
 }
+
+svg {
+  margin-top: 20px;
+  margin-left: -25%;
+  position: relative;
+  left: 50%;
+  width: 800px;
+  border: 1px solid silver;
+}
+
+rect.session {
+  fill: #337AB7;
+}

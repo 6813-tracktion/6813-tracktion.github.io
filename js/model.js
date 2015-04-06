@@ -9,13 +9,28 @@ $(function(){
 
     var Session = Backbone.Model.extend({
         defaults: {
-            day: new Date(),
+            date: moment(),
             duration: 30,
             label: 'unspecified',
         },
 
         initialize: function () {
+            // parse date
+            switch(typeof this.date){
+                case 'number':
+                case 'string':
+                    this.date = moment(this.date);
+                    break;
+            }
             console.log('initialized a session');
+        },
+
+        day: function() {
+            return moment(this.date).format('YYYY-MM-DD'); // e.g. 2015-02-15
+        },
+
+        week: function() {
+            return moment(this.date).format('YYYY-[W]W'); // e.g. 2015-W7
         }
 
     });
@@ -24,8 +39,14 @@ $(function(){
         model: Session,
 
         groupByDay: function() {
-                return _.groupBy(data, function(item) {
-                    return item.date.substring(8,10);
+            return this.groupBy(function(session) {
+                return session.day();
+            });
+        },
+
+        groupByWeek: function() {
+            return this.groupBy(function(session) {
+                return session.week();
             });
         }
 
@@ -33,10 +54,10 @@ $(function(){
     })
 
     var sessions = new SessionList([
-        new Session({ day: "2015-04-01", duration: 60, label: 'polka'}),
-        new Session({ day: "2015-04-01", duration: 100, label: 'running'}),
-        new Session({ day: "2015-04-02", duration: 20, label: 'aggressive sitting'}),
-        new Session({ day: "2015-04-04", duration: 40, label: 'laser tag'})
+        new Session({ date: "2015-04-01", duration: 60,   label: 'polka'}),
+        new Session({ date: "2015-04-01", duration: 100,  label: 'running'}),
+        new Session({ date: "2015-04-02", duration: 20,   label: 'aggressive sitting'}),
+        new Session({ date: "2015-04-04", duration: 40,   label: 'laser tag'})
     ]);
 
     // ================================================================
@@ -100,6 +121,11 @@ $(function(){
             });
 
             this.total.html(totalMins + ' minutes');
+
+            // Note from Alex:
+            // - currently nothing here uses Marionette
+            // - d3 is declarative, so it's going to be harder to use templates (and Marionette)
+
         },
 
         render: function(){
@@ -108,4 +134,55 @@ $(function(){
     });
 
     new App();
+
+
+    // tentative weekly grouping
+    var sessionsByWeek = sessions.groupByWeek();
+    var $list = $('#sessionsList');
+    _.each(sessionsByWeek, function(weekSessions){
+        console.log('per week: %o', weekSessions);
+
+        var sessionHeight = 30;
+        var leftMargin = 100;
+        var barWidth = function(d) {
+            return parseInt(d.attributes['duration']) * 2;
+        };
+
+        var $week = $('<svg class="week" />').appendTo($list);
+        var chart = $week.attr('width', 800).attr('height', 7 * sessionHeight);
+
+        var sess = d3.select(chart[0]).selectAll('g')
+            .data(weekSessions)
+          .enter().append('g')
+            .attr('transform', function(d, i) {
+                console.log(d);
+                return "translate(0, " + i * sessionHeight + ')';
+            });
+        sess.append('rect').classed('session', true)
+            .attr('x', leftMargin)
+            .attr('width', function(d) {
+                return barWidth(d);
+            })
+            .attr('height', sessionHeight - 1);
+
+        sess.append('text')
+            .attr('x', 0)
+            .attr('y', sessionHeight / 2)
+            .attr('dy', '.35em')
+            .text(function(d) {
+                console.log(d.attributes['date']);
+                return moment(d.attributes['date']).format('MMMM DD');
+            });
+
+        sess.append('text')
+            .attr('x', function(d){
+                return leftMargin + barWidth(d) + 20;
+            })
+            .attr('y', sessionHeight / 2)
+            .attr('dy', '.35em')
+            .attr('fill', 'gray')
+            .text(function(d){
+                return d.attributes['duration'];
+            });
+    });
 });
