@@ -182,9 +182,6 @@ $(function(){
         new Session({ date: "2015-04-04", duration: 40,   label: 'laser tag'})
     ]);
 
-    // TODO load templates from external files, maybe?
-    var weekTpl   = Handlebars.compile($('#weekTpl').html());
-
     //////////////////
     // Marionette code
     //////////////////
@@ -197,6 +194,22 @@ $(function(){
             this.byDay = this.weekSessions.groupBy(function(session, i) {
                 return session.day();
             });
+            // cache
+            this.beginning = moment(this.model.attributes[0].attributes.date).startOf('week');
+            this.end = +moment(this.beginning).endOf('week');
+            this.cumulativeSum = {};
+            var day = moment(this.beginning);
+            var sum = 0;
+            while(+day < this.end){
+                var key = dayFormat(day);
+                sum += _.reduce(this.byDay[key] || [], function(sum, session) {
+                    return sum + session.attributes.duration;
+                }, 0);
+                this.cumulativeSum[key] = sum;
+                day = day.add(1, 'days');
+            }
+            
+            // binding
             this.templateHelpers.self = this;
         },
         templateHelpers: {
@@ -206,9 +219,11 @@ $(function(){
             days: function() {
                 return [0, 1, 2, 3, 4, 5, 6];
             },
+            reversedDays: function() {
+                return [6, 5, 4, 3, 2, 1, 0];
+            },
             day: function(i){
-                var m = moment(this.self.model.attributes[0].attributes.date);
-                return m.endOf('week').subtract(i, 'days');
+                return moment(this.self.beginning).add(i, 'days');
             },
             daySessions: function(i) {
                 var day = this.day(i);
@@ -225,12 +240,29 @@ $(function(){
                   return sum + session.attributes.duration;
                 }, 0);
             },
+            cumulative: function(i) {
+                var m = this.day(i);
+                return this.self.cumulativeSum[dayFormat(m)];
+            },
             weekNumber: function(data){
                 if(data.length)
                     return data[0].week();
                 else
                     return -1;
             }
+        },
+        events: {
+          "click rect.new-session": "createSession",
+          "click rect.session":     "updateSession"
+        },
+        createSession: function(event){
+            var day = $(event.target).data('day');
+            console.log('Yo! day=%d, event=%o', day, event);
+        },
+        updateSession: function(event){
+            var day = $(event.target).data('day');
+            var index = $(event.target).data('day-index');
+            console.log('Yosh! day=%d, index=%d', day, index);
         }
     });
 

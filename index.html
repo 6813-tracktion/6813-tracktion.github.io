@@ -56,28 +56,47 @@
   <!-- templates -->
   <script type="text/template" id="weekTpl">
     <svg class="week">
-      <g class="cumulative" />
+      <g class="cumulative">
+      <% _.each(reversedDays(), function(d, i) { %>
+        <g transform="translate(100, <%= 30 * i + 15 %>)">
+          <% if(i > 0) { %>
+            <line class="cumulative" x1="<%= cumulative(d+1) %>" x2="<%= cumulative(d) %>" y1="-30" y2="0" />
+          <% } else { %>
+            <line class="cumulative" x1="<%= cumulative(d) %>" x2="<%= cumulative(d) %>" y1="-15" y2="0" />
+          <% } %>
+        </g>
+      <% }) %>
+      </g>
       <g class="goal" />
       <g class="days">
-      <% _.each(days(), function(i) { %>
+      <% _.each(reversedDays(), function(d, i) { %>
         <g transform="translate(0, <%= i * 30 %>)" class="day">
+          <!-- background for row hover -->
           <rect class="background" height="30" width="800" />
           <g transform="translate(100, 0)" class="sessions">
-            <% _.each(daySessions(i), function(session, j){ %>
-                <rect class="session" height="29" width="<%= attr(session, 'duration') - 1 %>" x="<%= daySum(i, j) %>"  />
+            <!-- cumulative fill -->
+            <rect class="cumulative" height="30" width="<%= cumulative(d) %>" />
+            <circle class="cumulative" cy="15" cx="<%= cumulative(d) %>" r="5" />
+            <!--
+            <text class="cumulative" y="15" x="<%= cumulative(d) + 20 %>" dy=".35em"><%= cumulative(d) %></text>
+            -->
+
+            <!-- activity slots -->
+            <% _.each(daySessions(d), function(session, j){ %>
+                <rect class="session" height="29" width="<%= attr(session, 'duration') - 1 %>" x="<%= daySum(d, j) %>" data-day="<%= d %>" data-day-index="<%= j %>"  />
             <% }) %>
-            <% if(emptyDay(i)){ %>
+            <% if(emptyDay(d)){ %>
               <!-- lazy boy -->
             <% } %>
             <!-- new session button and sum text -->
-            <g transform="translate(<%= daySum(i) %>, 0)">
-              <rect class="new-session" height="29" width="29" />
+            <g transform="translate(<%= daySum(d) %>, 0)">
+              <rect class="new-session" height="29" width="29" data-day="<%= d %>" />
               <line class="new-session" x1="15" x2="15" y1="5" y2="25" />
               <line class="new-session" y1="15" y2="15" x1="5" x2="25" />
-              <text x="49" y="15" dy=".35em" class="day-sum"><%= daySum(i) %></text>
+              <text x="49" y="15" dy=".35em" class="day-sum"><%= daySum(d) %></text>
             </g>
           </g>
-          <text x="10" y="15" dy=".35em" class="day"><%= day(i).format("MMMM DD")%></text>
+          <text x="10" y="15" dy=".35em" class="day"><%= day(d).format("MMMM DD")%></text>
         </g>
       <% }) %>
       <line x1="100" x2="100" y1="0" y2="210" class="separator" />

@@ -15,14 +15,15 @@ svg {
   /* @see http://lea.verou.me/css3patterns/#lined-paper */
   background-color: #fff; 
   background-image: 
-  linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+  linear-gradient(90deg, transparent 90px, #abced4 98px, #abced4 100px, transparent 100px),
   linear-gradient(#eee .1em, transparent .1em);
   background-size: 100% 30px;
 
 }
 line.separator {
-  stroke: black;
+  stroke: rgba(0, 0, 0, 0.5);
   stroke-width: 2px;
+  pointer-events: none;
 }
 g.day {
   pointer-events: all;
@@ -30,6 +31,24 @@ g.day {
 rect.background {
   pointer-events: all;
   fill: none;
+}
+rect.cumulative {
+  pointer-events: none;
+  fill: rgba(255, 0, 0, 0.1);
+}
+circle.cumulative {
+  pointer-events: none;
+  stroke: rgba(255, 0, 0, 0.1);
+  stroke-width: 2px;
+  fill: none;
+}
+text.cumulative {
+  visibility: hidden;
+  fill: rgba(200, 200, 200, 0.7);
+}
+line.cumulative {
+  stroke: rgba(200, 200, 200, 0.5);
+  stroke-width: 2px;
 }
 rect.session {
   fill: #337AB7;
@@ -58,6 +77,9 @@ text.day-sum {
 /* visual feedback */
 rect.background:hover {
   fill: none;
+}
+g.day:hover text.cumulative {
+  visibility: visible;
 }
 rect.session:hover {
   fill: blue;
