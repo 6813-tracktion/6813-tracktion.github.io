@@ -51,7 +51,7 @@ $(function(){
         }
 
         // TODO functions to do date range query + sum over time?
-    })
+    });
 
     var sessions = new SessionList([
         new Session({ date: "2015-04-01", duration: 60,   label: 'polka'}),
@@ -135,54 +135,130 @@ $(function(){
 
     new App();
 
+});
 
-    // tentative weekly grouping
-    var sessionsByWeek = sessions.groupByWeek();
-    var $list = $('#sessionsList');
-    _.each(sessionsByWeek, function(weekSessions){
-        console.log('per week: %o', weekSessions);
+$(function(){
 
-        var sessionHeight = 30;
-        var leftMargin = 100;
-        var barWidth = function(d) {
-            return parseInt(d.attributes['duration']) * 2;
-        };
+    ///// UTILS ///////////////////////////////////////////////////////////////
+    var dayFormat = function(m) {
+        return moment(m).format('YYYY-MM-DD'); // e.g. 2015-02-15
+    };
+    var weekFormat = function(m) {
+        return moment(m).format('YYYY-[W]W'); // e.g. 2015-W7
+    };
 
-        var $week = $('<svg class="week" />').appendTo($list);
-        var chart = $week.attr('width', 800).attr('height', 7 * sessionHeight);
-
-        var sess = d3.select(chart[0]).selectAll('g')
-            .data(weekSessions)
-          .enter().append('g')
-            .attr('transform', function(d, i) {
-                console.log(d);
-                return "translate(0, " + i * sessionHeight + ')';
-            });
-        sess.append('rect').classed('session', true)
-            .attr('x', leftMargin)
-            .attr('width', function(d) {
-                return barWidth(d);
-            })
-            .attr('height', sessionHeight - 1);
-
-        sess.append('text')
-            .attr('x', 0)
-            .attr('y', sessionHeight / 2)
-            .attr('dy', '.35em')
-            .text(function(d) {
-                console.log(d.attributes['date']);
-                return moment(d.attributes['date']).format('MMMM DD');
-            });
-
-        sess.append('text')
-            .attr('x', function(d){
-                return leftMargin + barWidth(d) + 20;
-            })
-            .attr('y', sessionHeight / 2)
-            .attr('dy', '.35em')
-            .attr('fill', 'gray')
-            .text(function(d){
-                return d.attributes['duration'];
-            });
+    ///// MODEL ///////////////////////////////////////////////////////////////
+    //
+    var Session = Backbone.Model.extend({
+        defaults: {
+            date: moment(),
+            duration: 30,
+            label: 'unspecified',
+        },
+        initialize: function (attrs, options) {
+            // parse date
+            switch(typeof attrs.date){
+                case 'number':
+                case 'string':
+                    attrs.date = moment(attrs.date);
+                    break;
+            }
+            console.log('initialized a session');
+        },
+        day: function() {
+            return dayFormat(this.attributes.date);
+        },
+        week: function() {
+            return weekFormat(this.attributes.date);
+        }
     });
+
+    // fake model
+    //
+    var sessions = new Backbone.Collection([
+        new Session({ date: "2015-04-01", duration: 60,   label: 'polka'}),
+        new Session({ date: "2015-04-01", duration: 100,  label: 'running'}),
+        new Session({ date: "2015-04-02", duration: 20,   label: 'aggressive sitting'}),
+        new Session({ date: "2015-04-04", duration: 40,   label: 'laser tag'})
+    ]);
+
+    // TODO load templates from external files, maybe?
+    var weekTpl   = Handlebars.compile($('#weekTpl').html());
+
+    //////////////////
+    // Marionette code
+    //////////////////
+
+    // @see http://jsfiddle.net/bryanbuchs/c72Vg/
+    var WeekView = Marionette.ItemView.extend({
+        template: "#weekTpl",
+        initialize: function(options) {
+            this.weekSessions = new Backbone.Collection(_.toArray(this.model.attributes));
+            this.byDay = this.weekSessions.groupBy(function(session, i) {
+                return session.day();
+            });
+            this.templateHelpers.self = this;
+        },
+        templateHelpers: {
+            attr: function(session, name){
+                return session.attributes[name];
+            },
+            days: function() {
+                return [0, 1, 2, 3, 4, 5, 6];
+            },
+            day: function(i){
+                var m = moment(this.self.model.attributes[0].attributes.date);
+                return m.endOf('week').subtract(i, 'days');
+            },
+            daySessions: function(i) {
+                var day = this.day(i);
+                return this.self.byDay[dayFormat(day)];
+            },
+            emptyDay: function(day) {
+                return !this.daySessions(day);
+            },
+            daySum: function(day, upTo) {
+                if(arguments.length < 2)
+                    upTo = Infinity;
+                var sessionList = this.daySessions(day) || [];
+                return _.reduce(sessionList.slice(0, upTo), function(sum, session){
+                  return sum + session.attributes.duration;
+                }, 0);
+            },
+            weekNumber: function(data){
+                if(data.length)
+                    return data[0].week();
+                else
+                    return -1;
+            }
+        }
+    });
+
+    var FullView = Marionette.CollectionView.extend({
+        childView: WeekView,
+        initialize: function() {
+            var weekSessions = this.collection.groupBy(function(session, i) {
+                return session.week();
+            });
+            this.collection = new Backbone.Collection(_.toArray(weekSessions));
+        }
+    });
+
+    // application
+    //
+    var app = new Marionette.Application();
+    app.addRegions({
+        weekList: '#weeks'
+    });
+    app.on('start', function(options){
+        console.log('Started Marionette application, options = %o', options);
+
+        if(Backbone.history){
+            Backbone.history.start();
+        }
+    });
+
+    app.weekList.show(new FullView({collection: sessions}));
+
+    app.start();
 });

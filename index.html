@@ -51,6 +51,39 @@
 
     <div id="totalMinutes">&nbsp;</div>
   </div>
+  <div id="weeks"></div>
+
+  <!-- templates -->
+  <script type="text/template" id="weekTpl">
+    <svg class="week">
+      <g class="cumulative" />
+      <g class="goal" />
+      <g class="days">
+      <% _.each(days(), function(i) { %>
+        <g transform="translate(0, <%= i * 30 %>)" class="day">
+          <rect class="background" height="30" width="800" />
+          <g transform="translate(100, 0)" class="sessions">
+            <% _.each(daySessions(i), function(session, j){ %>
+                <rect class="session" height="29" width="<%= attr(session, 'duration') - 1 %>" x="<%= daySum(i, j) %>"  />
+            <% }) %>
+            <% if(emptyDay(i)){ %>
+              <!-- lazy boy -->
+            <% } %>
+            <!-- new session button and sum text -->
+            <g transform="translate(<%= daySum(i) %>, 0)">
+              <rect class="new-session" height="29" width="29" />
+              <line class="new-session" x1="15" x2="15" y1="5" y2="25" />
+              <line class="new-session" y1="15" y2="15" x1="5" x2="25" />
+              <text x="49" y="15" dy=".35em" class="day-sum"><%= daySum(i) %></text>
+            </g>
+          </g>
+          <text x="10" y="15" dy=".35em" class="day"><%= day(i).format("MMMM DD")%></text>
+        </g>
+      <% }) %>
+      <line x1="100" x2="100" y1="0" y2="210" class="separator" />
+      </g>
+    </svg>
+  </script>
 
   <!-- libraries -->
   <!-- <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script> -->
@@ -62,8 +95,7 @@
   <script src="libs/backbone.localstorage/backbone.localStorage.js"></script>
   <script src="libs/backbone.marionette/lib/backbone.marionette.js"></script>
   <script src="libs/moment/moment.min.js"></script>
-  <script src="libs/d3/d3.js"></script>
-  
+
   <!-- custom JS -->
   <script type="text/javascript" src="js/model.js"></script>
 </body>

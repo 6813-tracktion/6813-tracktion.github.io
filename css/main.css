@@ -9,9 +9,66 @@ svg {
   position: relative;
   left: 50%;
   width: 800px;
-  border: 1px solid silver;
-}
+  /* background: #efefef; */
+  height: 210px;
+  
+  /* @see http://lea.verou.me/css3patterns/#lined-paper */
+  background-color: #fff; 
+  background-image: 
+  linear-gradient(90deg, transparent 79px, #abced4 79px, #abced4 81px, transparent 81px),
+  linear-gradient(#eee .1em, transparent .1em);
+  background-size: 100% 30px;
 
+}
+line.separator {
+  stroke: black;
+  stroke-width: 2px;
+}
+g.day {
+  pointer-events: all;
+}
+rect.background {
+  pointer-events: all;
+  fill: none;
+}
 rect.session {
   fill: #337AB7;
+  height: 29px;
+  cursor: col-resize;
+}
+.new-session {
+  visibility: hidden;
+}
+rect.new-session {
+  fill: rgba(255, 0, 0, 0.5);
+}
+line.new-session {
+  stroke: white;
+  stroke-width: 2px;
+  pointer-events: none;
+}
+text.day, text.day-sum {
+  cursor: default;
+  pointer-events: none;
+}
+text.day-sum {
+  fill: rgba(200, 200, 200, 0.7);
+  visibility: hidden;
+}
+/* visual feedback */
+rect.background:hover {
+  fill: none;
+}
+rect.session:hover {
+  fill: blue;
+}
+g.day:hover .new-session {
+  visibility: visible;
+  cursor: pointer;
+}
+rect.new-session:hover {
+  fill: red;
+}
+g.day:hover text.day-sum {
+  visibility: visible;
 }
