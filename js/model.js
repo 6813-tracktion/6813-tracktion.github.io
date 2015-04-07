@@ -161,6 +161,7 @@ $(function(){
                 case 'number':
                 case 'string':
                     attrs.date = moment(attrs.date);
+                    this.attributes.date = attrs.date;
                     break;
             }
             console.log('initialized a session');
@@ -182,11 +183,13 @@ $(function(){
         new Session({ date: "2015-04-04", duration: 40,   label: 'laser tag'})
     ];
     for(var i = 0; i < 100; ++i){
-        var m = moment("2015-04-04").subtract(Math.round(i / 3 + Math.random() * i), 'days');
+        var m = moment("2015-04-04")
+                  .subtract(Math.round(i / 3 + Math.random() * i), 'days')
+                  .add(Math.round(Math.random() * 1e6), 'ms');
         list.push(new Session({ date: m, duration: Math.ceil(1 + Math.random() * 10) * 5, label: 'random'}));
     }
     list.sort(function(a, b){
-        return moment(a.attributes.date) - moment(a.attributes.date) < 0;
+        return moment(a.attributes.date) - moment(b.attributes.date) < 0;
     });
     var sessions = new Backbone.Collection(list);
 
@@ -252,11 +255,8 @@ $(function(){
                 var m = this.day(i);
                 return this.self.cumulativeSum[dayFormat(m)];
             },
-            weekNumber: function(data){
-                if(data.length)
-                    return data[0].week();
-                else
-                    return -1;
+            weekNumber: function(){
+                return this.self.beginning.format('W');
             }
         },
         events: {
@@ -280,6 +280,12 @@ $(function(){
             var weekSessions = this.collection.groupBy(function(session, i) {
                 return session.week();
             });
+            var weeks = Object.keys(weekSessions);
+            console.log(weeks);
+            for(var w in weekSessions){
+                var sessions = weekSessions[w];
+                console.log('%s -> %o', w, sessions);
+            }
             this.collection = new Backbone.Collection(_.toArray(weekSessions));
         }
     });

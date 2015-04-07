@@ -56,6 +56,9 @@
   <!-- templates -->
   <script type="text/template" id="weekTpl">
     <svg class="week">
+      <g class="week-label" transform="translate(750, 100) rotate(90)">
+        <text style="text-anchor: middle;">Week <%= weekNumber() %></text>
+      </g>
       <g class="cumulative">
       <% _.each(reversedDays(), function(d, i) { %>
         <g transform="translate(100, <%= 30 * i + 15 %>)">

@@ -74,6 +74,9 @@ text.day-sum {
   fill: rgba(200, 200, 200, 0.7);
   visibility: hidden;
 }
+.week-label text {
+  fill: #dfdfdf;
+}
 /* visual feedback */
 rect.background:hover {
   fill: none;
