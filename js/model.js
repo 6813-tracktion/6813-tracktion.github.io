@@ -175,12 +175,20 @@ $(function(){
 
     // fake model
     //
-    var sessions = new Backbone.Collection([
+    var list = [
         new Session({ date: "2015-04-01", duration: 60,   label: 'polka'}),
         new Session({ date: "2015-04-01", duration: 100,  label: 'running'}),
         new Session({ date: "2015-04-02", duration: 20,   label: 'aggressive sitting'}),
         new Session({ date: "2015-04-04", duration: 40,   label: 'laser tag'})
-    ]);
+    ];
+    for(var i = 0; i < 100; ++i){
+        var m = moment("2015-04-04").subtract(Math.round(i / 3 + Math.random() * i), 'days');
+        list.push(new Session({ date: m, duration: Math.ceil(1 + Math.random() * 10) * 5, label: 'random'}));
+    }
+    list.sort(function(a, b){
+        return moment(a.attributes.date) - moment(a.attributes.date) < 0;
+    });
+    var sessions = new Backbone.Collection(list);
 
     //////////////////
     // Marionette code
