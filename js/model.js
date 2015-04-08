@@ -8,7 +8,9 @@ $(function(){
         return moment(m).format('YYYY-MM-DD'); // e.g. 2015-02-15
     };
     var weekFormat = function(m) {
-        return moment(m).format('YYYY-[W]W'); // e.g. 2015-W7
+        // TODO: Let the user change the current goal cycle without affecting
+        // past goal periods.  Can probably wait for GR5.
+        return moment(m).format('GGGG-[W]W'); // e.g. 2015-W7
     };
 
     ///// MODEL ///////////////////////////////////////////////////////////////
@@ -70,8 +72,8 @@ $(function(){
                 return session.day();
             });
             // cache
-            this.beginning = moment(this.model.attributes[0].attributes.date).startOf('week');
-            this.end = +moment(this.beginning).endOf('week');
+            this.beginning = moment(this.model.attributes[0].attributes.date).startOf('isoWeek');
+            this.end = +moment(this.beginning).endOf('isoWeek');
             this.cumulativeSum = {};
             var day = moment(this.beginning);
             var sum = 0;
