@@ -30,13 +30,25 @@ $(function(){
                     this.attributes.date = attrs.date;
                     break;
             }
-            console.log('initialized a session');
+            //console.log('initialized a session');
         },
         day: function() {
             return dayFormat(this.attributes.date);
         },
         week: function() {
             return weekFormat(this.attributes.date);
+        }
+    });
+
+    var WeekSessions = Backbone.Collection.extend({
+        model: Session
+    });
+
+    var Week = Backbone.Model.extend({
+        defaults: function() {
+            return {
+                sessions: new Backbone.Collection()
+            };
         }
     });
 
@@ -67,12 +79,15 @@ $(function(){
     var WeekView = Marionette.ItemView.extend({
         template: "#weekTpl",
         initialize: function(options) {
-            this.weekSessions = new Backbone.Collection(_.toArray(this.model.attributes));
+            this.weekSessions = this.model.attributes.sessions;
+            this.listenTo(this.weekSessions, 'add', this.render);
+        },
+        onBeforeRender: function() {
             this.byDay = this.weekSessions.groupBy(function(session, i) {
                 return session.day();
             });
             // cache
-            this.beginning = moment(this.model.attributes[0].attributes.date).startOf('isoWeek');
+            this.beginning = moment(this.weekSessions.at(0).attributes.date).startOf('isoWeek');
             this.end = +moment(this.beginning).endOf('isoWeek');
             this.cumulativeSum = {};
             var day = moment(this.beginning);
@@ -85,45 +100,45 @@ $(function(){
                 this.cumulativeSum[key] = sum;
                 day = day.add(1, 'days');
             }
-            
-            // binding
-            this.templateHelpers.self = this;
         },
-        templateHelpers: {
-            attr: function(session, name){
-                return session.attributes[name];
-            },
-            days: function() {
-                return [0, 1, 2, 3, 4, 5, 6];
-            },
-            reversedDays: function() {
-                return [6, 5, 4, 3, 2, 1, 0];
-            },
-            day: function(i){
-                return moment(this.self.beginning).add(i, 'days');
-            },
-            daySessions: function(i) {
-                var day = this.day(i);
-                return this.self.byDay[dayFormat(day)];
-            },
-            emptyDay: function(day) {
-                return !this.daySessions(day);
-            },
-            daySum: function(day, upTo) {
-                if(arguments.length < 2)
-                    upTo = Infinity;
-                var sessionList = this.daySessions(day) || [];
-                return _.reduce(sessionList.slice(0, upTo), function(sum, session){
-                  return sum + session.attributes.duration;
-                }, 0);
-            },
-            cumulative: function(i) {
-                var m = this.day(i);
-                return this.self.cumulativeSum[dayFormat(m)];
-            },
-            weekNumber: function(){
-                return this.self.beginning.format('W');
-            }
+        templateHelpers: function() {
+            return {
+                self: this,
+                attr: function(session, name){
+                    return session.attributes[name];
+                },
+                days: function() {
+                    return [0, 1, 2, 3, 4, 5, 6];
+                },
+                reversedDays: function() {
+                    return [6, 5, 4, 3, 2, 1, 0];
+                },
+                day: function(i){
+                    return moment(this.self.beginning).add(i, 'days');
+                },
+                daySessions: function(i) {
+                    var day = this.day(i);
+                    return this.self.byDay[dayFormat(day)];
+                },
+                emptyDay: function(day) {
+                    return !this.daySessions(day);
+                },
+                daySum: function(day, upTo) {
+                    if(arguments.length < 2)
+                        upTo = Infinity;
+                    var sessionList = this.daySessions(day) || [];
+                    return _.reduce(sessionList.slice(0, upTo), function(sum, session){
+                      return sum + session.attributes.duration;
+                    }, 0);
+                },
+                cumulative: function(i) {
+                    var m = this.day(i);
+                    return this.self.cumulativeSum[dayFormat(m)];
+                },
+                weekNumber: function(){
+                    return this.self.beginning.format('W');
+                }
+            };
         },
         events: {
           "click rect.new-session": "createSession",
@@ -132,6 +147,10 @@ $(function(){
         createSession: function(event){
             var day = $(event.target).data('day');
             console.log('Yo! day=%d, event=%o', day, event);
+            // TODO: Let the user input the parameters.
+            var date = this.templateHelpers().day(day);
+            var s = new Session({date: date, duration: 30});
+            this.weekSessions.add(s);
         },
         updateSession: function(event){
             var day = $(event.target).data('day');
@@ -143,16 +162,21 @@ $(function(){
     var FullView = Marionette.CollectionView.extend({
         childView: WeekView,
         initialize: function() {
-            var weekSessions = this.collection.groupBy(function(session, i) {
+            var sessionsByWeek = this.collection.groupBy(function(session, i) {
                 return session.week();
             });
+            /*
             var weeks = Object.keys(weekSessions);
             console.log(weeks);
             for(var w in weekSessions){
                 var sessions = weekSessions[w];
                 console.log('%s -> %o', w, sessions);
             }
-            this.collection = new Backbone.Collection(_.toArray(weekSessions));
+            */
+            var weeks = _.map(sessionsByWeek, function(weekSessionsArray) {
+                return new Week({sessions: new WeekSessions(weekSessionsArray)});
+            });
+            this.collection = new Backbone.Collection(weeks);
         }
     });
 
