@@ -38,7 +38,7 @@ rect.cumulative {
 }
 circle.cumulative {
   pointer-events: none;
-  stroke: rgba(255, 0, 0, 0.1);
+  stroke: rgba(255, 0, 0, 0.2);
   stroke-width: 2px;
   fill: none;
 }
@@ -47,7 +47,7 @@ text.cumulative {
   fill: rgba(200, 200, 200, 0.7);
 }
 line.cumulative {
-  stroke: rgba(200, 200, 200, 0.5);
+  stroke: rgba(100, 100, 100, 0.5);
   stroke-width: 2px;
 }
 rect.session {

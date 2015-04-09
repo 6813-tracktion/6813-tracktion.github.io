@@ -45,6 +45,11 @@
       </g>
       <g class="cumulative">
       <% _.each(reversedDays(), function(d, i) { %>
+        <!-- It would be more logical to put the vertices on the lines between
+             days, so that two consecutive vertices will straddle the day that
+             reflects the difference between them, but I think this is
+             outweighed by the downside of more of the cumulative line graph
+             being hidden by the bars. -->
         <g transform="translate(100, <%= 30 * i + 15 %>)">
           <% if(i > 0) { %>
             <line class="cumulative" x1="<%= cumulative(d+1) %>" x2="<%= cumulative(d) %>" y1="-30" y2="0" />
@@ -62,7 +67,9 @@
           <rect class="background" height="30" width="800" />
           <g transform="translate(100, 0)" class="sessions">
             <!-- cumulative fill -->
-            <rect class="cumulative" height="30" width="<%= cumulative(d) %>" />
+            <!-- IMO, filling under the cumulative graph is misleading because
+                 the area under it doesn't have any meaning. -->
+            <!--<rect class="cumulative" height="30" width="<%= cumulative(d) %>" />-->
             <circle class="cumulative" cy="15" cx="<%= cumulative(d) %>" r="5" />
             <!--
             <text class="cumulative" y="15" x="<%= cumulative(d) + 20 %>" dy=".35em"><%= cumulative(d) %></text>
