@@ -81,6 +81,9 @@ $(function(){
         initialize: function(options) {
             this.weekSessions = this.model.attributes.sessions;
             this.listenTo(this.weekSessions, 'add', this.render);
+            this.listenTo(this.weekSessions, 'change', this.render);
+            this.listenTo(this.weekSessions, 'remove', this.render);
+            this.dragInfo = null;
         },
         onBeforeRender: function() {
             this.byDay = this.weekSessions.groupBy(function(session, i) {
@@ -141,21 +144,53 @@ $(function(){
             };
         },
         events: {
-          "click rect.new-session": "createSession",
-          "click rect.session":     "updateSession"
+          "mousedown rect.session":     "mousedownSession",
+          "mousedown rect.new-session": "mousedownPlus",
+          "mousemove": "mousemove",
+          "mouseup": "mouseup",
         },
-        createSession: function(event){
+        mousedownSession: function(event){
+            var cid = $(event.target).data('cid');
+            this.startDragging(this.weekSessions.get(cid), false, event);
+        },
+        mousedownPlus: function(event){
             var day = $(event.target).data('day');
-            console.log('Yo! day=%d, event=%o', day, event);
-            // TODO: Let the user input the parameters.
             var date = this.templateHelpers().day(day);
-            var s = new Session({date: date, duration: 30});
-            this.weekSessions.add(s);
+            var newSession = new Session({date: date});
+            this.weekSessions.add(newSession);
+            // The view should render synchronously, so the new rect should be
+            // present in the DOM if we need it.
+            this.startDragging(newSession, true, event);
         },
-        updateSession: function(event){
-            var day = $(event.target).data('day');
-            var index = $(event.target).data('day-index');
-            console.log('Yosh! day=%d, index=%d', day, index);
+        startDragging: function(session, isCreate, event){
+            this.dragInfo = {
+                    session: session,
+                    isCreate: isCreate,
+                    startTime: moment(),
+                    origDuration: session.attributes.duration,
+                    origMouseX: event.pageX};
+        },
+        mousemove: function(event){
+            if (this.dragInfo) {
+                // Current assumption: 1 minute per horizontal pixel.
+                var newDuration = Math.max(0, this.dragInfo.origDuration + event.pageX - this.dragInfo.origMouseX);
+                this.dragInfo.session.set('duration', newDuration);
+            }
+        },
+        mouseup: function(event){
+            if (this.dragInfo) {
+                // XXX: Ideally this time threshold would be a system setting
+                // like the double-click timeout.
+                if (moment().diff(this.dragInfo.startTime, 'milliseconds') < 300) {
+                    console.log('Treat as a click');
+                    // TODO: If creating, prompt the user to type in the duration.
+                }
+                // TODO: Prompt for activity type if creating a session.
+                // Delete if duration has been reduced to zero.
+                if (this.dragInfo.session.attributes.duration == 0)
+                    this.weekSessions.remove(this.dragInfo.session);
+                this.dragInfo = null;
+            }
         }
     });
 

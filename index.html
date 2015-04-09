@@ -77,7 +77,7 @@
 
             <!-- activity slots -->
             <% _.each(daySessions(d), function(session, j){ %>
-                <rect class="session" height="29" width="<%= attr(session, 'duration') - 1 %>" x="<%= daySum(d, j) %>" data-day="<%= d %>" data-day-index="<%= j %>"  />
+                <rect class="session" height="29" width="<%= attr(session, 'duration') - 1 %>" x="<%= daySum(d, j) %>" data-cid="<%= session.cid %>"  />
             <% }) %>
             <% if(emptyDay(d)){ %>
               <!-- lazy boy -->
