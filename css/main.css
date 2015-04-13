@@ -100,7 +100,7 @@ g.day:hover text.day-sum {
     visibility: visible;
     stroke: red;
     stroke-width: 5;
-
+}
 /* unsuccesful attempt to fix jquery autocomplete behind dropdown */
 .ui-autocomplete-input, .ui-menu, .ui-menu-item {
   z-index: 2006;
