@@ -108,7 +108,9 @@ var WeekView = Marionette.ItemView.extend({
                 isCreate: isCreate,
                 startTime: moment(),
                 origDuration: session.attributes.duration,
-                origMouseX: event.pageX};
+                origMouseX: event.pageX
+        };
+        $('body').addClass('dragging');
     },
     mousemove: function(event){
         if (this.dragInfo) {
@@ -142,6 +144,7 @@ var WeekView = Marionette.ItemView.extend({
             if (this.dragInfo.session.attributes.duration == 0)
                 this.weekSessions.remove(this.dragInfo.session);
             this.dragInfo = null;
+            $('body').removeClass('dragging');
         }
     }
 });

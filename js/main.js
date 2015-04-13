@@ -8,14 +8,13 @@ async.waterfall([
     });
   },
   // 2 = load templates
-  loadTemplates,
-  ],
+  loadTemplates
+],
   // 3 = setup application
   function initialize(err, templates){
     if(err){
       console.log('Error: %o', err);
     }
-    console.log('Templates: %o', templates);
 
     // 1. Retrieve model
     var sessions = loadModel();

@@ -89,6 +89,10 @@ g.day:hover .new-session {
   visibility: visible;
   cursor: pointer;
 }
+.dragging g.day:hover .new-session {
+  visibility: hidden;
+  cursor: default;
+}
 rect.new-session:hover {
   fill: red;
 }
