@@ -76,6 +76,9 @@ $(function(){
     // Marionette code
     //////////////////
 
+    var DAY_HEIGHT_PX = 42;  // Keep in sync with svg {...} in main.css
+    var PX_PER_MIN = 700 / 420;
+
     // @see http://jsfiddle.net/bryanbuchs/c72Vg/
     var WeekView = Marionette.ItemView.extend({
         template: "#weekTpl",
@@ -108,6 +111,11 @@ $(function(){
         templateHelpers: function() {
             return {
                 self: this,
+                DAY_HEIGHT_PX: DAY_HEIGHT_PX,
+                // Round so our 1px borders are aligned with the screen pixels.
+                rm2p: function(min) {
+                    return Math.round(PX_PER_MIN * min);
+                },
                 attr: function(session, name){
                     return session.attributes[name];
                 },
@@ -173,8 +181,9 @@ $(function(){
         },
         mousemove: function(event){
             if (this.dragInfo) {
-                // Current assumption: 1 minute per horizontal pixel.
-                var newDuration = Math.max(0, this.dragInfo.origDuration + event.pageX - this.dragInfo.origMouseX);
+                var newDuration = Math.max(0,
+                        this.dragInfo.origDuration +
+                        (event.pageX - this.dragInfo.origMouseX) / PX_PER_MIN);
                 newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
                 this.dragInfo.session.set('duration', newDuration);
             }

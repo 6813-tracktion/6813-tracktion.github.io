@@ -10,14 +10,14 @@ svg {
   left: 50%;
   width: 800px;
   /* background: #efefef; */
-  height: 210px;
+  height: 294px;
   
   /* @see http://lea.verou.me/css3patterns/#lined-paper */
   background-color: #fff; 
   background-image: 
   linear-gradient(90deg, transparent 90px, #abced4 98px, #abced4 100px, transparent 100px),
   linear-gradient(#eee .1em, transparent .1em);
-  background-size: 100% 30px;
+  background-size: 100% 42px;
 
 }
 line.separator {
@@ -52,7 +52,6 @@ line.cumulative {
 }
 rect.session {
   fill: #337AB7;
-  height: 29px;
   cursor: col-resize;
 }
 .new-session {
