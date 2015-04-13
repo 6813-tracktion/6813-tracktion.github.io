@@ -96,3 +96,9 @@ rect.new-session:hover {
 g.day:hover text.day-sum {
   visibility: visible;
 }
+
+.goalLine {
+    visibility: visible;
+    stroke: red;
+    stroke-width: 5;
+}
