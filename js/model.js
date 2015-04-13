@@ -15,6 +15,7 @@ $(function(){
 
     ///// MODEL ///////////////////////////////////////////////////////////////
     //
+    var DURATION_GRANULARITY = 5;
     var Session = Backbone.Model.extend({
         defaults: {
             date: moment(),
@@ -174,6 +175,7 @@ $(function(){
             if (this.dragInfo) {
                 // Current assumption: 1 minute per horizontal pixel.
                 var newDuration = Math.max(0, this.dragInfo.origDuration + event.pageX - this.dragInfo.origMouseX);
+                newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
                 this.dragInfo.session.set('duration', newDuration);
             }
         },
