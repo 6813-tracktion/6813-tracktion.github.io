@@ -194,9 +194,19 @@ $(function(){
                 // like the double-click timeout.
                 if (moment().diff(this.dragInfo.startTime, 'milliseconds') < 300) {
                     console.log('Treat as a click');
-                    // TODO: If creating, prompt the user to type in the duration.
+                    if (! this.dragInfo.isCreate) {
+                        // TODO user clicked on existing entry, so show its info
+                    }
                 }
-                // TODO: Prompt for activity type if creating a session.
+
+                // if creating a session, ask for activity type and duration
+                if (this.dragInfo.isCreate) {
+                        // TODO ask for activity type and duration; set
+                        // duration to activity's current duration (some
+                        // default if just a click on plus) to handle both
+                        // click and drag cases
+                }
+
                 // Delete if duration has been reduced to zero.
                 if (this.dragInfo.session.attributes.duration == 0)
                     this.weekSessions.remove(this.dragInfo.session);
@@ -226,11 +236,110 @@ $(function(){
         }
     });
 
-    // application
+    ///// ACTIVITY TYPE ///////////////////////////////////////////////////////////
+
+    ActivityType = Backbone.Model.extend({
+        getIconPath: function() {
+            return "img/" + this.icon + ".png"
+        }
+    });
+
+    var ALL_ACTIVITY_TYPES = {
+        "unspecified":  new ActivityType({displayName:"Unspecified",icon: "who-knows"}),
+
+        "running":      new ActivityType({displayName: "Running",   icon: "running"}),
+        "baseball":     new ActivityType({displayName: "Baseball",  icon: "baseball"}),
+        "basketball":   new ActivityType({displayName: "Basketball",icon: "basketball"}),
+        "swimming":     new ActivityType({displayName: "Swimming",  icon: "swimming"}),
+        "curling":      new ActivityType({displayName: "Curling",   icon: "curling"}),
+        // TODO add more if desired
+    }
+
+    ///// ACTIVITY INFO POPUP /////////////////////////////////////////////////////
+
+    $('#durationInput').spinner();
+
+    // make the text field be an autocomplete text (this plays poorly
+    // with the dropdown, but would be preferable)
+    // $('#activityTypeInput').autocomplete({
+    //     source: Object.keys(ALL_ACTIVITY_TYPES),
+    //     minLength: 0,
+    //     select: function(event, ui) {
+    //         console.log("selected item: " + ui.item);
+    //         return true;
+    //     }
+    // });
+
+    // make the activity type menu // TODO render via Marionette
+    // var activityTypesMenu = $('#activityTypeMenu')
+    // $.each(ALL_ACTIVITY_TYPES, function(i) {
+    //     var li = $('<li/>')
+    //         .addClass('ui-menu-item')
+    //         .attr('role', 'menuitem')
+    //         .appendTo(activityTypesMenu);
+    //     var itm = $('<a/>')
+    //         .addClass('ui-all')
+    //         .text(ALL_ACTIVITY_TYPES[i].get('displayName'))
+    //         .appendTo(li);
+    // });
+    // $('#activityTypeMenu').menu({
+    //     select: function(event, ui) {
+    //         alert(ui.item.text());
+    //     }
+    // });
+
+    // actually, let's go with a select menu
+    var activityTypeSelect = $('#activityTypeSelect');
+    var options = '';
+    $.each(ALL_ACTIVITY_TYPES, function(i) {
+        typ = ALL_ACTIVITY_TYPES[i].get('displayName');
+        options += '<option value="'+ typ + '" class="activityType">' + typ + '</option>';
+    });
+    activityTypeSelect.append(options);
+
+    $("#submitActivityInfo").click(function(e) {
+        duration = $("#durationInput").val();
+        typ = $("#activityTypeSelect").val();
+        console.log(duration);
+        console.log(typ);
+    });
+    // activityTypeSelect.selectmenu({  // selectmenu breaks with dropdown...
+    //     select: function(event, ui) {
+    //         alert(ui.item.value);
+    //    }
+    // });
+
+    // don't close the popup when clicked
+    $('.dropdown-menu').click(function(e) {
+          e.stopPropagation();
+    });
+
+    // force durations to be numeric
+    // adapted from http://stackoverflow.com/a/20186188/1153180
+    $(document).on('keyup', '.numeric-only', function(event) {
+        var v = this.value;
+        if($.isNumeric(v) === false || v < 0) {
+            // remove the last char entered
+            this.value = this.value.slice(0,-1);
+        }
+    });
+
+    // see if we can trigger the activity info dropdown programmatically
+    // from elsewhere, since there doesn't seem to be a clean way to make
+    // any of the sessions rects act as dropdown containers
+    function showActivityInfo(session) {
+        // $('#activityTypeSelect').dropdown('toggle'); // does nothing
+    }
+    $('#showActivityInfoBtn').click(function() {
+        showActivityInfo();
+    });
+
+    ///// APPLICATION /////////////////////////////////////////////////////////
     //
     var app = new Marionette.Application();
     app.addRegions({
-        weekList: '#weeks'
+        weekList: '#weeks',
+        // activityInfo: ActivityInfo
     });
     app.on('start', function(options){
         console.log('Started Marionette application, options = %o', options);
