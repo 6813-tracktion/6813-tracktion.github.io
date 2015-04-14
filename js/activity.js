@@ -20,38 +20,27 @@ var ALL_ACTIVITY_TYPES = {
     // TODO add more if desired
 }
 
-    ///// ACTIVITY INFO POPUP /////////////////////////////////////////////////////
+function getAllActivities(request, response) {
+    var types = Object.keys(ALL_ACTIVITY_TYPES);
+    // TODO add all types ever, not just defaults
+    types.sort();
+    response(types);
+}
+
+///// ACTIVITY INFO POPUP /////////////////////////////////////////////////////
+
 function setupActivity(){
-    // $('#durationInput').spinner();
 
     // make the text field be an autocomplete text (this plays poorly
     // with the dropdown, but would be preferable)
-    // $('#activityTypeInput').autocomplete({
-    //     source: Object.keys(ALL_ACTIVITY_TYPES),
-    //     minLength: 0,
-    //     select: function(event, ui) {
-    //         console.log("selected item: " + ui.item);
-    //         return true;
-    //     }
-    // });
-
-    // make the activity type menu // TODO render via Marionette
-    // var activityTypesMenu = $('#activityTypeMenu')
-    // $.each(ALL_ACTIVITY_TYPES, function(i) {
-    //     var li = $('<li/>')
-    //         .addClass('ui-menu-item')
-    //         .attr('role', 'menuitem')
-    //         .appendTo(activityTypesMenu);
-    //     var itm = $('<a/>')
-    //         .addClass('ui-all')
-    //         .text(ALL_ACTIVITY_TYPES[i].get('displayName'))
-    //         .appendTo(li);
-    // });
-    // $('#activityTypeMenu').menu({
-    //     select: function(event, ui) {
-    //         alert(ui.item.text());
-    //     }
-    // });
+    $('#activityTypeInput').autocomplete({
+        source: getAllActivities,
+        minLength: 0,
+        // select: function(event, ui) {
+        //     console.log("selected item: " + ui.item);
+        //     return true;
+        // }
+    });
 
     // actually, let's go with a select menu
     var activityTypeSelect = $('#activityTypeSelect');
@@ -60,16 +49,11 @@ function setupActivity(){
         activityTypeSelect.append('<option value="'+ typ + '" class="activityType">' + typ + '</option>');
     });
 
-    $("#submitActivityInfo").click(function(e) {
-        duration = $("#durationInput").val();
-        typ = $("#activityTypeSelect").val();
-        console.log(duration);
-        console.log(typ);
-    });
-    // activityTypeSelect.selectmenu({  // selectmenu breaks with dropdown...
-    //     select: function(event, ui) {
-    //         alert(ui.item.value);
-    //    }
+    // $("#submitActivityInfo").click(function(e) {
+    //     duration = $("#durationInput").val();
+    //     typ = $("#activityTypeSelect").val();
+    //     console.log(duration);
+    //     console.log(typ);
     // });
 
     // don't close the popup when clicked

@@ -9,6 +9,7 @@
 	<!-- CSS -->
 	<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 
 </head>
 <body style="zoom: 1;">
@@ -54,15 +55,16 @@
   <div id="activityLayer">
     <div id="activityInfoView" class="fluid-container">
       <div class="form-group">
-        <div class="control-label">Minutes:</div>
-        <input type="number" id="durationInput" class="numeric-only" min="5" step="1" />
+        <div class="control-label col-xs-12">Minutes:</div>
+        <input type="number" id="durationInput" class="numeric-only col-xs-12" min="5" step="1" />
       </div>
       <div class="form-group">
-        <div class="control-label">Activity Type:</div>
-        <select id="activityTypeSelect" name="activityTypeSelect">
+        <div class="control-label col-xs-12">Activity Type:</div>
+        <input id="activityTypeInput" class="col-xs-12">
+        <!-- <select id="activityTypeSelect" name="activityTypeSelect"> -->
         </select>
       </div>
-      <div class="form-group">
+      <div class="form-group buttons">
         <button id="submitActivityInfo" class="col-xs-6 btn btn-default">Okay</button>
         <button id="cancelActivityInfo" class="col-xs-6 btn btn-default">Cancel</button>
       </div>
