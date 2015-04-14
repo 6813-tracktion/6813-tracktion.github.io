@@ -51,13 +51,21 @@
     </ul>
   </div> -->
 
-  <div id="activityInfoView">
-    <p align="center">Minutes:</p>
-    <input type="number" id="durationInput" class="numeric-only" min="0" step="1">
-    <p align="center">Activity Type:</p>
-    <select id="activityTypeSelect" name="activityTypeSelect"></select>
-    <div>
-      <button id="submitActivityInfo" class="btn btn-default">Okay</button>
+  <div id="activityLayer">
+    <div id="activityInfoView" class="fluid-container">
+      <div class="form-group">
+        <div class="control-label">Minutes:</div>
+        <input type="number" id="durationInput" class="numeric-only" min="5" step="1" />
+      </div>
+      <div class="form-group">
+        <div class="control-label">Activity Type:</div>
+        <select id="activityTypeSelect" name="activityTypeSelect">
+        </select>
+      </div>
+      <div class="form-group">
+        <button id="submitActivityInfo" class="col-xs-6 btn btn-default">Okay</button>
+        <button id="cancelActivityInfo" class="col-xs-6 btn btn-default">Cancel</button>
+      </div>
     </div>
   </div>
 

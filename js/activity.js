@@ -22,7 +22,7 @@ var ALL_ACTIVITY_TYPES = {
 
     ///// ACTIVITY INFO POPUP /////////////////////////////////////////////////////
 function setupActivity(){
-    $('#durationInput').spinner();
+    // $('#durationInput').spinner();
 
     // make the text field be an autocomplete text (this plays poorly
     // with the dropdown, but would be preferable)
@@ -55,12 +55,10 @@ function setupActivity(){
 
     // actually, let's go with a select menu
     var activityTypeSelect = $('#activityTypeSelect');
-    var options = '';
     $.each(ALL_ACTIVITY_TYPES, function(i) {
-        typ = ALL_ACTIVITY_TYPES[i].get('displayName');
-        options += '<option value="'+ typ + '" class="activityType">' + typ + '</option>';
+        var typ = ALL_ACTIVITY_TYPES[i].get('displayName');
+        activityTypeSelect.append('<option value="'+ typ + '" class="activityType">' + typ + '</option>');
     });
-    activityTypeSelect.append(options);
 
     $("#submitActivityInfo").click(function(e) {
         duration = $("#durationInput").val();
@@ -79,6 +77,26 @@ function setupActivity(){
           e.stopPropagation();
     });
 
+    // control numeric-only inputs
+    $(document).on('keydown', '.numeric-only', function(event) {
+        // we allow control key input
+        if(event.keyCode <= 40){
+            return;
+        }
+        /*
+        var allowed = [8, 9, 13, 32, 37, 38, 39, 40];
+        for(var i = 0; i < allowed.length; ++i){
+            if(event.keyCode == allowed[i]){
+                return;
+            }
+        }*/
+        // and disallow any non-numeric non-control character
+        if(!$.isNumeric(event.key)){
+            event.preventDefault();
+        }
+    });
+
+    /*
     // force durations to be numeric
     // adapted from http://stackoverflow.com/a/20186188/1153180
     $(document).on('keyup', '.numeric-only', function(event) {
@@ -87,37 +105,50 @@ function setupActivity(){
             this.value = this.value.slice(0,-1); // remove last char entered
         }
     });
+    */
 
-    $('#submitActivityInfo').click(function() {
+    $('#cancelActivityInfo').click(function(){
+        e.preventDefault();
         hideActivityInfo();
     });
+    $('#submitActivityInfo').click(submitActivityInfo);
 
-    // hide activity info upon click outside
-    // http://stackoverflow.com/a/7385673/1153180
-    $(document).mouseup(function(e) {
-        var container = $("#activityInfoView");
-        if (!container.is(e.target) // if the target of the click isn't the container...
-            && container.has(e.target).length === 0  // ... nor a descendant of the container
-            && container.css('visibility') === 'visible') // and currently showing
-        {
-            container.css('visibility', 'hidden');
-        }
+    $('#activityLayer').click(function(e){
+        if(e.target != e.currentTarget)
+            return;
+        e.preventDefault();
+        hideActivityInfo();
     });
 }
+function showActivityInfo(session, callback) {
+    var layer = $('#activityLayer');
+    // bind edited data
+    layer.data('session', session);
+    layer.data('callback', callback);
+    // set fields according to session
+    $('#durationInput').val(session.get('duration'));
 
-function showActivityInfoAtPosition(x, y) {
-    console.log('actually showing activity info at position ' + x + ',' + y);
-    var view = $('#activityInfoView')
-    $(view).css({
-        visibility: 'visible',
-        left:  x - view.width() / 2,
-        top:   y + 10,
-    });
+    // show layer
+    layer.stop().fadeIn();
 }
 
 function hideActivityInfo() {
-    console.log('hideActivityInfo()');
-    $('#activityInfoView').css({
-        visibility: 'hidden'
-    });
+    var layer = $('#activityLayer');
+
+    // trigger callback
+    var callback = layer.data('callback') || function(){ console.log('No callback!'); };
+    callback();
+
+    //  hide
+    layer.stop().fadeOut();
+}
+
+function submitActivityInfo() {
+    var layer = $('#activityLayer');
+    var session = layer.data('session');
+    // update model
+    session.set('duration', $('#durationInput').val());
+
+    // hide
+    hideActivityInfo();
 }

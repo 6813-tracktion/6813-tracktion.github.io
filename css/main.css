@@ -110,34 +110,34 @@ g.day:hover text.day-sum {
   z-index: 2006;
   position: relative;
 }*/
-select, option {
-  width: 200px;
-  font-size: 200%;
-}
-#submitActivityInfo {
-  display: block;
-  margin: 0 auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
 /* Activity info dialog */
-#activityInfoView {
-position: absolute;
-  float: left;
-  visibility: hidden;
-  width: 200px;
-  height: 160px;
+#activityLayer {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  left: 0px;
   z-index: 10;
-
-  background-color: #ddd;
-  border: 2px solid #337AB7;
-  border-radius: 25px;
-  box-shadow: 10px 10px 5px #888888;
-  text-align: center;
+  background: rgba(0, 0, 0, 0.3);
 }
-#activityInfoView p {
-  font-size: 110%;
-  margin-bottom: 2px;
+#activityInfoView {
+  position: absolute;
+  /* display: none; */
+  width: 600px;
+  left: 50%;
+  padding: 30px;
+  margin-left: -300px;
+  margin-top: 200px;
+  background-color: #eff;
+  border: 2px solid rgba(0, 0, 100, 0.7);
+  border-radius: 5px;
+  box-shadow: 3px 3px 10px rgba(0, 0, 100, 0.2);
+  font-size: 1.5em;
+}
+#activityInfoView input, #activityInfoView select {
+  height: 2em;
+  line-height: 1em;
+  font-size: 1em;
 }
 #durationInput {
   margin-bottom: 6px;
@@ -150,11 +150,5 @@ select, option {
 .ui-autocomplete-input, .ui-menu, .ui-menu-item {
   z-index: 2006;
   position: relative;
-}
-#submitActivityInfo {
-  display: block;
-  margin: 0 auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
 }
 

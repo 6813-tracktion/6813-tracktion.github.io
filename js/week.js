@@ -123,31 +123,39 @@ var WeekView = Marionette.ItemView.extend({
     },
     mouseup: function(event){
         if (this.dragInfo) {
+            var dragInfo = this.dragInfo;
+            this.dragInfo = null;
+            $('body').removeClass('dragging');
+
             x = event.pageX;
             y = event.pageY;
 
             // XXX: Ideally this time threshold would be a system setting
             // like the double-click timeout.
-            if (moment().diff(this.dragInfo.startTime, 'milliseconds') < 300) {
+            if (moment().diff(dragInfo.startTime, 'milliseconds') < 300) {
                 console.log('Treat as a click at position ' + x + ',' + y);
-                showActivityInfoAtPosition(x, y);
+                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session));
                 event.stopPropagation(); // event outside -> close popup
+                return;
             }
 
             // if creating a session, ask for activity type and duration
-            if (this.dragInfo.isCreate) {
-                showActivityInfoAtPosition(x, y);
+            if (dragInfo.isCreate) {
+                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session));
                 event.stopPropagation();
                 // TODO set duration to activity's current duration (some
                 // default if just a click on plus) to handle both
                 // click and drag cases
+                return;
             }
 
             // Delete if duration has been reduced to zero.
-            if (this.dragInfo.session.attributes.duration == 0)
-                this.weekSessions.remove(this.dragInfo.session);
-            this.dragInfo = null;
-            $('body').removeClass('dragging');
+            this.updateSession(this.dragInfo.session);
+        }
+    },
+    updateSession: function(session){
+        if (session.attributes.duration == 0){
+            this.weekSessions.remove(session);
         }
     }
 });
