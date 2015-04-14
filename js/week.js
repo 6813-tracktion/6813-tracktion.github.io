@@ -50,6 +50,15 @@ var WeekView = Marionette.ItemView.extend({
             attr: function(session, name){
                 return session.attributes[name];
             },
+            iconURL: function(session){
+                var label = session.get('label');
+                var data = DEFAULT_ACTIVITY_TYPES[label] || DEFAULT_ACTIVITY_TYPES['unspecified'];
+                return "img/freepik-icons/png/neg/" + data.icon + '.png';
+            },
+            iconClass: function(session){
+                var label = session.get('label');
+                return label == 'unspecified' || !(label in DEFAULT_ACTIVITY_TYPES) ? 'bad' : 'good';
+            },
             days: function() {
                 return [0, 1, 2, 3, 4, 5, 6];
             },

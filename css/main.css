@@ -75,6 +75,12 @@ text.day-sum {
 .week-label text {
   fill: #dfdfdf;
 }
+.sessions image {
+  pointer-events: none;
+}
+.sessions image.bad {
+  opacity: 0.242;
+}
 /* visual feedback */
 rect.background:hover {
   fill: none;
