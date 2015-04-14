@@ -150,7 +150,7 @@ var WeekView = Marionette.ItemView.extend({
             }
 
             // Delete if duration has been reduced to zero.
-            this.updateSession(this.dragInfo.session);
+            this.updateSession(dragInfo.session);
         }
     },
     updateSession: function(session){

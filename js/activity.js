@@ -3,25 +3,41 @@
  */
 ///// ACTIVITY TYPE ///////////////////////////////////////////////////////////
 
-var ActivityType = Backbone.Model.extend({
-    getIconPath: function() {
-        return "img/" + this.icon + ".png"
-    }
-});
+// var ActivityType = Backbone.Model.extend({
+//     getIconPath: function() {
+//         return "img/" + this.icon + ".png"
+//     }
+// });
 
-var ALL_ACTIVITY_TYPES = {
-    "unspecified":  new ActivityType({displayName:"Unspecified",icon: "who-knows"}),
+var DEFAULT_ACTIVITY_TYPES = {
+    "unspecified":  {displayName:"Unspecified",icon: "who-knows"},
 
-    "running":      new ActivityType({displayName: "Running",   icon: "running"}),
-    "baseball":     new ActivityType({displayName: "Baseball",  icon: "baseball"}),
-    "basketball":   new ActivityType({displayName: "Basketball",icon: "basketball"}),
-    "swimming":     new ActivityType({displayName: "Swimming",  icon: "swimming"}),
-    "curling":      new ActivityType({displayName: "Curling",   icon: "curling"}),
+    "running":      {displayName: "Running",   icon: "running"},
+    "baseball":     {displayName: "Baseball",  icon: "baseball"},
+    "basketball":   {displayName: "Basketball",icon: "basketball"},
+    "swimming":     {displayName: "Swimming",  icon: "swimming"},
+    "curling":      {displayName: "Curling",   icon: "curling"},
     // TODO add more if desired
 }
 
+var DISPLAY_NAMES_2_ACTIV_NAMES = {};
+for (var activ in DEFAULT_ACTIVITY_TYPES) {
+    var obj = DEFAULT_ACTIVITY_TYPES[activ];
+    DISPLAY_NAMES_2_ACTIV_NAMES[obj.displayName] = activ;
+}
+
+// function activityForDisplayName(name) {
+//     var activKey = DISPLAY_NAMES_2_ACTIV_NAMES[name];
+    // var activObj = DEFAULT_ACTIVITY_TYPES[activKey];
+//     return activObj;
+// }
+
 function getAllActivities(request, response) {
-    var types = Object.keys(ALL_ACTIVITY_TYPES);
+    var types = Object.keys(DEFAULT_ACTIVITY_TYPES).map(function(a){
+        return DEFAULT_ACTIVITY_TYPES[a].displayName;
+    }).filter(function(a){
+        return a.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
+    });
     // TODO add all types ever, not just defaults
     types.sort();
     response(types);
@@ -35,26 +51,8 @@ function setupActivity(){
     // with the dropdown, but would be preferable)
     $('#activityTypeInput').autocomplete({
         source: getAllActivities,
-        minLength: 0,
-        // select: function(event, ui) {
-        //     console.log("selected item: " + ui.item);
-        //     return true;
-        // }
+        minLength: 1
     });
-
-    // actually, let's go with a select menu
-    var activityTypeSelect = $('#activityTypeSelect');
-    $.each(ALL_ACTIVITY_TYPES, function(i) {
-        var typ = ALL_ACTIVITY_TYPES[i].get('displayName');
-        activityTypeSelect.append('<option value="'+ typ + '" class="activityType">' + typ + '</option>');
-    });
-
-    // $("#submitActivityInfo").click(function(e) {
-    //     duration = $("#durationInput").val();
-    //     typ = $("#activityTypeSelect").val();
-    //     console.log(duration);
-    //     console.log(typ);
-    // });
 
     // don't close the popup when clicked
     $('.dropdown-menu').click(function(e) {
@@ -111,6 +109,9 @@ function showActivityInfo(session, callback) {
     layer.data('callback', callback);
     // set fields according to session
     $('#durationInput').val(session.get('duration'));
+    var activ = session.get('label');
+    // let the record show that Alex wrote this line
+    $('#activityTypeInput').val((DEFAULT_ACTIVITY_TYPES[activ] || {displayName: activ}).displayName)
 
     // show layer
     layer.stop().fadeIn();
@@ -131,7 +132,11 @@ function submitActivityInfo() {
     var layer = $('#activityLayer');
     var session = layer.data('session');
     // update model
-    session.set('duration', $('#durationInput').val());
+    session.set('duration', parseInt($('#durationInput').val(), 10));
+
+    var displayName = $('#activityTypeInput').val();
+    var activName = DISPLAY_NAMES_2_ACTIV_NAMES[displayName] || displayName;
+    session.set('label', activName);
 
     // hide
     hideActivityInfo();
