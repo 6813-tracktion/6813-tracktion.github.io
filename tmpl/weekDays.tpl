@@ -17,7 +17,10 @@
 
       <!-- activity slots -->
       <% _.each(daySessions(d), function(session, j){ %>
-          <rect class="session" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= rm2p(attr(session, 'duration')) - 1 %>" x="<%= rm2p(daySum(d, j)) %>" data-cid="<%= session.cid %>"  />
+        <g transform="translate(<%= rm2p(daySum(d, j)) %>, 0)"> 
+          <rect class="session" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= rm2p(attr(session, 'duration')) - 1 %>" data-cid="<%= session.cid %>"  />
+          <image xlink:href="<%= iconURL(session)  %>" x="20" width="32" height="32" y="5" />
+        </g>
       <% }) %>
       <% if(emptyDay(d)){ %>
         <!-- lazy boy -->
