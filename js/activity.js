@@ -26,14 +26,14 @@ function setupActivity(){
 
     // make the text field be an autocomplete text (this plays poorly
     // with the dropdown, but would be preferable)
-    // $('#activityTypeInput').autocomplete({
-    //     source: Object.keys(ALL_ACTIVITY_TYPES),
-    //     minLength: 0,
-    //     select: function(event, ui) {
-    //         console.log("selected item: " + ui.item);
-    //         return true;
-    //     }
-    // });
+    $('#activityTypeInput').autocomplete({
+        source: Object.keys(ALL_ACTIVITY_TYPES),
+        minLength: 0,
+        select: function(event, ui) {
+            console.log("selected item: " + ui.item);
+            return true;
+        }
+    });
 
     // make the activity type menu // TODO render via Marionette
     // var activityTypesMenu = $('#activityTypeMenu')
@@ -54,15 +54,26 @@ function setupActivity(){
     // });
 
     // actually, let's go with a select menu
-    var activityTypeSelect = $('#activityTypeSelect');
-    var options = '';
-    $.each(ALL_ACTIVITY_TYPES, function(i) {
-        typ = ALL_ACTIVITY_TYPES[i].get('displayName');
-        options += '<option value="'+ typ + '" class="activityType">' + typ + '</option>';
-    });
-    activityTypeSelect.append(options);
+    // var activityTypeSelect = $('#activityTypeSelect');
+    // var options = '';
+    // $.each(ALL_ACTIVITY_TYPES, function(i) {
+    //     typ = ALL_ACTIVITY_TYPES[i].get('displayName');
+    //     options += '<option value="'+ typ + '" class="activityType">' + typ + '</option>';
+    // });
+    // activityTypeSelect.append(options);
 
-    $("#submitActivityInfo").click(function(e) {
+    // have enter key submit info (adapted from this Stack Overflow answer:
+    // http://stackoverflow.com/a/8294528/1153180)
+    $('#activityTypeInput').keypress(function(e) {
+        if ((e.which && e.which == 13) || (e.keyCode && e.keyCode == 13)) {
+            $('#submitActivityInfoBtn').click();
+            return false;
+        } else {
+            return true;
+        }
+    });
+
+    $("#submitActivityInfoBtn").click(function(e) {
         duration = $("#durationInput").val();
         typ = $("#activityTypeSelect").val();
         console.log(duration);
@@ -88,8 +99,11 @@ function setupActivity(){
         }
     });
 
-    $('#submitActivityInfo').click(function() {
+    $('#submitActivityInfoBtn').click(function() {
         hideActivityInfo();
+        if (onActivityInfoSubmitted) {
+            onActivityInfoSubmitted();
+        }
     });
 
     // hide activity info upon click outside
@@ -111,8 +125,13 @@ function showActivityInfoAtPosition(x, y) {
     $(view).css({
         visibility: 'visible',
         left:  x - view.width() / 2,
-        top:   y + 10,
+        top:   y + 20,
     });
+}
+
+function showActivityInfo(x, y, callback) {
+    setActivityInfoSubmittedCallback(callback);
+    showActivityInfoAtPosition(x, y);
 }
 
 function hideActivityInfo() {
@@ -120,4 +139,13 @@ function hideActivityInfo() {
     $('#activityInfoView').css({
         visibility: 'hidden'
     });
+}
+
+// callback for activity info--pretty sure a global is not the ideal way
+// to do this...
+var onActivityInfoSubmitted = function() {
+    console.log('submitted activity info');
+}
+function setActivityInfoSubmittedCallback(f) {
+    onActivityInfoSubmitted = f;
 }

@@ -105,55 +105,63 @@ g.day:hover text.day-sum {
     stroke: red;
     stroke-width: 5;
 }
+
+/* Activity info dialog */
+#activityInfoView {
+  position: absolute;
+  float: left;
+  visibility: hidden;
+  /*width: 200px;*/
+  padding: 0px 10px 2px 10px;
+  z-index: 10;
+
+  background-color: #eee;
+  border: 2px solid #337AB7;
+  -webkit-border-radius: 25px;
+  -moz-border-radius: 25px;
+  border-radius: 25px;
+  box-shadow: 10px 10px 5px #888888;
+  text-align: center;
+}
+#infoWrapper::after { /* triangle */
+  content: '';
+  position: absolute;
+  border-style: solid;
+  border-width: 0 10px 10px;
+  border-color: #eee transparent;
+  display: block;
+  width: 0;
+  z-index: 1;
+  margin-left: -10px;
+  top: -10px;
+  left: 50%;
+}
+
+#activityInfoView p {
+  font-size: 120%;
+  font-family: "Helvetica", sans-serif;
+  margin-bottom: 2px;
+  margin-top: 5px;
+}
+#durationInput {
+  width: 125px;
+  margin-bottom: 6px;
+}
+#activityTypeInput {
+  width: 160px;
+}
+/*select, option {
+  width: 180px;
+  font-size: 200%;
+}*/
 /* unsuccesful attempt to fix jquery autocomplete behind dropdown */
 /*.ui-autocomplete-input, .ui-menu, .ui-menu-item {
   z-index: 2006;
   position: relative;
 }*/
-select, option {
-  width: 200px;
-  font-size: 200%;
-}
-#submitActivityInfo {
-  display: block;
-  margin: 0 auto;
-  margin-top: 5px;
-  margin-bottom: 5px;
-}
-/* Activity info dialog */
-#activityInfoView {
-position: absolute;
-  float: left;
-  visibility: hidden;
-  width: 200px;
-  height: 160px;
-  z-index: 10;
-
-  background-color: #ddd;
-  border: 2px solid #337AB7;
-  border-radius: 25px;
-  box-shadow: 10px 10px 5px #888888;
-  text-align: center;
-}
-#activityInfoView p {
-  font-size: 110%;
-  margin-bottom: 2px;
-}
-#durationInput {
-  margin-bottom: 6px;
-}
-select, option {
-  width: 180px;
-  font-size: 200%;
-}
-/* unsuccesful attempt to fix jquery autocomplete behind dropdown */
-.ui-autocomplete-input, .ui-menu, .ui-menu-item {
-  z-index: 2006;
-  position: relative;
-}
-#submitActivityInfo {
-  display: block;
-  margin: 0 auto;
+#submitActivityInfoBtn {
+  /*display: block;*/
+  /*margin: 0 auto;*/
   margin-top: 5px;
   margin-bottom: 5px;
 }

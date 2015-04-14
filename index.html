@@ -8,6 +8,7 @@
 
 	<!-- CSS -->
 	<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 	<link rel="stylesheet" type="text/css" href="css/main.css" />
 
 </head>
@@ -34,30 +35,15 @@
       </div>
     </nav>
 
-<!--   <div class="activityInfoDropdown dropdown">
-    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Show ActivityInfo</a>
-    <ul class="dropdown-menu">
-      <li>
-        <p align="center">Duration (m)</p>
-        <input id="durationInput" class="numeric-only">
-        <p align="center">Activity Type:</p> -->
-        <!-- <input id="activityTypeInput"> --> <!-- autocomplete -->
-        <!-- <ul id="activityTypeMenu"></ul> --> <!-- menu -->
-<!--         <select id="activityTypeSelect" name="activityTypeSelect"></select>
-        <div>
-          <button id="submitActivityInfo" class="btn btn-default">Okay</button>
-        </div>
-      </li>
-    </ul>
-  </div> -->
-
   <div id="activityInfoView">
-    <p align="center">Minutes:</p>
-    <input type="number" id="durationInput" class="numeric-only" min="0" step="1">
-    <p align="center">Activity Type:</p>
-    <select id="activityTypeSelect" name="activityTypeSelect"></select>
-    <div>
-      <button id="submitActivityInfo" class="btn btn-default">Okay</button>
+    <div id="infoWrapper">
+      <p align="center">Minutes:</p>
+      <input type="number" id="durationInput" class="numeric-only" min="0" step="1">
+      <p align="center">Activity Type:</p>
+      <input id="activityTypeInput">
+      <div>
+        <button id="submitActivityInfoBtn" class="btn btn-default">Okay</button>
+      </div>
     </div>
   </div>
 

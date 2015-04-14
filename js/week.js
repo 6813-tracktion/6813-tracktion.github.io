@@ -130,13 +130,18 @@ var WeekView = Marionette.ItemView.extend({
             // like the double-click timeout.
             if (moment().diff(this.dragInfo.startTime, 'milliseconds') < 300) {
                 console.log('Treat as a click at position ' + x + ',' + y);
-                showActivityInfoAtPosition(x, y);
+                // showActivityInfoAtPosition(x, y);
+                showActivityInfo(x, y, function() {
+                    console.log('way to edit activity, bro');
+                });
                 event.stopPropagation(); // event outside -> close popup
             }
 
             // if creating a session, ask for activity type and duration
             if (this.dragInfo.isCreate) {
-                showActivityInfoAtPosition(x, y);
+                showActivityInfo(x, y, function() {
+                    console.log('way to edit activity, bro');
+                });
                 event.stopPropagation();
                 // TODO set duration to activity's current duration (some
                 // default if just a click on plus) to handle both
