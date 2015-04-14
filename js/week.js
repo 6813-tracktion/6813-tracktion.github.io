@@ -123,21 +123,24 @@ var WeekView = Marionette.ItemView.extend({
     },
     mouseup: function(event){
         if (this.dragInfo) {
+            x = event.pageX;
+            y = event.pageY;
+
             // XXX: Ideally this time threshold would be a system setting
             // like the double-click timeout.
             if (moment().diff(this.dragInfo.startTime, 'milliseconds') < 300) {
-                console.log('Treat as a click');
-                if (! this.dragInfo.isCreate) {
-                    // TODO user clicked on existing entry, so show its info
-                }
+                console.log('Treat as a click at position ' + x + ',' + y);
+                showActivityInfoAtPosition(x, y);
+                event.stopPropagation(); // event outside -> close popup
             }
 
             // if creating a session, ask for activity type and duration
             if (this.dragInfo.isCreate) {
-                    // TODO ask for activity type and duration; set
-                    // duration to activity's current duration (some
-                    // default if just a click on plus) to handle both
-                    // click and drag cases
+                showActivityInfoAtPosition(x, y);
+                event.stopPropagation();
+                // TODO set duration to activity's current duration (some
+                // default if just a click on plus) to handle both
+                // click and drag cases
             }
 
             // Delete if duration has been reduced to zero.

@@ -20,7 +20,8 @@ async.waterfall([
     var sessions = loadModel();
 
     // 2. Setup stuff ...
-    
+    setupActivity();
+
     // 3. Setup application
     var app = new Marionette.Application();
     app.addRegions({

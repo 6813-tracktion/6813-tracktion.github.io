@@ -84,18 +84,40 @@ function setupActivity(){
     $(document).on('keyup', '.numeric-only', function(event) {
         var v = this.value;
         if($.isNumeric(v) === false || v < 0) {
-            // remove the last char entered
-            this.value = this.value.slice(0,-1);
+            this.value = this.value.slice(0,-1); // remove last char entered
         }
     });
 
-    // see if we can trigger the activity info dropdown programmatically
-    // from elsewhere, since there doesn't seem to be a clean way to make
-    // any of the sessions rects act as dropdown containers
-    function showActivityInfo(session) {
-        // $('#activityTypeSelect').dropdown('toggle'); // does nothing
-    }
-    $('#showActivityInfoBtn').click(function() {
-        showActivityInfo();
+    $('#submitActivityInfo').click(function() {
+        hideActivityInfo();
+    });
+
+    // hide activity info upon click outside
+    // http://stackoverflow.com/a/7385673/1153180
+    $(document).mouseup(function(e) {
+        var container = $("#activityInfoView");
+        if (!container.is(e.target) // if the target of the click isn't the container...
+            && container.has(e.target).length === 0  // ... nor a descendant of the container
+            && container.css('visibility') === 'visible') // and currently showing
+        {
+            container.css('visibility', 'hidden');
+        }
+    });
+}
+
+function showActivityInfoAtPosition(x, y) {
+    console.log('actually showing activity info at position ' + x + ',' + y);
+    var view = $('#activityInfoView')
+    $(view).css({
+        visibility: 'visible',
+        left:  x - view.width() / 2,
+        top:   y + 10,
+    });
+}
+
+function hideActivityInfo() {
+    console.log('hideActivityInfo()');
+    $('#activityInfoView').css({
+        visibility: 'hidden'
     });
 }

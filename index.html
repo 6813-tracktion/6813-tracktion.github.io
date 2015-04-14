@@ -34,24 +34,32 @@
       </div>
     </nav>
 
-  <div class="activityInfoDropdown dropdown">
+<!--   <div class="activityInfoDropdown dropdown">
     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Show ActivityInfo</a>
     <ul class="dropdown-menu">
       <li>
         <p align="center">Duration (m)</p>
         <input id="durationInput" class="numeric-only">
-        <p align="center">Activity Type:</p>
+        <p align="center">Activity Type:</p> -->
         <!-- <input id="activityTypeInput"> --> <!-- autocomplete -->
         <!-- <ul id="activityTypeMenu"></ul> --> <!-- menu -->
-        <select id="activityTypeSelect" name="activityTypeSelect"></select>
+<!--         <select id="activityTypeSelect" name="activityTypeSelect"></select>
         <div>
           <button id="submitActivityInfo" class="btn btn-default">Okay</button>
         </div>
       </li>
     </ul>
-  </div>
+  </div> -->
 
-  <button id="showActivityInfoBtn">Show activity info from elsewhere (not working)</button>
+  <div id="activityInfoView">
+    <p align="center">Minutes:</p>
+    <input type="number" id="durationInput" class="numeric-only" min="0" step="1">
+    <p align="center">Activity Type:</p>
+    <select id="activityTypeSelect" name="activityTypeSelect"></select>
+    <div>
+      <button id="submitActivityInfo" class="btn btn-default">Okay</button>
+    </div>
+  </div>
 
   <!-- weeks view -->
   <div id="weeks"></div>
@@ -62,10 +70,7 @@
   <script type="text/template" src="tmpl/weekCumulative.tpl"></script>
 
   <!-- libraries -->
-  <!-- <script src="http://ajax.cdnjs.com/ajax/libs/json2/20110223/json2.js"></script> -->
-  <!-- <script src="libs/todomvc-common/base.js"></script> -->
   <script src="libs/jquery/jquery-1.11.2.min.js"></script>
-  <!-- <script src="libs/jquery/jquery-ui-1.10.0.custom.min.js"></script> -->
   <script src="http://code.jquery.com/ui/1.11.2/jquery-ui.js"></script>
   <script src="libs/bootstrap/js/bootstrap.min.js"></script>
   <script src="libs/underscore/underscore.js"></script>
@@ -77,10 +82,10 @@
 
   <!-- custom JS -->
   <script type="text/javascript" src="js/utils.js"></script>
+  <script type="text/javascript" src="js/activity.js"></script>
   <script type="text/javascript" src="js/templates.js"></script>
   <script type="text/javascript" src="js/model.js"></script>
   <script type="text/javascript" src="js/week.js"></script>
-  <script type="text/javascript" src="js/activity"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
