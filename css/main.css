@@ -38,6 +38,11 @@ rect.background {
   pointer-events: all;
   fill: none;
 }
+rect.background:hover {
+  fill: none;
+}
+
+/* cumulative line */
 rect.cumulative {
   pointer-events: none;
   fill: rgba(255, 0, 0, 0.1);
@@ -52,35 +57,27 @@ text.cumulative {
   visibility: hidden;
   fill: rgba(200, 200, 200, 0.7);
 }
+g.day:hover text.cumulative {
+  visibility: visible;
+}
 line.cumulative {
   stroke: rgba(100, 100, 100, 0.5);
   stroke-width: 2px;
 }
+
+/* individual sessions */
 rect.session {
   fill: #337AB7;
   cursor: col-resize;
 }
-.new-session {
-  visibility: hidden;
+rect.session:hover {
+  fill: blue;
 }
-rect.new-session {
-  fill: rgba(255, 0, 0, 0.5);
+.dragging rect.session:hover {
+  fill: #337AB7;
 }
-line.new-session {
-  stroke: white;
-  stroke-width: 2px;
-  pointer-events: none;
-}
-text.day, text.day-sum {
-  cursor: default;
-  pointer-events: none;
-}
-text.day-sum {
-  fill: rgba(200, 200, 200, 0.7);
-  visibility: hidden;
-}
-.week-label text {
-  fill: #dfdfdf;
+.dragging rect.session.drag-target {
+  fill: rgb(0, 200, 255);
 }
 .sessions image {
   pointer-events: none;
@@ -88,15 +85,13 @@ text.day-sum {
 .sessions image.bad {
   opacity: 0.242;
 }
-/* visual feedback */
-rect.background:hover {
-  fill: none;
+
+/* adding new session */
+.new-session {
+  visibility: hidden;
 }
-g.day:hover text.cumulative {
-  visibility: visible;
-}
-rect.session:hover {
-  fill: blue;
+rect.new-session {
+  fill: rgba(255, 0, 0, 0.5);
 }
 g.day:hover .new-session {
   visibility: visible;
@@ -109,10 +104,29 @@ g.day:hover .new-session {
 rect.new-session:hover {
   fill: red;
 }
+line.new-session {
+  stroke: white;
+  stroke-width: 2px;
+  pointer-events: none;
+}
+
+/* daily time */
+text.day, text.day-sum {
+  cursor: default;
+  pointer-events: none;
+}
+text.day-sum {
+  fill: rgba(200, 200, 200, 0.7);
+  visibility: hidden;
+}
 g.day:hover text.day-sum {
   visibility: visible;
 }
+.week-label text {
+  fill: #dfdfdf;
+}
 
+/* goal line */
 .goalLine {
     visibility: visible;
     stroke: red;
@@ -139,7 +153,7 @@ g.day:hover text.day-sum {
   width: 350px;
   left: 50%;
   padding: 30px;
-  margin-left: -300px;
+  margin-left: -175px;
   margin-top: 200px;
   background-color: #eff;
   border: 2px solid rgba(0, 0, 100, 0.7);

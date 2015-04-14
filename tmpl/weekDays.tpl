@@ -18,7 +18,7 @@
       <!-- activity slots -->
       <% _.each(daySessions(d), function(session, j){ %>
         <g transform="translate(<%= rm2p(daySum(d, j)) %>, 0)">
-          <rect class="session" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= rm2p(attr(session, 'duration')) - 1 %>" data-cid="<%= session.cid %>"  />
+          <rect class="session <%= sessionClass(session) %>" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= rm2p(attr(session, 'duration')) - 1 %>" data-cid="<%= session.cid %>"  />
           <% if(attr(session, 'duration') >= 30){ %>
           <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="10" width="32" height="32" y="5" />
           <% } %>

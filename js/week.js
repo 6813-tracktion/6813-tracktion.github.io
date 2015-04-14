@@ -50,6 +50,11 @@ var WeekView = Marionette.ItemView.extend({
             attr: function(session, name){
                 return session.attributes[name];
             },
+            sessionClass: function(session){
+                if(this.self.dragInfo)
+                    return this.self.dragInfo.session.cid == session.cid ? "drag-target" : "";
+                return "";
+            },
             iconURL: function(session){
                 var label = session.get('label');
                 var data = DEFAULT_ACTIVITY_TYPES[label] || DEFAULT_ACTIVITY_TYPES['unspecified'];
