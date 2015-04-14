@@ -17,7 +17,14 @@ svg {
   linear-gradient(90deg, transparent 90px, #abced4 98px, #abced4 100px, transparent 100px),
   linear-gradient(#eee .1em, transparent .1em);
   background-size: 100% 42px;
-
+}
+svg text {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
