@@ -107,7 +107,7 @@ function setupActivity(){
     });
     */
 
-    $('#cancelActivityInfo').click(function(){
+    $('#cancelActivityInfo').click(function(e){
         e.preventDefault();
         hideActivityInfo();
     });
