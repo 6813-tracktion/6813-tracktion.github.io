@@ -230,7 +230,8 @@ var WeekView = Marionette.ItemView.extend({
 var FullView = Marionette.CollectionView.extend({
     childView: WeekView,
     initialize: function() {
-        var sessionsByWeek = this.collection.groupBy(function(session, i) {
+        var dataset = this.model;
+        var sessionsByWeek = dataset.attributes.sessions.groupBy(function(session, i) {
             return session.week();
         });
         var weeks = Object.keys(sessionsByWeek);
@@ -244,7 +245,10 @@ var FullView = Marionette.CollectionView.extend({
         }
         */
         var weekModels = _.map(weeks, function(w) {
-            return new Week({sessions: new WeekSessions(sessionsByWeek[w])});
+            return new Week({
+                today: dataset.attributes.today,
+                sessions: new WeekSessions(sessionsByWeek[w])
+            });
         });
         this.collection = new Backbone.Collection(weekModels);
     }

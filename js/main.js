@@ -37,12 +37,12 @@ async.waterfall([
     });
 
     // 1. Retrieve model - which one to load depends on url args
-    var sessions;
+    var dataset;
     var isFresh = getUrlParameter('fresh');
     if (isFresh) {
-      sessions = loadFreshModel();
+      dataset = loadFreshModel();
     } else {
-      sessions = loadModel();
+      dataset = loadModel();
     }
 
     // 2. Setup stuff ...
@@ -62,7 +62,7 @@ async.waterfall([
         }
     });
 
-    app.weekList.show(new FullView({collection: sessions}));
+    app.weekList.show(new FullView({model: dataset}));
 
     // 4. Start the application
     app.start();
