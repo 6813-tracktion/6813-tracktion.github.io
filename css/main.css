@@ -2,7 +2,9 @@
 body {
   padding-top: 100px;
 }
-
+.navbar {
+  font-family: "Open sans", sans-serif;
+}
 .week {
   text-align: center;
 }
@@ -27,6 +29,11 @@ svg text {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+svg .day {
+  font-size: 115%;
+  /*text-align: center;*/
+  /*text-anchor: middle;*/
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
