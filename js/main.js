@@ -16,6 +16,26 @@ async.waterfall([
       console.log('Error: %o', err);
     }
 
+    // Give us functionality similar to Element.setCapture in all browsers.
+    // Take the opportunity to centralize the 'dragging' class here too.
+    window.startDrag = function(dragHandler) {
+        window.dragHandler = dragHandler;
+        $('body').addClass('dragging');
+    };
+    window.dragHandler = null;
+    window.addEventListener('mousemove', function(event) {
+        if (window.dragHandler) {
+            window.dragHandler.mousemove(event);
+        }
+    });
+    window.addEventListener('mouseup', function(event) {
+        if (window.dragHandler) {
+            window.dragHandler.mouseup(event);
+            window.dragHandler = null;
+            $('body').removeClass('dragging');
+        }
+    });
+
     // 1. Retrieve model
     var sessions = loadModel();
 

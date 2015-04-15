@@ -116,8 +116,9 @@ var WeekView = Marionette.ItemView.extend({
     events: {
       "mousedown rect.session":     "mousedownSession",
       "mousedown rect.new-session": "mousedownPlus",
-      "mousemove": "mousemove",
-      "mouseup": "mouseup",
+      // Implicit by setting window.dragHandler = this.
+      //"mousemove": "mousemove",
+      //"mouseup": "mouseup",
       "mousedown g.goal":           "mousedownGoal",
     },
     mousedownSession: function(event){
@@ -138,7 +139,7 @@ var WeekView = Marionette.ItemView.extend({
             origMouseX : event.pageX,
             origDuration: this.model.get('goal')
         };
-        
+        window.startDrag(this);
     },
     startDragging: function(session, isCreate, event){
         this.dragInfo = {
@@ -148,7 +149,7 @@ var WeekView = Marionette.ItemView.extend({
                 origDuration: session.attributes.duration,
                 origMouseX: event.pageX
         };
-        $('body').addClass('dragging');
+        window.startDrag(this);
     },
     mousemove: function(event){
         if (this.dragInfo) {
@@ -171,7 +172,6 @@ var WeekView = Marionette.ItemView.extend({
         if (this.dragInfo) {
             var dragInfo = this.dragInfo;
             this.dragInfo = null;
-            $('body').removeClass('dragging');
 
             x = event.pageX;
             y = event.pageY;
