@@ -21,6 +21,12 @@ var WeekView = Marionette.ItemView.extend({
         this.listenTo(this.model, 'change', this.render);
         this.dragInfo = null;
         this.goalDragInfo = null;
+        // http://stackoverflow.com/questions/14460855/backbone-js-listento-window-resize-throwing-object-object-has-no-method-apply
+        this.resizeCallback = _.bind(this.fixSVGFractionalCoordinates, this);
+        $(window).on('resize', this.resizeCallback);
+    },
+    remove: function() {
+        $(window).off('resize', this.resizeCallback);
     },
     onBeforeRender: function() {
         this.byDay = this.weekSessions.groupBy(function(session, i) {
@@ -40,6 +46,19 @@ var WeekView = Marionette.ItemView.extend({
             this.cumulativeSum[key] = sum;
             day = day.add(1, 'days');
         }
+    },
+    onShow: function() {
+        this.fixSVGFractionalCoordinates();
+    },
+    fixSVGFractionalCoordinates: function() {
+        // https://bugzilla.mozilla.org/show_bug.cgi?id=608812
+        // Not sure if this works in all browsers.
+        try {
+            this.$('svg').attr('style', '');
+            var ctm = this.$('svg')[0].getScreenCTM();
+            this.$('svg').attr('style', 'position: relative; ' +
+                    'top: ' + -(ctm.f % 1) + 'px; left: ' + -(ctm.e % 1) + 'px;');
+        } catch (e) {}
     },
     templateHelpers: function() {
         return {
