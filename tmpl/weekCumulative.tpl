@@ -20,7 +20,7 @@
             <% } else { %>
               <line class="cumulative" x1="<%= rm2p(cumulative(d)) %>" x2="<%= rm2p(cumulative(d)) %>" y1="<%= -DAY_HEIGHT_PX/2 %>" y2="0" />
             <% } %>
-            <circle class="cumulative" cy="<%= DAY_HEIGHT_PX/2 %>" cx="<%= rm2p(cumulative(d)) %>" r="5" />
+            <circle class="cumulative" cy="0" cx="<%= rm2p(cumulative(d)) %>" r="5" />
           <% } %>
           <!-- cumulative fill -->
           <!-- IMO, filling under the cumulative graph is misleading because
