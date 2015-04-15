@@ -12,13 +12,22 @@
 var DEFAULT_ACTIVITY_TYPES = {
     "unspecified":  {displayName:"Unspecified",icon: "who-knows"},
 
-    "running":      {displayName: "Running",   icon: "running"},
     "baseball":     {displayName: "Baseball",  icon: "baseball"},
     "basketball":   {displayName: "Basketball",icon: "basketball"},
-    "swimming":     {displayName: "Swimming",  icon: "swimming"},
+    "cycling":      {displayName: "Cycling",   icon: "cycling"},
     "curling":      {displayName: "Curling",   icon: "curling"},
+    "indoorbike":   {displayName: "Indoor Bike", icon: "exercise-bike"},
+    "lifting":      {displayName: "Lifting",   icon: "dumbbell"},
+    "karate":       {displayName: "Karate",    icon: "karate"},
+    "polka":        {displayName: "Polka",     icon: "../../../iconarchive/polka"},
+    "pushups":      {displayName: "PushUps",   icon: "pushups"},
+    "running":      {displayName: "Running",   icon: "running"},
+    "stretching":   {displayName: "Stretching",icon: "stretching"},
+    "swimming":     {displayName: "Swimming",  icon: "swimming"},
+    "treadmill":    {displayName: "Treadmill", icon: "treadmill"},
+    "yoga":         {displayName: "Yoga",      icon: "yoga"}
     // TODO add more if desired
-}
+};
 
 var DISPLAY_NAMES_2_ACTIV_NAMES = {};
 for (var activ in DEFAULT_ACTIVITY_TYPES) {
