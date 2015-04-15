@@ -8,7 +8,7 @@
              outweighed by the downside of more of the cumulative line graph
              being hidden by the bars. -->
         <g transform="translate(100, <%= DAY_HEIGHT_PX * (i + 1/2) %>)">
-          <% if(urlVar('cumulative') == 'rect'){ %>
+          <% if(urlVar('cumulative') != 'line'){ %>
             <rect class="cumulative" y="<%= -DAY_HEIGHT_PX/2 - (i == 0 ? 5 : 0) %>" height="<%= DAY_HEIGHT_PX + (i == 0 ? 5 : 0) %>" width="<%= rm2p(cumulative(d)) %>" />
             <line class="cumulative end" y1="<%= -DAY_HEIGHT_PX/2 - (i == 0 ? 5 : 0) %>" y2="<%= DAY_HEIGHT_PX/2 %>" x1="<%= rm2p(cumulative(d)) %>" x2="<%= rm2p(cumulative(d)) %>" />
             <% if(cumulative(d) > cumulative(d - 1)) { %>
