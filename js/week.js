@@ -112,6 +112,7 @@ var WeekView = Marionette.ItemView.extend({
       "mousedown rect.new-session": "mousedownPlus",
       "mousemove": "mousemove",
       "mouseup": "mouseup",
+      "mousedown g.goal":           "mousedownGoal",
     },
     mousedownSession: function(event){
         var cid = $(event.target).data('cid');
@@ -125,6 +126,9 @@ var WeekView = Marionette.ItemView.extend({
         // The view should render synchronously, so the new rect should be
         // present in the DOM if we need it.
         this.startDragging(newSession, true, event);
+    },
+    mousedownGoal: function(event) {
+        console.log("you clicked on the goal flag");
     },
     startDragging: function(session, isCreate, event){
         this.dragInfo = {
