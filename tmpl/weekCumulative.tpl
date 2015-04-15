@@ -8,10 +8,14 @@
              outweighed by the downside of more of the cumulative line graph
              being hidden by the bars. -->
         <g transform="translate(100, <%= DAY_HEIGHT_PX * (i + 1/2) %>)">
-          <% if(i > 0) { %>
-            <line class="cumulative" x1="<%= rm2p(cumulative(d+1)) %>" x2="<%= rm2p(cumulative(d)) %>" y1="<%= -DAY_HEIGHT_PX %>" y2="0" />
+          <% if(urlVar('cumulative') == 'rect'){ %>
+            <rect class="cumulative" y="<%= -DAY_HEIGHT_PX/2 %>" height="<%= DAY_HEIGHT_PX %>" width="<%= rm2p(cumulative(d)) %>" />
           <% } else { %>
-            <line class="cumulative" x1="<%= rm2p(cumulative(d)) %>" x2="<%= rm2p(cumulative(d)) %>" y1="<%= -DAY_HEIGHT_PX/2 %>" y2="0" />
+            <% if(i > 0) { %>
+              <line class="cumulative" x1="<%= rm2p(cumulative(d+1)) %>" x2="<%= rm2p(cumulative(d)) %>" y1="<%= -DAY_HEIGHT_PX %>" y2="0" />
+            <% } else { %>
+              <line class="cumulative" x1="<%= rm2p(cumulative(d)) %>" x2="<%= rm2p(cumulative(d)) %>" y1="<%= -DAY_HEIGHT_PX/2 %>" y2="0" />
+            <% } %>
           <% } %>
         </g>
       <% }) %>
