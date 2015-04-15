@@ -1,5 +1,5 @@
 <script type="text/template" id="weekTpl">
-    <svg class="week">
+    <svg class="week"><g transform="translate(10,0)">
 
         <!--
             Text label for the "WEEK TOTAL" bar
@@ -411,5 +411,5 @@
             <%= include #weekCumulative %>
             <%= include #weekDays %>
         </g>
-    </svg>
+    </g></svg>
 </script>
