@@ -33,7 +33,7 @@ var WeekView = Marionette.ItemView.extend({
             return session.day();
         });
         // cache
-        this.beginning = moment(this.weekSessions.at(0).attributes.date).startOf('isoWeek');
+        this.beginning = this.model.attributes.beginning;
         this.end = +moment(this.beginning).endOf('isoWeek');
         this.cumulativeSum = {};
         var day = moment(this.beginning);
@@ -245,9 +245,21 @@ var FullView = Marionette.CollectionView.extend({
         var sessionsByWeek = dataset.attributes.sessions.groupBy(function(session, i) {
             return session.week();
         });
-        var weeks = Object.keys(sessionsByWeek);
-        weeks.sort();
-        weeks.reverse();
+        // Ensure today is present.
+        var todayWeekStr = weekFormat(dataset.attributes.today.startOf('isoWeek'));
+        if (!sessionsByWeek[todayWeekStr])
+            sessionsByWeek[todayWeekStr] = [];
+        var weekStrs = Object.keys(sessionsByWeek);
+        weekStrs.sort();
+        weekStrs.reverse();
+        // Find shortest contiguous range of weeks containing today and all existing sessions.
+        // (GR5: Allow data to be added to older weeks?)
+        var m = moment(weekStrs[0]);  // weekStrs should always be nonempty because of today.
+        var weekMoments = [m.clone()];
+        while (weekFormat(m) > weekStrs[weekStrs.length - 1]) {
+            m.subtract(1, 'week');
+            weekMoments.push(m.clone());
+        }
         /*
         console.log(weeks);
         for(var w in weekSessions){
@@ -255,10 +267,11 @@ var FullView = Marionette.CollectionView.extend({
             console.log('%s -> %o', w, sessions);
         }
         */
-        var weekModels = _.map(weeks, function(w) {
+        var weekModels = _.map(weekMoments, function(m) {
             return new Week({
+                beginning: m,
                 today: dataset.attributes.today,
-                sessions: new WeekSessions(sessionsByWeek[w])
+                sessions: new WeekSessions(sessionsByWeek[weekFormat(m)])
             });
         });
         this.collection = new Backbone.Collection(weekModels);
