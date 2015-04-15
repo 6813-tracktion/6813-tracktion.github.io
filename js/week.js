@@ -246,7 +246,7 @@ var FullView = Marionette.CollectionView.extend({
             return session.week();
         });
         // Ensure today is present.
-        var todayWeekStr = weekFormat(dataset.attributes.today.startOf('isoWeek'));
+        var todayWeekStr = weekFormat(moment(dataset.attributes.today).startOf('isoWeek'));
         if (!sessionsByWeek[todayWeekStr])
             sessionsByWeek[todayWeekStr] = [];
         var weekStrs = Object.keys(sessionsByWeek);
@@ -267,6 +267,7 @@ var FullView = Marionette.CollectionView.extend({
             console.log('%s -> %o', w, sessions);
         }
         */
+        console.log(dataset.attributes.today);
         var weekModels = _.map(weekMoments, function(m) {
             return new Week({
                 beginning: m,
