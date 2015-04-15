@@ -78,15 +78,7 @@ var WeekView = Marionette.ItemView.extend({
                 return model.get(name);
             },
             urlVar: function(name){
-                var vars = [];
-                var hashes = window.location.href.slice(
-                        window.location.href.indexOf('?') + 1).split('&');
-                for ( var i = 0; i < hashes.length; i++) {
-                    var hash = hashes[i].split('=');
-                    if(hash[0] == name)
-                        return hash[1];
-                }
-                return null;
+                return getUrlParameter(name);
             },
             sessionClass: function(session){
                 if(this.self.dragInfo)
