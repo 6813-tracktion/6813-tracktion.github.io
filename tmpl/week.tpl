@@ -1,10 +1,10 @@
 <script type="text/template" id="weekTpl">
-    <svg class="week"><g transform="translate(10,0)">
+    <svg class="week"><g transform="translate(10,10)">
 
         <!--
             Text label for the "WEEK TOTAL" bar
         -->
-        <g transform = "translate(47,<%=DAY_HEIGHT_PX+32%>)">
+        <g transform = "translate(47,<%=DAY_HEIGHT_PX+33%>)">
             <text style="text-anchor: middle" class="weekTotal"> Week Total </text>
         </g>
 
@@ -21,7 +21,7 @@
             var day = $(event.target).data('day');
         var date = this.templateHelpers().day(day);
         -->
-        <g style = "text-anchor: middle;" transform = "translate(50,20)">
+        <g style = "text-anchor: middle;" transform = "translate(50,13)">
             <text> Weekly Goal </text>
             <text transform = "translate(0,20)"> By <%=day(6).format("MMM DD")%> </text>
         </g>
@@ -399,8 +399,8 @@
         </g>
 
         <g class = "goal" transform = "translate(<%= weekAttr('goal') * 5 / 3 + 100 %>,0)">
-            <line x1 = "0" x2 = "0" y1 = "20" y2 = "<%=DAY_HEIGHT_PX/2+22%>" stroke = "black" stroke-width = "2"/>
-            <image xlink:href="img/checkered-flag.png" x = "-1" y = "-5"
+            <line x1 = "0" x2 = "0" y1 = "10" y2 = "<%=DAY_HEIGHT_PX/2+22%>" stroke = "black" stroke-width = "2"/>
+            <image xlink:href="img/checkered-flag.png" x = "-1" y = "-14"
                     height = "40px" width = "30px" />
         </g>
 

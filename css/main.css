@@ -12,9 +12,9 @@ svg {
   margin-top: 20px;
   margin-left: 15px;
   margin-right: 15px;
-  width: 810px;
+  width: 800px;
   /* background: #efefef; */
-  height: 390px;
+  height: 400px;
   /* @see http://lea.verou.me/css3patterns/#lined-paper */
 /*  background-color: #fff;
   background-image:
@@ -37,7 +37,8 @@ svg .day {
   /*text-anchor: middle;*/
 }
 svg .today {
-  font-size: 95%;
+  /*font-size: 95%;*/ /* if one line */
+  font-size: 105%;
 }
 svg .weekTotal {
   font-size: 120%;

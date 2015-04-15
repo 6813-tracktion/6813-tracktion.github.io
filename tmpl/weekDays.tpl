@@ -34,7 +34,7 @@
       <!-- <text x="92" y="<%= DAY_HEIGHT_PX/2 - 18%>" dy=".35em" text-anchor="end" class="day today">Today,</text>
       <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" text-anchor="end" class="day today"><%= day(d).format("MMM D")%></text>-->
     <% } else { %>
-      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" text-anchor="end" class="day"><%= day(d).format("MMM D")%> </text>
+      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".33em" text-anchor="end" class="day"><%= day(d).format("MMM D")%> </text>
     <% } %>
   </g>
 <% }) %>
