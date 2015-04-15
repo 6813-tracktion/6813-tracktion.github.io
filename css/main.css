@@ -16,11 +16,11 @@ svg {
   /* background: #efefef; */
   height: 390px;
   /* @see http://lea.verou.me/css3patterns/#lined-paper */
-  background-color: #fff;
+/*  background-color: #fff;
   background-image:
   linear-gradient(90deg, transparent 90px, #abced4 98px, #abced4 100px, transparent 100px),
   linear-gradient(#eee .1em, transparent .1em);
-  background-size: 100% 42px;
+  background-size: 100% 42px;*/
 }
 svg text {
   -webkit-touch-callout: none;
@@ -38,6 +38,11 @@ svg .day {
 }
 svg .today {
   font-size: 95%;
+}
+svg .weekTotal {
+  font-size: 120%;
+  /*font-style: italic;*/
+  font-weight: bold;
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
