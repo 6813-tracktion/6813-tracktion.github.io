@@ -36,6 +36,9 @@ svg .day {
   /*text-align: center;*/
   /*text-anchor: middle;*/
 }
+svg .today {
+  font-size: 95%;
+}
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
   stroke-width: 2px;
