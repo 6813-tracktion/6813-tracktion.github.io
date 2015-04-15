@@ -9,3 +9,10 @@ function weekFormat(m) {
     // past goal periods.  Can probably wait for GR5.
     return moment(m).format('GGGG-[W]WW'); // e.g. 2015-W7
 };
+
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+    var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+        results = regex.exec(location.search);
+    return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+}
