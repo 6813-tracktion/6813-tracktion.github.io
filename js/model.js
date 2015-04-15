@@ -80,5 +80,5 @@ function loadModel(){
         return moment(a.attributes.date) - moment(b.attributes.date) < 0;
     });
     var sessions = new Backbone.Collection(list);
-    return new DataSet({today: moment('2015-04-15'), sessions: sessions});
+    return new DataSet({today: moment('2015-04-04'), sessions: sessions});
 }
