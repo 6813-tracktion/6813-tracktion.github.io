@@ -6,14 +6,6 @@
     <!-- background for row hover -->
     <rect class="background" height="<%= DAY_HEIGHT_PX %>" width="800" />
     <g transform="translate(100, 0)" class="sessions">
-      <!-- cumulative fill -->
-      <!-- IMO, filling under the cumulative graph is misleading because
-           the area under it doesn't have any meaning. -->
-      <!--<rect class="cumulative" height="<%= DAY_HEIGHT_PX %>" width="<%= rm2p(cumulative(d)) %>" />-->
-      <circle class="cumulative" cy="<%= DAY_HEIGHT_PX/2 %>" cx="<%= rm2p(cumulative(d)) %>" r="5" />
-      <!--
-      <text class="cumulative" y="<%= DAY_HEIGHT_PX/2 %>" x="<%= rm2p(cumulative(d)) + 20 %>" dy=".35em"><%= cumulative(d) %></text>
-      -->
 
       <!-- activity slots -->
       <% _.each(daySessions(d), function(session, j){ %>
