@@ -138,7 +138,6 @@ var WeekView = Marionette.ItemView.extend({
             origMouseX : event.pageX,
             origDuration: this.model.get('goal')
         };
-        console.log("yo");
         
     },
     startDragging: function(session, isCreate, event){
@@ -166,8 +165,6 @@ var WeekView = Marionette.ItemView.extend({
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             // move goal line and flag
             this.model.set('goal', newDuration); 
-            console.log(newDuration);
-            console.log("I'm here");
         }
     },
     mouseup: function(event){
