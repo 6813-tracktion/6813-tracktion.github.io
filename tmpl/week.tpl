@@ -404,7 +404,7 @@
                     height = "40px" width = "30px" />
         </g>
 
-        <g transform="translate(0,<%=Math.round(DAY_HEIGHT_PX*2.25)%>)">
+        <g transform="translate(0,<%=Math.round(DAY_HEIGHT_PX*2+10)%>)">
             <g class="week-label" transform="translate(750, 100) rotate(90)">
             <text style="text-anchor: middle;">Week <%= weekNumber() %></text>
             </g>
