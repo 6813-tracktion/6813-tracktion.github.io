@@ -31,6 +31,9 @@ svg text {
   user-select: none;
   cursor: default;
 }
+svg .goalText {
+  font-size: 115%;
+}
 svg .day {
   font-size: 115%;
   /*text-align: center;*/

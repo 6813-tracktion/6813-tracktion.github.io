@@ -21,9 +21,9 @@
             var day = $(event.target).data('day');
         var date = this.templateHelpers().day(day);
         -->
-        <g style = "text-anchor: middle;" transform = "translate(50,13)">
-            <text> Weekly Goal </text>
-            <text transform = "translate(0,20)"> By <%=day(6).format("MMM D")%> </text>
+        <g style = "text-anchor: middle;" transform = "translate(50,27)">
+            <text class="goalText">Weekly Goal</text>
+            <!-- <text transform = "translate(0,20)"> By <%=day(6).format("MMM D")%> </text> -->
         </g>
 
         <!--
@@ -371,7 +371,7 @@
                 YELLOW  -> if the goal has not been met
                 GREEN   -> if goal has been met
         -->
-        <g class = "weekTotal" transform = "translate(100,<%=DAY_HEIGHT_PX+5%>)">
+        <g class = "weekTotal" transform = "translate(100,<%=DAY_HEIGHT_PX + 7 %>)">
             <rect class="weekTotal" height="<%= DAY_HEIGHT_PX %>" width="<%=rm2p(cumulative(6))%>"
                 style = "<%=totalBarColor(cumulative(6))%>;"
             />
