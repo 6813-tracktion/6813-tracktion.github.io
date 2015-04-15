@@ -12,6 +12,7 @@ var weekGoal = 300;
 // @see http://jsfiddle.net/bryanbuchs/c72Vg/
 var WeekView = Marionette.ItemView.extend({
     template: "#weekTpl",
+    className: "week",
     initialize: function(options) {
         this.weekSessions = this.model.attributes.sessions;
         this.listenTo(this.weekSessions, 'add', this.render);
