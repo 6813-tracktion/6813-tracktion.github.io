@@ -35,6 +35,9 @@
         <text x="49" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" class="day-sum"><%= daySum(d) %></text>
       </g>
     </g>
+    <% if (day(d).isSame(today)) { %>
+      <text x="10" y="<%= DAY_HEIGHT_PX/2 - 20 %>">Today</text>
+    <% } %>
     <text x="10" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" class="day"><%= day(d).format("MMMM DD")%></text>
   </g>
 <% }) %>

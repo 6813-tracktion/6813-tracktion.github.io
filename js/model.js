@@ -34,7 +34,20 @@ var WeekSessions = Backbone.Collection.extend({
 var Week = Backbone.Model.extend({
     defaults: function() {
         return {
+            // TODO: Reference this from the global data set, if and when we
+            // figure out how to reverse the group-by-week at all.
+            today: moment().startOf('isoWeek'),
             goal: 200,
+            sessions: new Backbone.Collection()
+        };
+    }
+});
+
+// A temporary data structure, but still gives us a way to pass in the current day.
+var DataSet = Backbone.Model.extend({
+    defaults: function() {
+        return {
+            today: moment().startOf('isoWeek'),
             sessions: new Backbone.Collection()
         };
     }
@@ -46,7 +59,7 @@ function loadFreshModel() {
     ];
     var sessions = new Backbone.Collection(list);
     // var sessions = new Backbone.Collection([]);
-    return sessions;
+    return new DataSet({today: moment('2015-04-04'), sessions: sessions});
 }
 
 function loadModel(){
@@ -70,5 +83,5 @@ function loadModel(){
         return moment(a.attributes.date) - moment(b.attributes.date) < 0;
     });
     var sessions = new Backbone.Collection(list);
-    return sessions;
+    return new DataSet({today: moment('2015-04-04'), sessions: sessions});
 }
