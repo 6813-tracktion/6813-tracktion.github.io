@@ -10,6 +10,7 @@ function weekFormat(m) {
     return moment(m).format('GGGG-[W]WW'); // e.g. 2015-W7
 };
 
+// from http://stackoverflow.com/a/901144/1153180
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
     var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
