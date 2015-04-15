@@ -149,6 +149,7 @@ var WeekView = Marionette.ItemView.extend({
                 origDuration: session.attributes.duration,
                 origMouseX: event.pageX
         };
+        this.render();  // update drag-target class
         window.startDrag(this);
     },
     mousemove: function(event){
@@ -172,6 +173,7 @@ var WeekView = Marionette.ItemView.extend({
         if (this.dragInfo) {
             var dragInfo = this.dragInfo;
             this.dragInfo = null;
+            this.render();  // update drag-target class
 
             x = event.pageX;
             y = event.pageY;
