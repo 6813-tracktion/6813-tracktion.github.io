@@ -4,7 +4,7 @@
         <!--
             Text label for the "WEEK TOTAL" bar
         -->
-        <g transform = "translate(45,<%=DAY_HEIGHT_PX+32%>)">
+        <g transform = "translate(47,<%=DAY_HEIGHT_PX+32%>)">
             <text style="text-anchor: middle" class="weekTotal"> Week Total </text>
         </g>
 
