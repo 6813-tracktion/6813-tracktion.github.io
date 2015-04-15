@@ -37,8 +37,8 @@ svg .day {
   /*text-anchor: middle;*/
 }
 svg .today {
-  /*font-size: 95%;*/ /* if one line */
-  font-size: 105%;
+  font-size: 95%; /* if one line */
+  /*font-size: 105%;*/
 }
 svg .weekTotal {
   font-size: 120%;
