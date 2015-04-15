@@ -101,7 +101,7 @@ function setupActivity(){
 
     $('#cancelActivityInfo').click(function(e){
         e.preventDefault();
-        hideActivityInfo();
+        hideActivityInfo(false);
     });
     $('#submitActivityInfo').click(submitActivityInfo);
 
@@ -109,7 +109,7 @@ function setupActivity(){
         if(e.target != e.currentTarget)
             return;
         e.preventDefault();
-        hideActivityInfo();
+        hideActivityInfo(false);
     });
 }
 function showActivityInfo(session, callback) {
@@ -127,12 +127,12 @@ function showActivityInfo(session, callback) {
     layer.stop().fadeIn();
 }
 
-function hideActivityInfo() {
+function hideActivityInfo(isOK) {
     var layer = $('#activityLayer');
 
     // trigger callback
     var callback = layer.data('callback') || function(){ console.log('No callback!'); };
-    callback();
+    callback(isOK);
 
     //  hide
     layer.stop().fadeOut();
@@ -149,5 +149,5 @@ function submitActivityInfo() {
     session.set('label', activName);
 
     // hide
-    hideActivityInfo();
+    hideActivityInfo(true);
 }

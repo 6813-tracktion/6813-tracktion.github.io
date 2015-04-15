@@ -208,14 +208,14 @@ var WeekView = Marionette.ItemView.extend({
             // like the double-click timeout.
             if (moment().diff(dragInfo.startTime, 'milliseconds') < 300) {
                 console.log('Treat as a click at position ' + x + ',' + y);
-                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session));
+                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
                 event.stopPropagation(); // event outside -> close popup
                 return;
             }
 
             // if creating a session, ask for activity type and duration
             if (dragInfo.isCreate) {
-                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session));
+                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
                 event.stopPropagation();
                 // TODO set duration to activity's current duration (some
                 // default if just a click on plus) to handle both
@@ -231,8 +231,8 @@ var WeekView = Marionette.ItemView.extend({
             this.dragGoalInfo = null;
         }
     },
-    updateSession: function(session){
-        if (session.attributes.duration == 0){
+    updateSession: function(session, isCreate, isOK){
+        if ((isCreate && !isOK) || session.attributes.duration == 0){
             this.weekSessions.remove(session);
         }
     }
