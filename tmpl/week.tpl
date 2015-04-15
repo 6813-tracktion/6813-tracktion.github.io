@@ -18,7 +18,7 @@
             Text label for the "WEEK TOTAL" bar
         -->
         <g transform = "translate(45,<%=DAY_HEIGHT_PX+35%>)">
-            <text style="text-anchor: middle"> WEEK TOTAL </text>
+            <text style="text-anchor: middle"> Week Total </text>
         </g>
 
         <!--
@@ -26,7 +26,7 @@
             The default goal is going to be set to 300 min / week.
         -->
         <g transform = "translate(100,42)">
-            <line x1="0" y1="0" x2="<%= weekAttr('goal') * 5 / 3 %>" y2 = "0"stroke="black" stroke-width="2"/>
+            <line x1="0" y1="0" x2="1000" y2 = "0"stroke="black" stroke-width="2"/>
         </g>
 
         <!--
@@ -35,7 +35,7 @@
         var date = this.templateHelpers().day(day);
         -->
         <g style = "text-anchor: middle;" transform = "translate(50,20)">
-            <text> WEEKLY GOAL </text>
+            <text> Weekly Goal </text>
             <text transform = "translate(0,20)"> By <%=day(6).format("MMM DD")%> </text>
         </g>
 
@@ -50,20 +50,328 @@
         -->
         <g transform = "translate(150,32)">
             <line x1 = "0" y1 = "0" x2 = "0" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "0" x2 = "0" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "0" x2 = "0" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
             <line x1 = "50" y1 = "0" x2 = "50" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "50" x2 = "50" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "50" x2 = "50" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
             <line x1 = "100" y1 = "0" x2 = "100" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "100" x2 = "100" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "100" x2 = "100" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
             <line x1 = "150" y1 = "0" x2 = "150" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "150" x2 = "150" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "150" x2 = "150" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
             <line x1 = "200" y1 = "0" x2 = "200" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "200" x2 = "200" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "200" x2 = "200" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
             <line x1 = "250" y1 = "0" x2 = "250" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "250" x2 = "250" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "250" x2 = "250" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
             <line x1 = "300" y1 = "0" x2 = "300" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "300" x2 = "300" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "300" x2 = "300" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
             <line x1 = "350" y1 = "0" x2 = "350" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "350" x2 = "350" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "350" x2 = "350" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "400" y1 = "0" x2 = "400" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "400" x2 = "400" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "400" x2 = "400" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "450" y1 = "0" x2 = "450" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "450" x2 = "450" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "450" x2 = "450" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "500" y1 = "0" x2 = "500" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "500" x2 = "500" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "500" x2 = "500" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "550" y1 = "0" x2 = "550" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "550" x2 = "550" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "550" x2 = "550" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "600" y1 = "0" x2 = "600" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "600" x2 = "600" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "600" x2 = "600" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "650" y1 = "0" x2 = "650" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "650" x2 = "650" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "650" x2 = "650" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "700" y1 = "0" x2 = "700" y2 = "10" stroke = "black" stroke-width = "2"/>
+            
+                <line x1 = "700" x2 = "700" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                <line x1 = "700" x2 = "700" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+            
+            
             <line x1 = "750" y1 = "0" x2 = "750" y2 = "10" stroke = "black" stroke-width = "2"/>
             <line x1 = "800" y1 = "0" x2 = "800" y2 = "10" stroke = "black" stroke-width = "2"/>
             <line x1 = "850" y1 = "0" x2 = "850" y2 = "10" stroke = "black" stroke-width = "2"/>

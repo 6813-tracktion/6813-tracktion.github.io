@@ -38,6 +38,6 @@
     <text x="10" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" class="day"><%= day(d).format("MMMM DD")%></text>
   </g>
 <% }) %>
-<line x1="100" x2="100" y1="0" y2="<%= 7*DAY_HEIGHT_PX %>" class="separator" />
+<line x1="100" x2="100" y1="-100" y2="<%= 10*DAY_HEIGHT_PX %>" class="separator" />
 </g>
 </script>
