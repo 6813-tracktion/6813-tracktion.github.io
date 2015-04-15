@@ -218,17 +218,19 @@ var FullView = Marionette.CollectionView.extend({
         var sessionsByWeek = this.collection.groupBy(function(session, i) {
             return session.week();
         });
+        var weeks = Object.keys(sessionsByWeek);
+        weeks.sort();
+        weeks.reverse();
         /*
-        var weeks = Object.keys(weekSessions);
         console.log(weeks);
         for(var w in weekSessions){
             var sessions = weekSessions[w];
             console.log('%s -> %o', w, sessions);
         }
         */
-        var weeks = _.map(sessionsByWeek, function(weekSessionsArray) {
-            return new Week({sessions: new WeekSessions(weekSessionsArray)});
+        var weekModels = _.map(weeks, function(w) {
+            return new Week({sessions: new WeekSessions(sessionsByWeek[w])});
         });
-        this.collection = new Backbone.Collection(weeks);
+        this.collection = new Backbone.Collection(weekModels);
     }
 });
