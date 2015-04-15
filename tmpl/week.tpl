@@ -396,6 +396,7 @@
             <g transform = "translate(638,30)"><text> 330 </text></g>
             <g transform = "translate(688,30)"><text> 360 </text></g>
             <g transform = "translate(738,30)"><text> 390 </text></g>
+            <g transform = "translate(767,30)"><text> min </text></g>
         </g>
 
         <g class = "goal" transform = "translate(<%= weekAttr('goal') * 5 / 3 + 100 %>,0)">
