@@ -34,6 +34,7 @@ var WeekSessions = Backbone.Collection.extend({
 var Week = Backbone.Model.extend({
     defaults: function() {
         return {
+            goal: 200,
             sessions: new Backbone.Collection()
         };
     }

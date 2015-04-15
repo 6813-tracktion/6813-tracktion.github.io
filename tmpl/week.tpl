@@ -10,7 +10,7 @@
         -->
         <g class = "weekTotal" transform = "translate(100,<%=DAY_HEIGHT_PX+5%>)">
             <rect class="weekTotal" height="<%= DAY_HEIGHT_PX %>" width="<%=rm2p(cumulative(6))%>"
-                style = "<%=totalBarColor(rm2p(cumulative(6)))%>;"
+                style = "<%=totalBarColor(cumulative(6))%>;"
             />
         </g>
 
@@ -25,8 +25,8 @@
             The editable goal line. 
             The default goal is going to be set to 300 min / week.
         -->
-        <g transform = "translate(0,40)">
-            <line x1="100" y1="0" x2="600" y2 = "0"stroke="<%= goalLineColor(rm2p(cumulative(6))) %>" stroke-width="4"/>
+        <g transform = "translate(100,42)">
+            <line x1="0" y1="0" x2="<%= weekAttr('goal') * 5 / 3 %>" y2 = "0"stroke="black" stroke-width="2"/>
         </g>
 
         <!--
@@ -90,8 +90,8 @@
             <g transform = "translate(738,30)"><text> 390 </text></g>
         </g>
 
-        <g class = "goal" transform = "translate(600,0)">
-            <line x1 = "0" x2 = "0" y1 = "20" y2 = "<%=DAY_HEIGHT_PX/2+20%>" stroke = "black" stroke-width = "2"/>
+        <g class = "goal" transform = "translate(<%= weekAttr('goal') * 5 / 3 + 100 %>,0)">
+            <line x1 = "0" x2 = "0" y1 = "20" y2 = "<%=DAY_HEIGHT_PX/2+22%>" stroke = "black" stroke-width = "2"/>
             <image xlink:href="img/checkered-flag.png" x = "-1" y = "-5" 
                     height = "40px" width = "30px" />
         </g>

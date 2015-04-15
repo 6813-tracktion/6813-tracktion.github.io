@@ -17,7 +17,9 @@ var WeekView = Marionette.ItemView.extend({
         this.listenTo(this.weekSessions, 'add', this.render);
         this.listenTo(this.weekSessions, 'change', this.render);
         this.listenTo(this.weekSessions, 'remove', this.render);
+        this.listenTo(this.model, 'change', this.render);
         this.dragInfo = null;
+        this.goalDragInfo = null;
     },
     onBeforeRender: function() {
         this.byDay = this.weekSessions.groupBy(function(session, i) {
@@ -49,8 +51,11 @@ var WeekView = Marionette.ItemView.extend({
             rm2p: function(min) {
                 return Math.round(PX_PER_MIN * min);
             },
-            attr: function(session, name){
-                return session.attributes[name];
+            weekAttr: function(name) {
+                return this.self.model.get(name);
+            },
+            attr: function(model, name){
+                return model.get(name);
             },
             sessionClass: function(session){
                 if(this.self.dragInfo)
@@ -101,9 +106,9 @@ var WeekView = Marionette.ItemView.extend({
                 var defaultPixel = 500;
                 return px >= defaultPixel ? "rgb(0,150,0)":"rgb(225,0,0)";
             },
-            totalBarColor: function(px) {
-                var defaultPixel = 500;
-                return px >= defaultPixel ? "fill:rgb(0,150,0)":"fill:rgb(227,227,22)";
+            totalBarColor: function(mins) {
+                var goalMins = this.self.model.get('goal');
+                return mins >= goalMins ? "fill:rgb(0,150,0)":"fill:rgb(227,227,22)";
             }
         };
     },
@@ -128,7 +133,12 @@ var WeekView = Marionette.ItemView.extend({
         this.startDragging(newSession, true, event);
     },
     mousedownGoal: function(event) {
-        console.log("you clicked on the goal flag");
+        this.dragGoalInfo = {
+            origMouseX : event.pageX,
+            origDuration: this.model.get('goal')
+        };
+        console.log("yo");
+        
     },
     startDragging: function(session, isCreate, event){
         this.dragInfo = {
@@ -147,6 +157,16 @@ var WeekView = Marionette.ItemView.extend({
                     (event.pageX - this.dragInfo.origMouseX) / PX_PER_MIN);
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             this.dragInfo.session.set('duration', newDuration);
+        }
+        if (this.dragGoalInfo) {
+            var newDuration = Math.max(0,
+                    this.dragGoalInfo.origDuration +
+                    (event.pageX - this.dragGoalInfo.origMouseX) / PX_PER_MIN);
+            newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
+            // move goal line and flag
+            this.model.set('goal', newDuration); 
+            console.log(newDuration);
+            console.log("I'm here");
         }
     },
     mouseup: function(event){
@@ -179,6 +199,10 @@ var WeekView = Marionette.ItemView.extend({
 
             // Delete if duration has been reduced to zero.
             this.updateSession(dragInfo.session);
+        }
+        
+        if (this.dragGoalInfo) {
+            this.dragGoalInfo = null;
         }
     },
     updateSession: function(session){
