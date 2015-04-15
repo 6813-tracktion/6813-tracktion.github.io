@@ -29,7 +29,7 @@
     </g>
     <% if (day(d).isSame(today)) { %>
       <!-- 1 line version -->
-      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today">Today <%= day(d).format("MMM D")%></text>
+      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="4px" text-anchor="end" class="day today">Today <%= day(d).format("MMM D")%></text>
       <!-- 2 line version -->
       <!-- <text x="92" y="<%= DAY_HEIGHT_PX/2 - 18%>" dy=".35em" text-anchor="end" class="day today">Today,</text>
       <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" text-anchor="end" class="day today"><%= day(d).format("MMM D")%></text>-->

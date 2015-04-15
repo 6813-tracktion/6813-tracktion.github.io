@@ -23,7 +23,7 @@
         -->
         <g style = "text-anchor: middle;" transform = "translate(50,13)">
             <text> Weekly Goal </text>
-            <text transform = "translate(0,20)"> By <%=day(6).format("MMM DD")%> </text>
+            <text transform = "translate(0,20)"> By <%=day(6).format("MMM D")%> </text>
         </g>
 
         <!--
