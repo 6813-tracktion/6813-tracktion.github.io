@@ -7,6 +7,8 @@ var DURATION_GRANULARITY = 5;
 var DAY_HEIGHT_PX = 42;  // Keep in sync with svg {...} in main.css
 var PX_PER_MIN = 700 / 420;
 
+var weekGoal = 300;
+
 // @see http://jsfiddle.net/bryanbuchs/c72Vg/
 var WeekView = Marionette.ItemView.extend({
     template: "#weekTpl",
@@ -94,6 +96,14 @@ var WeekView = Marionette.ItemView.extend({
             },
             weekNumber: function(){
                 return this.self.beginning.format('W');
+            },
+            goalLineColor: function(px) {
+                var defaultPixel = 500;
+                return px >= defaultPixel ? "rgb(0,150,0)":"rgb(225,0,0)";
+            },
+            totalBarColor: function(px) {
+                var defaultPixel = 500;
+                return px >= defaultPixel ? "fill:rgb(0,150,0)":"fill:rgb(255,255,20)";
             }
         };
     },
