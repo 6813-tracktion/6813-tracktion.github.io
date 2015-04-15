@@ -36,8 +36,14 @@ async.waterfall([
         }
     });
 
-    // 1. Retrieve model
-    var sessions = loadModel();
+    // 1. Retrieve model - which one to load depends on url args
+    var sessions;
+    var isFresh = getUrlParameter('fresh');
+    if (isFresh) {
+      sessions = loadFreshModel();
+    } else {
+      sessions = loadModel();
+    }
 
     // 2. Setup stuff ...
     setupActivity();

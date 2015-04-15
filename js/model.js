@@ -40,6 +40,15 @@ var Week = Backbone.Model.extend({
     }
 });
 
+function loadFreshModel() {
+    var list = [
+        new Session({ date: "2015-04-01", duration: 60,   label: 'running'}),
+    ];
+    var sessions = new Backbone.Collection(list);
+    // var sessions = new Backbone.Collection([]);
+    return sessions;
+}
+
 function loadModel(){
     // fake model
     //
