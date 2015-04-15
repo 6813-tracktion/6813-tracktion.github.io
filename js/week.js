@@ -21,6 +21,7 @@ var WeekView = Marionette.ItemView.extend({
         this.listenTo(this.model, 'change', this.render);
         this.dragInfo = null;
         this.goalDragInfo = null;
+        this.svgStyleAttr = '';
         // http://stackoverflow.com/questions/14460855/backbone-js-listento-window-resize-throwing-object-object-has-no-method-apply
         this.resizeCallback = _.bind(this.fixSVGFractionalCoordinates, this);
         $(window).on('resize', this.resizeCallback);
@@ -56,8 +57,9 @@ var WeekView = Marionette.ItemView.extend({
         try {
             this.$('svg').attr('style', '');
             var ctm = this.$('svg')[0].getScreenCTM();
-            this.$('svg').attr('style', 'position: relative; ' +
-                    'top: ' + -(ctm.f % 1) + 'px; left: ' + -(ctm.e % 1) + 'px;');
+            this.svgStyleAttr = 'position: relative; ' +
+                'top: ' + -(ctm.f % 1) + 'px; left: ' + -(ctm.e % 1) + 'px;';
+            this.render();
         } catch (e) {}
     },
     templateHelpers: function() {
@@ -267,7 +269,6 @@ var FullView = Marionette.CollectionView.extend({
             console.log('%s -> %o', w, sessions);
         }
         */
-        console.log(dataset.attributes.today);
         var weekModels = _.map(weekMoments, function(m) {
             return new Week({
                 beginning: m,

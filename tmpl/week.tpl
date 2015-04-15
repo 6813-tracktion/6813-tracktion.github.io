@@ -1,5 +1,5 @@
 <script type="text/template" id="weekTpl">
-    <svg class="week"><g transform="translate(10,10)">
+    <svg class="week" style="<%= self.svgStyleAttr %>"><g transform="translate(10,10)">
 
         <!--
             Text label for the "WEEK TOTAL" bar
