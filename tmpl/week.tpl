@@ -36,7 +36,7 @@
         -->
         <g style = "text-anchor: middle;" transform = "translate(50,20)">
             <text> WEEKLY GOAL </text>
-            <text transform = "translate(0,20)"> By <%=day(6)%> </text>
+            <text transform = "translate(0,20)"> By <%=day(6).format("MMM DD")%> </text>
         </g>
 
         <!--
@@ -87,7 +87,7 @@
             <g transform = "translate(588,30)"><text> 300 </text></g>
             <g transform = "translate(638,30)"><text> 330 </text></g>
             <g transform = "translate(688,30)"><text> 360 </text></g>
-            <g transform = "translate(738,30)"><text> 410 </text></g>
+            <g transform = "translate(738,30)"><text> 390 </text></g>
         </g>
 
         <g class = "goal" transform = "translate(600,0)">

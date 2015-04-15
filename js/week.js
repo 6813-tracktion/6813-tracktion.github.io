@@ -103,7 +103,7 @@ var WeekView = Marionette.ItemView.extend({
             },
             totalBarColor: function(px) {
                 var defaultPixel = 500;
-                return px >= defaultPixel ? "fill:rgb(0,150,0)":"fill:rgb(255,255,20)";
+                return px >= defaultPixel ? "fill:rgb(0,150,0)":"fill:rgb(227,227,22)";
             }
         };
     },
