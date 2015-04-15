@@ -29,11 +29,15 @@ svg text {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  cursor: default;
 }
 svg .day {
   font-size: 115%;
   /*text-align: center;*/
   /*text-anchor: middle;*/
+}
+svg .today {
+  font-size: 95%;
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
@@ -54,7 +58,7 @@ rect.background:hover {
 /* cumulative line */
 rect.cumulative {
   pointer-events: none;
-  fill: rgba(255, 0, 0, 0.1);
+  fill: rgba(250, 180, 180, 0.2);
 }
 circle.cumulative {
   pointer-events: none;
@@ -72,6 +76,10 @@ g.day:hover text.cumulative {
 line.cumulative {
   stroke: rgba(100, 100, 100, 0.5);
   stroke-width: 2px;
+}
+line.cumulative.end {
+  stroke: rgba(200, 200, 200, 0.5);
+  stroke-width: 1px;
 }
 
 /* individual sessions */
@@ -125,7 +133,9 @@ text.day, text.day-sum {
   pointer-events: none;
 }
 text.day-sum {
-  fill: rgba(200, 200, 200, 0.7);
+  fill: gray;
+  stroke: silver; /*rgba(255, 255, 255, 0.7); */
+  stroke-width: 1px;
   visibility: hidden;
 }
 g.day:hover text.day-sum {
@@ -140,6 +150,12 @@ g.day:hover text.day-sum {
     visibility: visible;
     stroke: red;
     stroke-width: 5;
+}
+.goal {
+    cursor: pointer;
+}
+.dragging .goal {
+    cursor: move;
 }
 /* unsuccesful attempt to fix jquery autocomplete behind dropdown */
 /*.ui-autocomplete-input, .ui-menu, .ui-menu-item {

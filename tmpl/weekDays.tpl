@@ -6,14 +6,6 @@
     <!-- background for row hover -->
     <rect class="background" height="<%= DAY_HEIGHT_PX %>" width="800" />
     <g transform="translate(100, 0)" class="sessions">
-      <!-- cumulative fill -->
-      <!-- IMO, filling under the cumulative graph is misleading because
-           the area under it doesn't have any meaning. -->
-      <!--<rect class="cumulative" height="<%= DAY_HEIGHT_PX %>" width="<%= rm2p(cumulative(d)) %>" />-->
-      <circle class="cumulative" cy="<%= DAY_HEIGHT_PX/2 %>" cx="<%= rm2p(cumulative(d)) %>" r="5" />
-      <!--
-      <text class="cumulative" y="<%= DAY_HEIGHT_PX/2 %>" x="<%= rm2p(cumulative(d)) + 20 %>" dy=".35em"><%= cumulative(d) %></text>
-      -->
 
       <!-- activity slots -->
       <% _.each(daySessions(d), function(session, j){ %>
@@ -36,9 +28,14 @@
       </g>
     </g>
     <% if (day(d).isSame(today)) { %>
-      <text x="10" y="<%= DAY_HEIGHT_PX/2 - 20 %>">Today</text>
+      <!-- 1 line version -->
+      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today">Today <%= day(d).format("MMM D")%></text>
+      <!-- 2 line version -->
+      <!-- <text x="92" y="<%= DAY_HEIGHT_PX/2 - 18%>" dy=".35em" text-anchor="end" class="day today">Today,</text>
+      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" text-anchor="end" class="day today"><%= day(d).format("MMM D")%></text>-->
+    <% } else { %>
+      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" text-anchor="end" class="day"><%= day(d).format("MMM D")%> </text>
     <% } %>
-    <text x="85" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" text-anchor="end" class="day"><%= day(d).format("MMM D")%></text>
   </g>
 <% }) %>
 <line x1="100" x2="100" y1="-100" y2="<%= 10*DAY_HEIGHT_PX %>" class="separator" />
