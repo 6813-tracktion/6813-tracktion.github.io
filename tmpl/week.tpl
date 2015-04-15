@@ -1,18 +1,5 @@
 <script type="text/template" id="weekTpl">
     <svg class="week">
-        
-        <!--
-            Draws the Week Total bar showing the total number of minutes 
-                worked out this particular week.
-            Bar color is 
-                YELLOW  -> if the goal has not been met
-                GREEN   -> if goal has been met
-        -->
-        <g class = "weekTotal" transform = "translate(100,<%=DAY_HEIGHT_PX+5%>)">
-            <rect class="weekTotal" height="<%= DAY_HEIGHT_PX %>" width="<%=rm2p(cumulative(6))%>"
-                style = "<%=totalBarColor(cumulative(6))%>;"
-            />
-        </g>
 
         <!--
             Text label for the "WEEK TOTAL" bar
@@ -375,6 +362,19 @@
             <line x1 = "750" y1 = "0" x2 = "750" y2 = "10" stroke = "black" stroke-width = "2"/>
             <line x1 = "800" y1 = "0" x2 = "800" y2 = "10" stroke = "black" stroke-width = "2"/>
             <line x1 = "850" y1 = "0" x2 = "850" y2 = "10" stroke = "black" stroke-width = "2"/>
+        </g>
+
+        <!--
+            Draws the Week Total bar showing the total number of minutes 
+                worked out this particular week.
+            Bar color is 
+                YELLOW  -> if the goal has not been met
+                GREEN   -> if goal has been met
+        -->
+        <g class = "weekTotal" transform = "translate(100,<%=DAY_HEIGHT_PX+5%>)">
+            <rect class="weekTotal" height="<%= DAY_HEIGHT_PX %>" width="<%=rm2p(cumulative(6))%>"
+                style = "<%=totalBarColor(cumulative(6))%>;"
+            />
         </g>
 
         <!--
