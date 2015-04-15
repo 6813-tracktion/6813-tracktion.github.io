@@ -45,14 +45,16 @@ function loadModel(){
     var list = [
         new Session({ date: "2015-04-01", duration: 60,   label: 'polka'}),
         new Session({ date: "2015-04-01", duration: 100,  label: 'running'}),
-        new Session({ date: "2015-04-02", duration: 20,   label: 'aggressive sitting'}),
-        new Session({ date: "2015-04-04", duration: 40,   label: 'laser tag'})
+        new Session({ date: "2015-04-02", duration: 20,   label: 'sitting'}),
+        new Session({ date: "2015-04-04", duration: 40,   label: 'swimming'})
     ];
+    var labels = Object.keys(DEFAULT_ACTIVITY_TYPES);
     for(var i = 0; i < 100; ++i){
         var m = moment("2015-04-04")
               .subtract(Math.round(i / 3 + Math.random() * i), 'days')
               .add(Math.round(Math.random() * 1e6), 'ms');
-        list.push(new Session({ date: m, duration: Math.ceil(1 + Math.random() * 10) * 5, label: 'random'}));
+        var label = labels[Math.floor(Math.random() * (labels.length + 1))] || 'random';
+        list.push(new Session({ date: m, duration: Math.ceil(1 + Math.random() * 10) * 5, label: label}));
     }
     list.sort(function(a, b){
         return moment(a.attributes.date) - moment(b.attributes.date) < 0;
