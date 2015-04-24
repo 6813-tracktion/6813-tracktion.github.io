@@ -144,6 +144,11 @@ var WeekView = Marionette.ItemView.extend({
       //"mousemove": "mousemove",
       //"mouseup": "mouseup",
       "mousedown g.goal":           "mousedownGoal",
+      // hover info callbacks
+      "mouseover g.goal":           "mouseoverGoal",
+      "mouseout g.goal":            "mouseoutGoal",
+      "mouseover rect.session":     "mouseoverSession",
+      "mouseout rect":              "mouseoutRect"
     },
     mousedownSession: function(event){
         event.preventDefault();
@@ -168,6 +173,24 @@ var WeekView = Marionette.ItemView.extend({
         };
         window.startDrag(this);
     },
+    mouseoverGoal: function(event) {
+        var tip = $('#durationToolTip');
+        // $(tip).fadeIn(); // preferable, but not working; unclear why
+        $(tip).css('opacity', 1);
+        $(tip).html(this.model.get('goal'));
+
+        moveToEventTargetPlusOffset(tip, event, -4, -38);
+    },
+    mouseoutGoal: function(event) {
+        $('#durationToolTip').css('opacity', 0);
+    },
+    mouseoverSession: function(event) {
+        var session = sessionForEvent(this, event);
+        showToolTipForSession(session, true); // true = allow repositioning
+    },
+    mouseoutRect: function(event) {
+        $('#sessionToolTip').css('opacity', 0);
+    },
     startDragging: function(session, isCreate, event){
         this.dragInfo = {
                 session: session,
@@ -187,6 +210,7 @@ var WeekView = Marionette.ItemView.extend({
                     (event.pageX - this.dragInfo.origMouseX) / PX_PER_MIN);
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             this.dragInfo.session.set('duration', newDuration);
+            showToolTipForSession(this.dragInfo.session, false);
         }
         if (this.dragGoalInfo) {
             var newDuration = Math.max(0,
@@ -194,7 +218,7 @@ var WeekView = Marionette.ItemView.extend({
                     (event.pageX - this.dragGoalInfo.origMouseX) / PX_PER_MIN);
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             // move goal line and flag
-            this.model.set('goal', newDuration); 
+            this.model.set('goal', newDuration);
         }
     },
     mouseup: function(event){
@@ -228,7 +252,7 @@ var WeekView = Marionette.ItemView.extend({
             // Delete if duration has been reduced to zero.
             this.updateSession(dragInfo.session);
         }
-        
+
         if (this.dragGoalInfo) {
             this.dragGoalInfo = null;
         }
@@ -279,3 +303,34 @@ var FullView = Marionette.CollectionView.extend({
         this.collection = new Backbone.Collection(weekModels);
     }
 });
+
+function sessionForEvent(ths, event) {
+    var cid = $(event.target).data('cid');
+    return ths.weekSessions.get(cid);
+}
+
+function showToolTipForSession(session, reposition) {
+    var tip = $('#sessionToolTip');
+    $(tip).css('opacity', 1);
+
+    // populate tooltip
+    var duration = session.attributes.duration;
+    if (duration <= 0) {
+        duration = "(Delete)";
+    }
+    var name = displayNameForLabel(session.attributes.label);
+    $(tip).html(duration + 'm ' + name);
+
+    // position tooltip; the reposition flag is a hack to have
+    // it not move the tooltip to some random place in the svg when
+    // this is called as a result of dragging while the mouse is
+    // outside the session itself; ideally, we should store all
+    // the relevant info about the session's position in the dragInfo
+    // and use that instead
+    if (reposition) {
+        var wSesh = event.target.getAttribute("width");
+        var wTip = $(tip).width();
+        var dx = -wTip / 2 + wSesh / 2 - 3;
+        moveToEventTargetPlusOffset(tip, event, dx, -30);
+    }
+}

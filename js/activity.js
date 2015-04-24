@@ -36,6 +36,11 @@ for (var activ in DEFAULT_ACTIVITY_TYPES) {
     DISPLAY_NAMES_2_ACTIV_NAMES[obj.displayName] = activ;
 }
 
+function displayNameForLabel(lbl) {
+    knownActivity = DEFAULT_ACTIVITY_TYPES[lbl];
+    return knownActivity ? knownActivity.displayName : lbl;
+}
+
 // function activityForDisplayName(name) {
 //     var activKey = DISPLAY_NAMES_2_ACTIV_NAMES[name];
     // var activObj = DEFAULT_ACTIVITY_TYPES[activKey];

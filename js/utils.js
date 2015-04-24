@@ -17,3 +17,24 @@ function getUrlParameter(name) {
         results = regex.exec(location.search);
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
+
+// based on http://codepen.io/recursiev/pen/zpJxs
+// only tested on svg elements
+function getTargetElementAbsPosition(event) {
+	var element = event.target;
+    var matrix = element.getScreenCTM()
+            .translate(+element.getAttribute("cx"),
+                     +element.getAttribute("cy"));
+    return {'x': window.pageXOffset + matrix.e,
+    	'y': window.pageYOffset + matrix.f}
+}
+
+function moveToAbsPosition(sel, x, y) {
+	$(sel).css("left", x + "px")
+        .css("top", y + "px");
+}
+
+function moveToEventTargetPlusOffset(sel, event, dx, dy) {
+	pos = getTargetElementAbsPosition(event);
+	moveToAbsPosition(sel, pos.x + dx, pos.y + dy);
+}
