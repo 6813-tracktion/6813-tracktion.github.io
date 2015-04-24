@@ -75,29 +75,15 @@ function setupActivity(){
         if(event.keyCode <= 40){
             return;
         }
-        /*
-        var allowed = [8, 9, 13, 32, 37, 38, 39, 40];
-        for(var i = 0; i < allowed.length; ++i){
-            if(event.keyCode == allowed[i]){
-                return;
-            }
-        }*/
         // and disallow any non-numeric non-control character
-        if(!$.isNumeric(event.key)){
+        // 0 is keycode 48, 9 is 57
+        var isNumericKey = event.which >= 48 && event.which <= 57;
+        var isModified = event.altKey || event.ctrlKey || event.shiftKey;
+        console.log('isModified: ' + isModified);
+        if (!isNumericKey || isModified) {
             event.preventDefault();
         }
     });
-
-    /*
-    // force durations to be numeric
-    // adapted from http://stackoverflow.com/a/20186188/1153180
-    $(document).on('keyup', '.numeric-only', function(event) {
-        var v = this.value;
-        if($.isNumeric(v) === false || v < 0) {
-            this.value = this.value.slice(0,-1); // remove last char entered
-        }
-    });
-    */
 
     $('#cancelActivityInfo').click(function(e){
         e.preventDefault();
