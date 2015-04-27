@@ -34,13 +34,21 @@ var WeekSessions = Backbone.Collection.extend({
 var Week = Backbone.Model.extend({
     defaults: function() {
         return {
-            // TODO: Reference today from the global data set, if and when we
-            // figure out how to reverse the group-by-week at all.
-            today: moment().startOf('isoWeek'),
+            dataset: null,  // Required reference to DataSet.
             beginning: moment('2015-04-13'),
             goal: 200,
             sessions: new Backbone.Collection()
         };
+    },
+    initialize: function() {
+        // Propagate additions/removals back to the master sessions collection.
+        // This will need to change if we allow a session to be dragged to a different goal period.
+        this.listenTo(this.attributes.sessions, 'add', function(session) {
+            this.attributes.dataset.attributes.sessions.add(session);
+            });
+        this.listenTo(this.attributes.sessions, 'remove', function(session) {
+            this.attributes.dataset.attributes.sessions.remove(session);
+            });
     }
 });
 
