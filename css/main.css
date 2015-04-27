@@ -36,17 +36,15 @@ svg .goalText {
 }
 svg .day {
   font-size: 115%;
-  /*text-align: center;*/
-  /*text-anchor: middle;*/
 }
 svg .today {
-  font-size: 95%; /* if one line */
-  /*font-size: 105%;*/
+  font-size: 115%;
+  font-style: italic;
+  font-weight: bold;
 }
 svg .weekTotal {
-  font-size: 120%;
-  /*font-style: italic;*/
-  font-weight: bold;
+  font-size: 135%;
+  font-weight: bolder;
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
