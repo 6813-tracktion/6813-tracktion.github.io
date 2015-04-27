@@ -1,5 +1,7 @@
 <script type="text/template" id="weekTpl">
-    <svg class="week" style="<%= self.svgStyleAttr %>"><g transform="translate(10,10)">
+    <!-- XXX: Express 106 in terms of DAY_HEIGHT_PX -->
+    <svg class="week" height="<%= 106 + numDaysToShow() * DAY_HEIGHT_PX %>"
+    style="<%= self.svgStyleAttr %>"><g transform="translate(10,10)">
 
         <!--
             Text label for the "WEEK TOTAL" bar

@@ -98,11 +98,13 @@ var WeekView = Marionette.ItemView.extend({
                 return label == 'unspecified' || !(label in DEFAULT_ACTIVITY_TYPES) ? 'bad' : 'good';
             },
             today: this.model.attributes.dataset.attributes.today,
-            days: function() {
-                return [0, 1, 2, 3, 4, 5, 6];
+            numDaysToShow: function() {
+                return this.reversedDays().length;
             },
             reversedDays: function() {
-                return [6, 5, 4, 3, 2, 1, 0];
+                return _.filter([6, 5, 4, 3, 2, 1, 0], _.bind(function(i) {
+                    return !this.day(i).isAfter(this.today);
+                    }, this));
             },
             day: function(i){
                 return moment(this.self.beginning).add(i, 'days');
@@ -303,6 +305,8 @@ var FullView = Marionette.CollectionView.extend({
         weekStrs.reverse();
         // Find shortest contiguous range of weeks containing today and all existing sessions.
         // (GR5: Allow data to be added to older weeks?)
+        // XXX: Now that future days are hidden, future sessions can make the UI do various
+        // weird things.  Fix this?  How?
         var m = moment(weekStrs[0]);  // weekStrs should always be nonempty because of today.
         var weekMoments = [m.clone()];
         while (weekFormat(m) > weekStrs[weekStrs.length - 1]) {
