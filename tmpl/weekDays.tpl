@@ -24,7 +24,7 @@
         <rect class="new-session" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= DAY_HEIGHT_PX-1 %>" data-day="<%= d %>" />
         <line class="new-session" x1="<%= DAY_HEIGHT_PX/2 %>" x2="<%= DAY_HEIGHT_PX/2 %>" y1="<%= 1/6*DAY_HEIGHT_PX %>" y2="<%= 5/6*DAY_HEIGHT_PX %>" />
         <line class="new-session" y1="<%= DAY_HEIGHT_PX/2 %>" y2="<%= DAY_HEIGHT_PX/2 %>" x1="<%= 1/6*DAY_HEIGHT_PX %>" x2="<%= 5/6*DAY_HEIGHT_PX %>" />
-        <text x="49" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" class="day-sum"><%= daySum(d) %></text>
+        <text x="49" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" class="day-sum"><%= formatDuration(daySum(d), '0') %></text>
       </g>
     </g>
     <% if (day(d).isSame(today)) { %>

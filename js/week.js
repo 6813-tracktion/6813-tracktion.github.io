@@ -348,14 +348,12 @@ function showToolTipForSession(session, element) {
     // ugly, and espeically ugly when the user is dragging to create a new
     // session and intends to specify something)
     var duration = session.attributes.duration;
-    if (duration <= 0) {
-        duration = "(Delete)";
-    }
+    var durationStr = formatDuration(duration, '(Delete)');
     if (session.attributes.label == 'unspecified') {
-        $(tip).html(duration + 'm');
+        $(tip).html(durationStr);
     } else {
         var name = displayNameForLabel(session.attributes.label);
-        $(tip).html(duration + 'm ' + name);
+        $(tip).html(durationStr + ' ' + name);
     }
 
     // position tooltip
@@ -368,6 +366,7 @@ function showToolTipForSession(session, element) {
 function showToolTipForGoal(goalMins, element) {
     var tip = $('#durationToolTip');
     $(tip).css('opacity', 1);
-    $(tip).html(goalMins);
+    var durationStr = formatDuration(goalMins, '0');
+    $(tip).html(durationStr);
     moveToElementPlusOffset(tip, element, -4, -38);
 }

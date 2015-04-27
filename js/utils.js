@@ -37,3 +37,19 @@ function moveToElementPlusOffset(sel, element, dx, dy) {
 	pos = getElementAbsPosition(element);
 	moveToAbsPosition(sel, pos.x + dx, pos.y + dy);
 }
+
+// moment.js can't format() durations, so just do it ourselves; also lets
+// us handle 0 or negative durations however we want
+function formatDuration(duration, negativeString) {
+    if (duration <= 0) {
+		return negativeString;
+    }
+    var hours = Math.floor(duration / 60);
+    var minutes = duration % 60;
+
+    // want 1:00, not 1:0
+    if (minutes < 10) {
+		return hours + ':0' + minutes;
+    }
+    return hours + ':' + minutes;
+}
