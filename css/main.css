@@ -164,11 +164,7 @@ g.day:hover text.day-sum {
 .dragging .goal {
     cursor: move;
 }
-/* unsuccesful attempt to fix jquery autocomplete behind dropdown */
-/*.ui-autocomplete-input, .ui-menu, .ui-menu-item {
-  z-index: 2006;
-  position: relative;
-}*/
+
 /* Activity info dialog */
 #activityLayer {
   display: none;
@@ -212,10 +208,9 @@ select, option {
   width: 180px;
   font-size: 200%;
 }
-/* unsuccesful attempt to fix jquery autocomplete behind dropdown */
+
 .ui-autocomplete-input, .ui-menu, .ui-menu-item {
-  z-index: 2006;
-  position: relative;
+  font-size: 15pt;
 }
 
 .tooltip {
@@ -230,6 +225,7 @@ select, option {
   border-radius: 4px;
   font-size: 18px;
   padding: 0px 3px;
+  z-index: 9;
 }
 .tooltip::after { /* triangle */
   content: '';

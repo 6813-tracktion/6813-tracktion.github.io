@@ -66,6 +66,7 @@ function setupActivity(){
     // with the dropdown, but would be preferable)
     $('#activityTypeInput').autocomplete({
         source: getAllActivities,
+        appendTo: '#activityInfoView',
         minLength: 0
     });
 
