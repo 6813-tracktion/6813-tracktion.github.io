@@ -13,7 +13,7 @@ var DEFAULT_ACTIVITY_TYPES = {
     "unspecified":  {displayName:"Unspecified",icon: "who-knows"},
 
     "baseball":     {displayName: "Baseball",  icon: "baseball"},
-    "basketball":   {displayName: "Basketball",icon: "basketball"},
+    // "basketball":   {displayName: "Basketball",icon: "basketball"},
     "cycling":      {displayName: "Cycling",   icon: "cycling"},
     "curling":      {displayName: "Curling",   icon: "curling"},
     "indoorbike":   {displayName: "Indoor Bike", icon: "exercise-bike"},
