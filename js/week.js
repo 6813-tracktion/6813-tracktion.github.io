@@ -318,13 +318,19 @@ function showToolTipForSession(session, element) {
     var tip = $('#sessionToolTip');
     $(tip).css('opacity', 1);
 
-    // populate tooltip
+    // populate tooltip, making sure not to write "Unspecified" (this is
+    // ugly, and espeically ugly when the user is dragging to create a new
+    // session and intends to specify something)
     var duration = session.attributes.duration;
     if (duration <= 0) {
         duration = "(Delete)";
     }
-    var name = displayNameForLabel(session.attributes.label);
-    $(tip).html(duration + 'm ' + name);
+    if (session.attributes.label == 'unspecified') {
+        $(tip).html(duration + 'm');
+    } else {
+        var name = displayNameForLabel(session.attributes.label);
+        $(tip).html(duration + 'm ' + name);
+    }
 
     // position tooltip
     var wSesh = element.getAttribute("width");
