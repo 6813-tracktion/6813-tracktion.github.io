@@ -7,7 +7,7 @@
             Text label for the "WEEK TOTAL" bar
         -->
         <g transform = "translate(47,<%=DAY_HEIGHT_PX+33%>)">
-            <text style="text-anchor: middle" class="weekTotal"> Week Total </text>
+            <text style="text-anchor: middle" class="weekTotalLabel"> Week Total </text>
         </g>
 
         <!--
@@ -377,6 +377,11 @@
             <rect class="weekTotal" height="<%= DAY_HEIGHT_PX %>" width="<%=rm2p(cumulative(6))%>"
                 style = "<%=totalBarColor(cumulative(6))%>;"
             />
+            <% if (rm2p(cumulative(6)) >= 42) { %>
+                <g transform="translate(<%=rm2p(cumulative(6)) - 6%>, <%=DAY_HEIGHT_PX / 2 + 6 %>)">
+                    <text text-anchor="end" class="totalMinutes"><%= formatDuration(cumulative(6))%></text>
+                </g>
+            <% } %>
         </g>
 
         <!--
@@ -398,7 +403,6 @@
             <g transform = "translate(638,30)"><text>  </text></g>
             <g transform = "translate(692,30)"><text>  6h </text></g>
             <g transform = "translate(738,30)"><text>  </text></g>
-            <g transform = "translate(767,30)"><text> min </text></g>
         </g>
 
         <g class = "goal" transform = "translate(<%= weekAttr('goal') * 5 / 3 + 100 %>,0)">

@@ -41,9 +41,13 @@ svg .today {
   font-style: italic;
   font-weight: bold;
 }
-svg .weekTotal {
+svg .weekTotalLabel {
   font-size: 135%;
   font-weight: bolder;
+}
+svg .totalMinutes {
+  font-size: 115%;
+  font-weight: bold;
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
