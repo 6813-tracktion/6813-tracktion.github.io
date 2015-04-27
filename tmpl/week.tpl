@@ -383,19 +383,19 @@
             NOTE: Same story as above with the for loop
         -->
         <g>
-            <g transform = "translate(142,30)"><text> 30 </text></g>
-            <g transform = "translate(192,30)"><text> 60 </text></g>
-            <g transform = "translate(242,30)"><text> 90 </text></g>
-            <g transform = "translate(288,30)"><text> 120 </text></g>
-            <g transform = "translate(338,30)"><text> 150 </text></g>
-            <g transform = "translate(388,30)"><text> 180 </text></g>
-            <g transform = "translate(438,30)"><text> 210 </text></g>
-            <g transform = "translate(488,30)"><text> 240 </text></g>
-            <g transform = "translate(538,30)"><text> 270 </text></g>
-            <g transform = "translate(588,30)"><text> 300 </text></g>
-            <g transform = "translate(638,30)"><text> 330 </text></g>
-            <g transform = "translate(688,30)"><text> 360 </text></g>
-            <g transform = "translate(738,30)"><text> 390 </text></g>
+            <g transform = "translate(142,30)"><text>  </text></g>
+            <g transform = "translate(192,30)"><text>  1h </text></g>
+            <g transform = "translate(242,30)"><text>  </text></g>
+            <g transform = "translate(292,30)"><text>  2h </text></g>
+            <g transform = "translate(338,30)"><text>  </text></g>
+            <g transform = "translate(392,30)"><text>  3h </text></g>
+            <g transform = "translate(438,30)"><text>  </text></g>
+            <g transform = "translate(492,30)"><text>  4h </text></g>
+            <g transform = "translate(538,30)"><text>  </text></g>
+            <g transform = "translate(592,30)"><text>  5h </text></g>
+            <g transform = "translate(638,30)"><text>  </text></g>
+            <g transform = "translate(692,30)"><text>  6h </text></g>
+            <g transform = "translate(738,30)"><text>  </text></g>
             <g transform = "translate(767,30)"><text> min </text></g>
         </g>
 
