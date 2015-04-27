@@ -174,19 +174,22 @@ var WeekView = Marionette.ItemView.extend({
         window.startDrag(this);
     },
     mouseoverGoal: function(event) {
-        var tip = $('#durationToolTip');
-        // $(tip).fadeIn(); // preferable, but not working; unclear why
-        $(tip).css('opacity', 1);
-        $(tip).html(this.model.get('goal'));
-
-        moveToEventTargetPlusOffset(tip, event, -4, -38);
+        showToolTipForGoal(this.model.get('goal'), event.target);
     },
     mouseoutGoal: function(event) {
         $('#durationToolTip').css('opacity', 0);
     },
     mouseoverSession: function(event) {
+        // TODO handle the case wherein we want to continue displaying the
+        // tooltip despite the mouse not being over the session in question
+        // (or the goal). This happens when you drag past 0 or move vertically
+        // above or below the session. To draw it such that it's centered, we
+        // need to know which DOM element is being dragged (so that we can
+        // get its position and width), but the element appears to be nulled
+        // when Marionette redraws. If we care enough to fix this, I think
+        // we'll have to include drawing the tooltip in the Marionette code.
         var session = sessionForEvent(this, event);
-        showToolTipForSession(session, true); // true = allow repositioning
+        showToolTipForSession(session, event.target);
     },
     mouseoutRect: function(event) {
         $('#sessionToolTip').css('opacity', 0);
@@ -210,7 +213,6 @@ var WeekView = Marionette.ItemView.extend({
                     (event.pageX - this.dragInfo.origMouseX) / PX_PER_MIN);
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             this.dragInfo.session.set('duration', newDuration);
-            showToolTipForSession(this.dragInfo.session, false);
         }
         if (this.dragGoalInfo) {
             var newDuration = Math.max(0,
@@ -309,7 +311,10 @@ function sessionForEvent(ths, event) {
     return ths.weekSessions.get(cid);
 }
 
-function showToolTipForSession(session, reposition) {
+function showToolTipForSession(session, element) {
+    console.log("session element = ");
+    console.log(element);
+
     var tip = $('#sessionToolTip');
     $(tip).css('opacity', 1);
 
@@ -321,16 +326,19 @@ function showToolTipForSession(session, reposition) {
     var name = displayNameForLabel(session.attributes.label);
     $(tip).html(duration + 'm ' + name);
 
-    // position tooltip; the reposition flag is a hack to have
-    // it not move the tooltip to some random place in the svg when
-    // this is called as a result of dragging while the mouse is
-    // outside the session itself; ideally, we should store all
-    // the relevant info about the session's position in the dragInfo
-    // and use that instead
-    if (reposition) {
-        var wSesh = event.target.getAttribute("width");
-        var wTip = $(tip).width();
-        var dx = -wTip / 2 + wSesh / 2 - 3;
-        moveToEventTargetPlusOffset(tip, event, dx, -30);
-    }
+    // position tooltip
+    var wSesh = element.getAttribute("width");
+    var wTip = $(tip).width();
+    var dx = -wTip / 2 + wSesh / 2 - 3;
+    moveToElementPlusOffset(tip, element, dx, -30);
+}
+
+function showToolTipForGoal(goalMins, element) {
+    console.log("goal element = ");
+    console.log(element);
+
+    var tip = $('#durationToolTip');
+    $(tip).css('opacity', 1);
+    $(tip).html(goalMins);
+    moveToElementPlusOffset(tip, element, -4, -38);
 }

@@ -20,9 +20,8 @@ function getUrlParameter(name) {
 
 // based on http://codepen.io/recursiev/pen/zpJxs
 // only tested on svg elements
-function getTargetElementAbsPosition(event) {
-	var element = event.target;
-    var matrix = element.getScreenCTM()
+function getElementAbsPosition(element) {
+	var matrix = element.getScreenCTM()
             .translate(+element.getAttribute("cx"),
                      +element.getAttribute("cy"));
     return {'x': window.pageXOffset + matrix.e,
@@ -34,7 +33,7 @@ function moveToAbsPosition(sel, x, y) {
         .css("top", y + "px");
 }
 
-function moveToEventTargetPlusOffset(sel, event, dx, dy) {
-	pos = getTargetElementAbsPosition(event);
+function moveToElementPlusOffset(sel, element, dx, dy) {
+	pos = getElementAbsPosition(element);
 	moveToAbsPosition(sel, pos.x + dx, pos.y + dy);
 }
