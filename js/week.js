@@ -97,7 +97,7 @@ var WeekView = Marionette.ItemView.extend({
                 var label = session.get('label');
                 return label == 'unspecified' || !(label in DEFAULT_ACTIVITY_TYPES) ? 'bad' : 'good';
             },
-            today: this.self.model.attributes.dataset.attributes.today,
+            today: this.model.attributes.dataset.attributes.today,
             days: function() {
                 return [0, 1, 2, 3, 4, 5, 6];
             },
