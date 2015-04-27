@@ -58,6 +58,11 @@ function getAllActivities(request, response) {
     response(types);
 }
 
+function normalizeActivity(label) {
+    // @see http://www.regular-expressions.info/refcharclass.html
+    return label.replace(/[^a-zA-Z]+/g, '').toLowerCase();
+}
+
 ///// ACTIVITY INFO POPUP /////////////////////////////////////////////////////
 
 function setupActivity(){
@@ -139,7 +144,7 @@ function submitActivityInfo() {
     session.set('duration', parseInt($('#durationInput').val(), 10));
 
     var displayName = $('#activityTypeInput').val();
-    var activName = DISPLAY_NAMES_2_ACTIV_NAMES[displayName] || displayName;
+    var activName = DISPLAY_NAMES_2_ACTIV_NAMES[displayName] || normalizeActivity(displayName);
     session.set('label', activName);
 
     // hide
