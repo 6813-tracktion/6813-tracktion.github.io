@@ -312,9 +312,6 @@ function sessionForEvent(ths, event) {
 }
 
 function showToolTipForSession(session, element) {
-    console.log("session element = ");
-    console.log(element);
-
     var tip = $('#sessionToolTip');
     $(tip).css('opacity', 1);
 
@@ -340,9 +337,6 @@ function showToolTipForSession(session, element) {
 }
 
 function showToolTipForGoal(goalMins, element) {
-    console.log("goal element = ");
-    console.log(element);
-
     var tip = $('#durationToolTip');
     $(tip).css('opacity', 1);
     $(tip).html(goalMins);
