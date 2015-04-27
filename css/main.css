@@ -64,7 +64,11 @@ rect.background:hover {
 /* cumulative line */
 rect.cumulative {
   pointer-events: none;
-  fill: rgba(250, 180, 180, 0.2);
+  fill: rgba(180, 180, 180, 0.1);
+}
+rect.cumulative-curr {
+  pointer-events: none;
+  fill: rgba(0, 183, 255, 0.2);
 }
 circle.cumulative {
   pointer-events: none;
