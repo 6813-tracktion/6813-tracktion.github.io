@@ -248,7 +248,12 @@ var WeekView = Marionette.ItemView.extend({
 
             // if creating a session, ask for activity type and duration
             if (dragInfo.isCreate) {
-                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
+                if(dragInfo.session.attributes.duration <= 0){
+                  // just delete, do not show
+                  this.updateSession(dragInfo.session, dragInfo.isCreate, false); // equivalent to showing and canceling
+                } else {
+                  showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
+                }
                 event.stopPropagation();
                 // TODO set duration to activity's current duration (some
                 // default if just a click on plus) to handle both
