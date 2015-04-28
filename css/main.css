@@ -175,6 +175,30 @@ g.day:hover text.day-sum {
     cursor: move;
 }
 
+#setGoalContainer {
+    display: none;
+    position: fixed;
+    width: 350px;
+    left: 50%;
+    padding: 30px;
+    margin-left: -150px;
+    margin-top: 75px;
+    background-color: #eff;
+    border: 2px solid rgba(0, 0, 100, 0.7);
+    border-radius: 5px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 100, 0.2);
+    font-size: 1.5em;
+    z-index: 9;
+}
+
+#hourDuration {
+    width: 50px;
+}
+
+#minuteDUration {
+    width: 60px;
+}
+
 /* Activity info dialog */
 #activityLayer {
   display: none;

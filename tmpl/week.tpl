@@ -27,345 +27,346 @@
             <text class="goalText">Weekly Goal</text>
             <!-- <text transform = "translate(0,20)"> By <%=day(6).format("MMM D")%> </text> -->
         </g>
+        
+        <g transform = "translate(100,0)">
+            <!--
+                Insert the 30 min ticks
 
-        <!--
-            Insert the 30 min ticks
+                NOTE: <pattern></pattern> does not work when I used it
+                        even in multiple variations.  But these ticks and
+                        the minutes will be static in the sense that they will
+                        not change over time so I will hard code these for now
+                        until I find a better way of for looping this thing
+            -->
+            <g transform = "translate(<%=30*PX_PER_MIN%>,32)">
+                <line x1 = "0" y1 = "0" x2 = "0" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            NOTE: <pattern></pattern> does not work when I used it
-                    even in multiple variations.  But these ticks and
-                    the minutes will be static in the sense that they will
-                    not change over time so I will hard code these for now
-                    until I find a better way of for looping this thing
-        -->
-        <g transform = "translate(150,32)">
-            <line x1 = "0" y1 = "0" x2 = "0" y2 = "10" stroke = "black" stroke-width = "2"/>
+                    <line x1 = "0" x2 = "0" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "0" x2 = "0" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
-                <line x1 = "0" x2 = "0" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "0" x2 = "0" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                <line x1 = "<%=30*PX_PER_MIN%>" y1 = "0" x2 = "<%=30*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            <line x1 = "50" y1 = "0" x2 = "50" y2 = "10" stroke = "black" stroke-width = "2"/>
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=30*PX_PER_MIN%>" x2 = "<%=30*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
-                <line x1 = "50" x2 = "50" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "50" x2 = "50" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                <line x1 = "<%=60*PX_PER_MIN%>" y1 = "0" x2 = "<%=60*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            <line x1 = "100" y1 = "0" x2 = "100" y2 = "10" stroke = "black" stroke-width = "2"/>
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=60*PX_PER_MIN%>" x2 = "<%=60*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
-                <line x1 = "100" x2 = "100" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "100" x2 = "100" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                <line x1 = "<%=90*PX_PER_MIN%>" y1 = "0" x2 = "<%=90*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            <line x1 = "150" y1 = "0" x2 = "150" y2 = "10" stroke = "black" stroke-width = "2"/>
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=90*PX_PER_MIN%>" x2 = "<%=90*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
-                <line x1 = "150" x2 = "150" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "150" x2 = "150" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                <line x2 = "<%=120*PX_PER_MIN%>" y1 = "0" x1 = "<%=120*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            <line x1 = "200" y1 = "0" x2 = "200" y2 = "10" stroke = "black" stroke-width = "2"/>
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=120*PX_PER_MIN%>" x1 = "<%=120*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
-                <line x1 = "200" x2 = "200" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "200" x2 = "200" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                <line x2 = "<%=150*PX_PER_MIN%>" y1 = "0" x1 = "<%=150*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            <line x1 = "250" y1 = "0" x2 = "250" y2 = "10" stroke = "black" stroke-width = "2"/>
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x2 = "<%=150*PX_PER_MIN%>" x1 = "<%=150*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
-                <line x1 = "250" x2 = "250" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "250" x2 = "250" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                <line x1 = "<%=180*PX_PER_MIN%>" y1 = "0" x2 = "<%=180*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            <line x1 = "300" y1 = "0" x2 = "300" y2 = "10" stroke = "black" stroke-width = "2"/>
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=180*PX_PER_MIN%>" x2 = "<%=180*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
-                <line x1 = "300" x2 = "300" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "300" x2 = "300" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                <line x1 = "<%=210*PX_PER_MIN%>" y1 = "0" x2 = "<%=210*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-            <line x1 = "350" y1 = "0" x2 = "350" y2 = "10" stroke = "black" stroke-width = "2"/>
-
-                <line x1 = "350" x2 = "350" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "350" x2 = "350" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
-
-
-            <line x1 = "400" y1 = "0" x2 = "400" y2 = "10" stroke = "black" stroke-width = "2"/>
-
-                <line x1 = "400" x2 = "400" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "400" x2 = "400" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=210*PX_PER_MIN%>" x2 = "<%=210*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
 
-            <line x1 = "450" y1 = "0" x2 = "450" y2 = "10" stroke = "black" stroke-width = "2"/>
+                <line x1 = "<%=240*PX_PER_MIN%>" y1 = "0" x2 = "<%=240*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-                <line x1 = "450" x2 = "450" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "450" x2 = "450" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
-
-
-            <line x1 = "500" y1 = "0" x2 = "500" y2 = "10" stroke = "black" stroke-width = "2"/>
-
-                <line x1 = "500" x2 = "500" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "500" x2 = "500" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=240*PX_PER_MIN%>" x2 = "<%=240*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
 
-            <line x1 = "550" y1 = "0" x2 = "550" y2 = "10" stroke = "black" stroke-width = "2"/>
+                <line x1 = "<%=270*PX_PER_MIN%>" y1 = "0" x2 = "<%=270*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-                <line x1 = "550" x2 = "550" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "550" x2 = "550" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
-
-
-            <line x1 = "600" y1 = "0" x2 = "600" y2 = "10" stroke = "black" stroke-width = "2"/>
-
-                <line x1 = "600" x2 = "600" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "600" x2 = "600" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=270*PX_PER_MIN%>" x2 = "<%=270*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
 
-            <line x1 = "650" y1 = "0" x2 = "650" y2 = "10" stroke = "black" stroke-width = "2"/>
+                <line x1 = "<%=300*PX_PER_MIN%>" y1 = "0" x2 = "<%=300*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
 
-                <line x1 = "650" x2 = "650" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "650" x2 = "650" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
-
-
-            <line x1 = "700" y1 = "0" x2 = "700" y2 = "10" stroke = "black" stroke-width = "2"/>
-
-                <line x1 = "700" x2 = "700" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
-                <line x1 = "700" x2 = "700" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=300*PX_PER_MIN%>" x2 = "<%=300*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
 
 
-            <line x1 = "750" y1 = "0" x2 = "750" y2 = "10" stroke = "black" stroke-width = "2"/>
-            <line x1 = "800" y1 = "0" x2 = "800" y2 = "10" stroke = "black" stroke-width = "2"/>
-            <line x1 = "850" y1 = "0" x2 = "850" y2 = "10" stroke = "black" stroke-width = "2"/>
+                <line x1 = "<%=330*PX_PER_MIN%>" y1 = "0" x2 = "<%=330*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
+
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=330*PX_PER_MIN%>" x2 = "<%=330*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+
+
+                <line x1 = "<%=360*PX_PER_MIN%>" y1 = "0" x2 = "<%=360*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
+
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=360*PX_PER_MIN%>" x2 = "<%=360*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+
+
+                <line x1 = "<%=390*PX_PER_MIN%>" y1 = "0" x2 = "<%=390*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
+
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=390*PX_PER_MIN%>" x2 = "<%=390*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+
+
+                <line x1 = "<%=420*PX_PER_MIN%>" y1 = "0" x2 = "<%=420*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
+
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "15" y2 = "20" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "35" y2 = "40" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "55" y2 = "60" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "75" y2 = "80" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "95" y2 = "100" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "115" y2 = "120" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "135" y2 = "140" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "155" y2 = "160" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "175" y2 = "180" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "195" y2 = "200" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "215" y2 = "220" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "235" y2 = "240" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "255" y2 = "260" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "275" y2 = "280" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "295" y2 = "300" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "315" y2 = "320" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "335" y2 = "340" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%=420*PX_PER_MIN%>" x2 = "<%=420*PX_PER_MIN%>" y1 = "355" y2 = "360" stroke = "grey" stroke-width = "1" />
+
+
+                <line x1 = "<%=450*PX_PER_MIN%>" y1 = "0" x2 = "<%=450*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
+                <line x1 = "<%=480*PX_PER_MIN%>" y1 = "0" x2 = "<%=480*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
+                <line x1 = "<%=510*PX_PER_MIN%>" y1 = "0" x2 = "<%=510*PX_PER_MIN%>" y2 = "10" stroke = "black" stroke-width = "2"/>
+            </g>
         </g>
-
         <!--
             Draws the Week Total bar showing the total number of minutes
                 worked out this particular week.
@@ -389,7 +390,7 @@
 
             NOTE: Same story as above with the for loop
         -->
-        <g>
+        <g tansform = "translate(100,0)">
             <g transform = "translate(142,30)"><text>  </text></g>
             <g transform = "translate(192,30)"><text>  1h </text></g>
             <g transform = "translate(242,30)"><text>  </text></g>
