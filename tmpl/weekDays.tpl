@@ -2,12 +2,14 @@
 <script type="text/template" id="weekDays">
 <defs>
   <linearGradient id="Gradient<%= weekNumber() %>">
-    <stop offset="0" stop-color="white" stop-opacity="1" />
-    <stop offset="0.9" stop-color="white" stop-opacity="0" />
+    <stop offset="0"    stop-color="white" stop-opacity="1" />
+    <stop offset="0.7"  stop-color="white" stop-opacity="0.8" />
+    <stop offset="0.8"  stop-color="white" stop-opacity="0.2" />
+    <stop offset="0.9"  stop-color="white" stop-opacity="0" />
   </linearGradient>
   <mask id="Mask<%= weekNumber() %>" maskUnits="userSpaceOnUse"
       x="-30" y="0" width="62" height="<%= DAY_HEIGHT_PX %>">
-    <rect x="-30" y="0" width="62" height="<%= DAY_HEIGHT_PX %>" fill="url(#Gradient<%= weekNumber() %>)"  />
+    <rect x="-40" y="0" width="62" height="<%= DAY_HEIGHT_PX %>" fill="url(#Gradient<%= weekNumber() %>)"  />
   </mask>
 </defs>
 <g class="days">
@@ -33,14 +35,10 @@
             <% } %>
           </g>
           <!-- drag affordance -->
-          <% if(urlVar('splitter') == 'true'){ %>
-            <image xlink:href="img/splitter2.png" class="splitter" x="<%= rm2p(attr(session, 'duration')) - 24 %>" width="24" height="32" y="5" />
-          <% } else if(urlVar('splitter') == 'lines') { %>
-            <g transform="translate(<%= rm2p(attr(session, 'duration')) %>, 0)">
-              <line class="splitter" x1="-6" x2="-6" y1="<%= DAY_HEIGHT_PX / 6.0 %>" y2="<%= DAY_HEIGHT_PX*5.0/6.0 %>" />
-              <line class="splitter" x1="-9" x2="-9" y1="<%= DAY_HEIGHT_PX / 6.0 %>" y2="<%= DAY_HEIGHT_PX*5.0/6.0 %>" />
-            </g>
-          <% } %>
+          <g transform="translate(<%= rm2p(attr(session, 'duration')) %>, 0)">
+            <line class="splitter" x1="-6" x2="-6" y1="<%= DAY_HEIGHT_PX / 6.0 %>" y2="<%= DAY_HEIGHT_PX*5.0/6.0 %>" />
+            <line class="splitter" x1="-9" x2="-9" y1="<%= DAY_HEIGHT_PX / 6.0 %>" y2="<%= DAY_HEIGHT_PX*5.0/6.0 %>" />
+          </g>
         </g>
       <% }) %>
       <% if(emptyDay(d)){ %>
@@ -51,9 +49,6 @@
         <!-- plus button -->
         <g transform="translate(1, <%= DAY_HEIGHT_PX/6 %>)">
           <g transform="scale(<%= DAY_HEIGHT_PX*2/3 %>) translate(0.5, 0.5)" stroke-width="0.1">
-          <% if(urlVar('plus') == 'rounded'){ %>
-            <rect class="new-session" x="-0.5" y="-0.5" rx="0.1" height="1" width="1" data-day="<%= d %>" />
-          <% } else if(urlVar('plus') == 'special'){ %>
             <!-- @see http://www.w3.org/TR/SVG/shapes.html#RectElement and http://www.w3.org/TR/SVG/paths.html#PathElement -->
             <path class="new-session"
                   d="M-0.5,-0.5
@@ -65,9 +60,7 @@
                      L-0.5,-0.5
                      Z
                     " data-day="<%= d %>" />
-          <% } else { %>
-            <rect class="new-session" x="-0.5" y="-0.5" height="1" width="1" data-day="<%= d %>" />
-          <% } %>
+            <!-- plus lines -->
             <line class="new-session" x1="0" x2="0" y1="-0.2" y2="0.2" />
             <line class="new-session" y1="0" y2="0" x1="-0.2" x2="0.2" />
           </g>
