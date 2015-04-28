@@ -151,6 +151,7 @@ function submitActivityInfo() {
 
     // hide
     hideActivityInfo(true);
+    undoManager.commit();
 }
 
 
