@@ -169,6 +169,9 @@ function showActivityInfo(session, callback, selectType) {
     var activityType = $('#activityTypeInput');
     activityType.val((DEFAULT_ACTIVITY_TYPES[activ] || {displayName: activ}).displayName);
 
+    // since we are showing => duration > 0 => no delete yet
+    $('#submitActivityInfo').text('Okay').removeClass('btn-danger');
+
     // show layer
     layer.stop().fadeIn();
 
