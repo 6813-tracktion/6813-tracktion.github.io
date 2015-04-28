@@ -250,13 +250,18 @@ var WeekView = Marionette.ItemView.extend({
             this.dragInfo = null;
             this.render();  // update drag-target class
 
+            // is it a click or a drag?
+            // XXX: Ideally this time threshold would be a system setting
+            // like the double-click timeout.
+            var isClick = moment().diff(dragInfo.startTime, 'milliseconds') < 300;
+
             // if creating a session, ask for activity type and duration
             if (dragInfo.isCreate) {
                 if(dragInfo.session.attributes.duration <= 0){
                   // just delete, do not show
                   this.updateSession(dragInfo.session, dragInfo.isCreate, false); // equivalent to showing and canceling
                 } else {
-                  showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
+                  showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate), !isClick);
                 }
                 event.stopPropagation();
                 // TODO set duration to activity's current duration (some
@@ -265,9 +270,7 @@ var WeekView = Marionette.ItemView.extend({
                 return;
             }
 
-            // XXX: Ideally this time threshold would be a system setting
-            // like the double-click timeout.
-            if (moment().diff(dragInfo.startTime, 'milliseconds') < 300) {
+            if (isClick) {
                 undoManager.rollback();  // in case there was a short drag before the click
                 showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
                 event.stopPropagation(); // event outside -> close popup
@@ -285,7 +288,7 @@ var WeekView = Marionette.ItemView.extend({
             
             if (this.dragGoalInfo.origMouseX === event.pageX) {
                 // Make the goal box visible
-                $('#setGoalContainer').css('display', 'inherit');
+                $('#setGoalContainer').fadeIn();
                 console.log(this.model.get('goal'));
                     
                 var duration = this.dragGoalInfo.origDuration;
@@ -302,11 +305,11 @@ var WeekView = Marionette.ItemView.extend({
                     // this.model is not defined in this function for some reason.
                     
                     // Make the goal box invisible
-                    $('#setGoalContainer').css('display', 'none');
+                    $('#setGoalContainer').fadeOut();
                 });
                 
                 $('#cancelSetGoal').click(function(e) {
-                    $('#setGoalContainer').css('display', 'none');
+                    $('#setGoalContainer').fadeOut();
                 });
                 
                 

@@ -108,22 +108,58 @@ function setupActivity(){
         e.preventDefault();
         hideActivityInfo(false);
     });
+
+    // submitting the form on <Enter>
+    $('#activityTypeInput, #durationInput').keypress(function(e) {
+        if(e.which == 13){
+            // TODO validate form first
+            $(this).blur();
+            $('#submitActivityInfo').focus().click();
+            return false;
+        }
+    });
 }
-function showActivityInfo(session, callback) {
+
+// @see http://help.dottoro.com/ljtfkhio.php
+function selectContentOf(node){
+    var len = $(node).val().length;
+    if('selectionStart' in node){
+        node.selectionStart = 0;
+        node.selectionEnd = len;
+        node.focus();
+    } else {
+        var inputRange = node.createTextRange();
+        inputRange.moveStart('character', 0);
+        inputRange.collapse();
+        inputRange.moveEnd('character', len);
+        inputRange.select();
+    }
+}
+
+function showActivityInfo(session, callback, selectType) {
     var layer = $('#activityLayer');
     // bind edited data
     layer.data('session', session);
     layer.data('callback', callback);
     // set fields according to session
-    $('#durationInput').val(session.get('duration'));
+    var durationInput = $('#durationInput');
+    durationInput.val(session.get('duration'));
+
     var activ = session.get('label');
     // let the record show that Alex wrote this line
-    $('#activityTypeInput').val((DEFAULT_ACTIVITY_TYPES[activ] || {displayName: activ}).displayName);
+    var activityType = $('#activityTypeInput');
+    activityType.val((DEFAULT_ACTIVITY_TYPES[activ] || {displayName: activ}).displayName);
+
     // show layer
     layer.stop().fadeIn();
 
     // disable scrolling
     lockScroll();
+
+    // select duration input
+    // Note: the field must be visible for that to work!
+    activityType.blur();
+    selectContentOf(selectType ? activityType[0] : durationInput[0]);
 }
 
 function hideActivityInfo(isOK) {
