@@ -112,12 +112,31 @@ function setupActivity(){
     // submitting the form on <Enter>
     $('#activityTypeInput, #durationInput').keypress(function(e) {
         if(e.which == 13){
-            // TODO validate form first
             $(this).blur();
             $('#submitActivityInfo').focus().click();
             return false;
         }
     });
+
+    // duration and <Ok/Delete> labeling
+    $('#durationInput').on('change', function(){
+        var isDelete = parseInt($(this).val(), 10) <= 0;
+        $('#submitActivityInfo').text(isDelete ? 'Delete' : 'Okay');
+        if(isDelete)
+            $('#submitActivityInfo').addClass('btn-danger');
+        else
+            $('#submitActivityInfo').removeClass('btn-danger');
+    });
+}
+
+function validateInput(){
+    var duration = $('#durationInput').val();
+    if(!duration.match(/^[1-9]*[05]$/)){
+        // TODO maybe provide message to user
+        // (though HTML-5 browsers already give a hint with red highlight and tooltip on hover)
+        return false;
+    }
+    return true;
 }
 
 // @see http://help.dottoro.com/ljtfkhio.php
@@ -176,6 +195,11 @@ function hideActivityInfo(isOK) {
 function submitActivityInfo() {
     var layer = $('#activityLayer');
     var session = layer.data('session');
+
+    // don't submit unless it's valid
+    if(!validateInput())
+        return;
+
     // update model (callback is responsible for the commit)
     session.set('duration', parseInt($('#durationInput').val(), 10));
 
