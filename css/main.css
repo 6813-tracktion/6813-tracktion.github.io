@@ -117,6 +117,12 @@ rect.session:hover {
 .sessions image.bad {
   opacity: 0.242;
 }
+.sessions image.splitter {
+  opacity: 0.6;
+}
+.sessions:hover image.splitter {
+  opacity: 0.2;
+}
 
 /* adding new session */
 .new-session {

@@ -14,6 +14,9 @@
           <% if(attr(session, 'duration') >= 30){ %>
           <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="10" width="32" height="32" y="5" />
           <% } %>
+          <% if(urlVar('splitter') == 'true'){ %>
+          <image xlink:href="img/splitter2.png" class="splitter" x="<%= rm2p(attr(session, 'duration')) - 24 %>" width="24" height="32" y="5" />
+          <% } %>
         </g>
       <% }) %>
       <% if(emptyDay(d)){ %>
