@@ -141,7 +141,7 @@ function hideActivityInfo(isOK) {
 function submitActivityInfo() {
     var layer = $('#activityLayer');
     var session = layer.data('session');
-    // update model
+    // update model (callback is responsible for the commit)
     session.set('duration', parseInt($('#durationInput').val(), 10));
 
     var displayName = $('#activityTypeInput').val();
@@ -150,7 +150,6 @@ function submitActivityInfo() {
 
     // hide
     hideActivityInfo(true);
-    undoManager.commit();
 }
 
 

@@ -73,6 +73,8 @@ var DataSet = Backbone.Model.extend({
             this.extendToToday();
         }
         this.listenTo(this, 'change:today', this.extendToToday);
+        // In case the last week (first in the collection) is changed to end in the past.
+        this.listenTo(weeks, 'change:end', this.extendToToday);
     },
     extendToToday: function() {
         var weeks = this.attributes.weeks, lastWeek = weeks.at(0);
