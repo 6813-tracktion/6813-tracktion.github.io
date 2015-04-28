@@ -9,13 +9,18 @@
 
       <!-- activity slots -->
       <% _.each(daySessions(d), function(session, j){ %>
-        <g transform="translate(<%= rm2p(daySum(d, j)) %>, 0)">
+        <g class="session" transform="translate(<%= rm2p(daySum(d, j)) %>, 0)">
           <rect class="session <%= sessionClass(session) %>" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= rm2p(attr(session, 'duration')) - 1 %>" data-cid="<%= session.cid %>"  />
           <% if(attr(session, 'duration') >= 30){ %>
-          <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="10" width="32" height="32" y="5" />
+            <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="10" width="32" height="32" y="5" />
           <% } %>
           <% if(urlVar('splitter') == 'true'){ %>
-          <image xlink:href="img/splitter2.png" class="splitter" x="<%= rm2p(attr(session, 'duration')) - 24 %>" width="24" height="32" y="5" />
+            <image xlink:href="img/splitter2.png" class="splitter" x="<%= rm2p(attr(session, 'duration')) - 24 %>" width="24" height="32" y="5" />
+          <% } else if(urlVar('splitter') == 'lines') { %>
+            <g transform="translate(<%= rm2p(attr(session, 'duration')) %>, 0)">
+              <line class="splitter" x1="-6" x2="-6" y1="<%= DAY_HEIGHT_PX / 6.0 %>" y2="<%= DAY_HEIGHT_PX*5.0/6.0 %>" />
+              <line class="splitter" x1="-9" x2="-9" y1="<%= DAY_HEIGHT_PX / 6.0 %>" y2="<%= DAY_HEIGHT_PX*5.0/6.0 %>" />
+            </g>
           <% } %>
         </g>
       <% }) %>

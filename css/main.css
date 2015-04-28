@@ -120,8 +120,20 @@ rect.session:hover {
 .sessions image.splitter {
   opacity: 0.6;
 }
-.sessions:hover image.splitter {
+.session:hover image.splitter {
   opacity: 0.2;
+}
+line.splitter {
+  stroke: white;
+  stroke-width: 1px;
+  opacity: 0.3;
+  pointer-events: none;
+}
+.session:hover line.splitter {
+  opacity: 1.0;
+}
+.dragging .session:hover line.splitter {
+  opacity: 0.3;
 }
 
 /* adding new session */
