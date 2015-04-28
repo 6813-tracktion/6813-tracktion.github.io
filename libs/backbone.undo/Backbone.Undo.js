@@ -648,8 +648,14 @@
 		},
 		rollback: function () {
 			if (this.isAvailable("undo") &&
-			    this.stack.at(this.stack.pointer).get("magicFusionIndex") == this.stack.fusionIndex) {
+				this.stack.at(this.stack.pointer).get("magicFusionIndex") == this.stack.fusionIndex) {
+				// Undo is the most convenient way to implement rollback.
+				// However, the actions so undone should not be redoable.
 				this.undo(true);
+				while (this.stack.pointer < this.stack.length - 1) {
+					this.stack.pop();
+				}
+				this.trigger("availabilityMayHaveChanged", this);
 			}
 		},
 		/**

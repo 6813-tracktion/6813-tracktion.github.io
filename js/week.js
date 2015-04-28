@@ -250,15 +250,6 @@ var WeekView = Marionette.ItemView.extend({
             this.dragInfo = null;
             this.render();  // update drag-target class
 
-            // XXX: Ideally this time threshold would be a system setting
-            // like the double-click timeout.
-            if (moment().diff(dragInfo.startTime, 'milliseconds') < 300) {
-                undoManager.rollback();  // in case there was a short drag before the click
-                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
-                event.stopPropagation(); // event outside -> close popup
-                return;
-            }
-
             // if creating a session, ask for activity type and duration
             if (dragInfo.isCreate) {
                 if(dragInfo.session.attributes.duration <= 0){
@@ -271,6 +262,15 @@ var WeekView = Marionette.ItemView.extend({
                 // TODO set duration to activity's current duration (some
                 // default if just a click on plus) to handle both
                 // click and drag cases
+                return;
+            }
+
+            // XXX: Ideally this time threshold would be a system setting
+            // like the double-click timeout.
+            if (moment().diff(dragInfo.startTime, 'milliseconds') < 300) {
+                undoManager.rollback();  // in case there was a short drag before the click
+                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
+                event.stopPropagation(); // event outside -> close popup
                 return;
             }
 
