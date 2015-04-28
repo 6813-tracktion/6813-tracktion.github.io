@@ -160,6 +160,7 @@ var WeekView = Marionette.ItemView.extend({
       "mousedown rect.session":     "mousedownSession",
       "mousedown rect.new-session": "mousedownPlus",
       "mousedown path.new-session": "mousedownPlus",
+      "mousedown rect.new-first-session": "mousedownPlus",
       // Implicit by setting window.dragHandler = this.
       //"mousemove": "mousemove",
       //"mouseup": "mouseup",

@@ -142,10 +142,10 @@ line.splitter {
 }
 
 /* adding new session */
-.new-session {
+.new-session, .new-first-session {
   visibility: hidden;
 }
-rect.new-session, path.new-session {
+rect.new-session, path.new-session, rect.new-first-session {
   fill: rgba(255, 0, 0, 0.5);
 }
 g.day:hover .new-session {
