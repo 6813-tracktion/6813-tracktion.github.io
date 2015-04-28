@@ -22,7 +22,6 @@ var DEFAULT_ACTIVITY_TYPES = {
     "polka":        {displayName: "Polka",     icon: "../../../iconarchive/polka"},
     "pushups":      {displayName: "PushUps",   icon: "pushups"},
     "running":      {displayName: "Running",   icon: "running"},
-    "aggressivesitting":      {displayName: "Aggressive Sitting", icon: "../../../flaticon/sitting"},
     "sitting":      {displayName: "Aggressive Sitting", icon: "../../../flaticon/sitting"},
     "stretching":   {displayName: "Stretching",icon: "stretching"},
     "swimming":     {displayName: "Swimming",  icon: "swimming"},
