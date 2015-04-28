@@ -48,7 +48,7 @@ svg .weekTotalLabel {
 svg .totalMinutes {
   font-size: 115%;
   font-weight: bold;
-  fill: rgba(255, 255, 255, 0.7);
+  fill: #222;
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
@@ -154,6 +154,9 @@ text.day-sum {
 }
 g.day:hover text.day-sum {
   visibility: visible;
+}
+.dragging g.day:hover text.day-sum {
+  visibility: hidden;
 }
 .week-label text {
   fill: #dfdfdf;
