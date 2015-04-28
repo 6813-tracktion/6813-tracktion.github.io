@@ -279,6 +279,46 @@ var WeekView = Marionette.ItemView.extend({
         }
 
         if (this.dragGoalInfo) {
+            console.log(this.model.get('goal'));
+            console.log(event.pageX);
+                 
+            
+            if (this.dragGoalInfo.origMouseX === event.pageX) {
+                // Make the goal box visible
+                $('#setGoalContainer').css('display', 'inherit');
+                console.log(this.model.get('goal'));
+                    
+                var duration = this.dragGoalInfo.origDuration;
+                
+                $('#setGoal').click(function(e) {
+                    var hours = parseInt($('#hourDuration').val());
+                    var mins = parseInt($('#minuteDuration').val());
+
+                    duration = hours * 60 + mins;
+                    duration = DURATION_GRANULARITY * Math.round(duration / DURATION_GRANULARITY);
+                    
+                    console.log("hours: " + hours + " mins: " + mins + " duration: " + duration);
+                    
+                    // this.model is not defined in this function for some reason.
+                    
+                    // Make the goal box invisible
+                    $('#setGoalContainer').css('display', 'none');
+                });
+                
+                $('#cancelSetGoal').click(function(e) {
+                    $('#setGoalContainer').css('display', 'none');
+                });
+                
+                
+            }
+            // Threshold is pageX >= 990
+            if ( event.pageX >= 990 ) {
+                PX_PER_MIN = PX_PER_MIN / (1.2)
+            }
+            console.log(PX_PER_MIN);
+                
+            
+            this.render();
             this.dragGoalInfo = null;
             undoManager.commit();
         }

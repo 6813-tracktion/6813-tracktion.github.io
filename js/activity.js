@@ -118,8 +118,7 @@ function showActivityInfo(session, callback) {
     $('#durationInput').val(session.get('duration'));
     var activ = session.get('label');
     // let the record show that Alex wrote this line
-    $('#activityTypeInput').val((DEFAULT_ACTIVITY_TYPES[activ] || {displayName: activ}).displayName)
-
+    $('#activityTypeInput').val((DEFAULT_ACTIVITY_TYPES[activ] || {displayName: activ}).displayName);
     // show layer
     layer.stop().fadeIn();
 
