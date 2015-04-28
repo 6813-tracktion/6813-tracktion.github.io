@@ -48,6 +48,7 @@ svg .weekTotalLabel {
 svg .totalMinutes {
   font-size: 115%;
   font-weight: bold;
+  fill: rgba(255, 255, 255, 0.7);
 }
 line.separator {
   stroke: rgba(0, 0, 0, 0.5);
@@ -121,7 +122,7 @@ rect.session:hover {
 .new-session {
   visibility: hidden;
 }
-rect.new-session {
+rect.new-session, path.new-session {
   fill: rgba(255, 0, 0, 0.5);
 }
 g.day:hover .new-session {
@@ -132,12 +133,11 @@ g.day:hover .new-session {
   visibility: hidden;
   cursor: default;
 }
-rect.new-session:hover {
+rect.new-session:hover, path.new-session:hover {
   fill: red;
 }
 line.new-session {
   stroke: white;
-  stroke-width: 2px;
   pointer-events: none;
 }
 

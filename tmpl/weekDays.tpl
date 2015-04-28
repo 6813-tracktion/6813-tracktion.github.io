@@ -21,17 +21,40 @@
       <% } %>
       <!-- new session button and sum text -->
       <g transform="translate(<%= rm2p(daySum(d)) %>, 0)">
-        <rect class="new-session" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= DAY_HEIGHT_PX-1 %>" data-day="<%= d %>" />
-        <line class="new-session" x1="<%= DAY_HEIGHT_PX/2 %>" x2="<%= DAY_HEIGHT_PX/2 %>" y1="<%= 1/6*DAY_HEIGHT_PX %>" y2="<%= 5/6*DAY_HEIGHT_PX %>" />
-        <line class="new-session" y1="<%= DAY_HEIGHT_PX/2 %>" y2="<%= DAY_HEIGHT_PX/2 %>" x1="<%= 1/6*DAY_HEIGHT_PX %>" x2="<%= 5/6*DAY_HEIGHT_PX %>" />
+        <!-- plus button -->
+        <g transform="translate(1, <%= DAY_HEIGHT_PX/6 %>)">
+          <g transform="scale(<%= DAY_HEIGHT_PX*2/3 %>) translate(0.5, 0.5)" stroke-width="0.1">
+          <% if(urlVar('plus') == 'rounded'){ %>
+            <rect class="new-session" x="-0.5" y="-0.5" rx="0.1" height="1" width="1" data-day="<%= d %>" />
+          <% } else if(urlVar('plus') == 'special'){ %>
+            <!-- @see http://www.w3.org/TR/SVG/shapes.html#RectElement and http://www.w3.org/TR/SVG/paths.html#PathElement -->
+            <path class="new-session"
+                  d="M-0.5,-0.5
+                     L0.3,-0.5
+                     A0.2,0.2 0 0,1 0.5,-0.3
+                     L0.5,0.3
+                     A0.2,0.2 0 0,1 0.3,0.5
+                     L-0.5,0.5
+                     L-0.5,-0.5
+                     Z
+                    " data-day="<%= d %>" />
+          <% } else { %>
+            <rect class="new-session" x="-0.5" y="-0.5" height="1" width="1" data-day="<%= d %>" />
+          <% } %>
+            <line class="new-session" x1="0" x2="0" y1="-0.2" y2="0.2" />
+            <line class="new-session" y1="0" y2="0" x1="-0.2" x2="0.2" />
+          </g>
+        </g>
+        <!-- day sum -->
         <text x="49" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" class="day-sum"><%= formatDuration(daySum(d), '0') %></text>
       </g>
     </g>
-    <% if (day(d).isSame(today)) { %>
-      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today">Today</text>
-    <% } else { %>
-      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".33em" text-anchor="end" class="day"><%= day(d).format("ddd M/D")%> </text>
-    <% } %>
+    <!-- day label -->
+  <% if (day(d).isSame(today)) { %>
+    <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today">Today</text>
+  <% } else { %>
+    <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".33em" text-anchor="end" class="day"><%= day(d).format("ddd M/D")%> </text>    
+  <% } %>
   </g>
 <% }) %>
 <line x1="100" x2="100" y1="-100" y2="<%= 10*DAY_HEIGHT_PX %>" class="separator" />
