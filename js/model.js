@@ -27,38 +27,63 @@ var Session = Backbone.Model.extend({
     }
 });
 
-var WeekSessions = Backbone.Collection.extend({
-    model: Session
-});
-
+// TODO: Rename to goal period
 var Week = Backbone.Model.extend({
     defaults: function() {
         return {
             dataset: null,  // Required reference to DataSet.
             beginning: moment('2015-04-13'),
+            end: moment('2015-04-19'),  // Inclusive for our convenience.
             goal: 200,
-            sessions: new Backbone.Collection()
+            sessions: null,  // Set by initialize; should not be passed by the caller.
         };
     },
     initialize: function() {
-        // Propagate additions/removals back to the master sessions collection.
-        // This will need to change if we allow a session to be dragged to a different goal period.
-        this.listenTo(this.attributes.sessions, 'add', function(session) {
-            this.attributes.dataset.attributes.sessions.add(session);
-            });
-        this.listenTo(this.attributes.sessions, 'remove', function(session) {
-            this.attributes.dataset.attributes.sessions.remove(session);
-            });
+        var sessions = new FilteredCollection(this.attributes.dataset.attributes.sessions);
+        this.set('sessions', sessions, {silent: true});
+        sessions.filterBy('thisWeek', _.bind(function(sess) {
+            return !sess.attributes.date.isBefore(this.attributes.beginning) &&
+                !sess.attributes.date.isAfter(this.attributes.end);
+        }, this));
+        this.listenTo(this, 'change:beginning', function() { sessions.refilter(); });
+        this.listenTo(this, 'change:end', function() { sessions.refilter(); });
     }
 });
 
-// A temporary data structure, but still gives us a way to pass in the current day.
 var DataSet = Backbone.Model.extend({
     defaults: function() {
         return {
-            today: moment().startOf('isoWeek'),
-            sessions: new Backbone.Collection()
+            today: moment().startOf('day'),
+            sessions: new Backbone.Collection(),
+            // In reverse order because it's awkward to reverse in the view. :/
+            weeks: new Backbone.Collection()
         };
+    },
+    initialize: function() {
+        var weeks = this.attributes.weeks;
+        if (weeks.length == 0) {
+            // XXX Should be based on user's locale week.
+            var beginning = moment(this.attributes.today).startOf('isoWeek');
+            weeks.add(new Week({
+                dataset: this,
+                beginning: beginning,
+                end: moment(beginning).add(6, 'days'),
+            }));
+        } else {
+            this.extendToToday();
+        }
+        this.listenTo(this, 'change:today', this.extendToToday);
+    },
+    extendToToday: function() {
+        var weeks = this.attributes.weeks, lastWeek = weeks.at(0);
+        while (lastWeek.attributes.end.isBefore(this.attributes.today)) {
+            lastWeek = weeks.unshift(new Week({
+                dataset: this,
+                beginning: moment(lastWeek.attributes.end).add(1, 'days'),
+                end: moment(lastWeek.attributes.end).add(7, 'days'),
+                goal: lastWeek.attributes.goal,
+            }));
+        }
     }
 });
 
@@ -79,14 +104,27 @@ function loadModel(){
     var labels = Object.keys(DEFAULT_ACTIVITY_TYPES);
     for(var i = 0; i < 100; ++i){
         var m = moment("2015-04-04")
-              .subtract(7 + Math.round(i / 3 + Math.random() * i), 'days')
-              .add(Math.round(Math.random() * 1e6), 'ms');
+              .subtract(7 + Math.round(i / 3 + Math.random() * i), 'days');
         var label = labels[Math.floor(Math.random() * (labels.length + 1))] || 'random';
         list.push(new Session({ date: m, duration: Math.ceil(1 + Math.random() * 10) * 5, label: label}));
     }
     list.sort(function(a, b){
-        return moment(a.attributes.date) - moment(b.attributes.date) < 0;
+        return moment(a.attributes.date).diff(moment(b.attributes.date));
     });
     var sessions = new Backbone.Collection(list);
-    return new DataSet({today: moment('2015-04-04'), sessions: sessions});
+    var dataset = new DataSet({today: moment('2015-04-04'), sessions: sessions});
+
+    // Generate goal periods to cover all possible randomly generated sessions.
+    var weekStart = moment("2015-03-23");
+    while (weekStart.isAfter(moment("2014-11-10"))) {
+        dataset.attributes.weeks.add(new Week({
+            dataset: dataset,
+            beginning: moment(weekStart),
+            end: moment(weekStart).add(6, 'days'),
+            goal: 200,
+        }));
+        weekStart.subtract(1, 'weeks');
+    }
+
+    return dataset;
 }

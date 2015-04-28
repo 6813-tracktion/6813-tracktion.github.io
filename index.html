@@ -13,8 +13,9 @@
 
 </head>
 <body style="zoom: 1;">
+  <div style="position: fixed; left: 0; right: 0; top: 0; z-index: 8; background-color: #eee;">
   <!-- navbar -->
-	<nav class="navbar navbar-inverse navbar-fixed-top">
+	<nav class="navbar navbar-inverse navbar-static-top">
       <div class="container">
         <div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -34,11 +35,16 @@
           -->
             <!-- type="date" does not work yet in Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=825294 -->
             <li style="padding: 10px 15px; color: #9d9d9d;"><label for="mockToday">Simulated current date:</label>
-            <input id="mockToday" type="text" style="color: #000;"/></li>
+            <input id="mockToday" type="text" style="color: black;"/></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </nav>
+    <div>
+      <button id="undo">Undo</button>
+      <button id="redo">Redo</button>
+    </div>
+  </div>
 
 <!--   <div class="activityInfoDropdown dropdown">
     <a href="#" data-toggle="dropdown" class="dropdown-toggle">Show ActivityInfo</a>
@@ -96,6 +102,8 @@
   <script src="libs/backbone/backbone.js"></script>
   <script src="libs/backbone.localstorage/backbone.localStorage.js"></script>
   <script src="libs/backbone.marionette/lib/backbone.marionette.js"></script>
+  <script src="libs/backbone.filtered-collection/backbone-filtered-collection.js"></script>
+  <script src="libs/backbone.undo/Backbone.Undo.js"></script>
   <script src="libs/moment/moment.min.js"></script>
   <script src="libs/async/lib/async.js"></script>
 
