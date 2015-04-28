@@ -13,6 +13,10 @@ var weekGoal = 300;
 var WeekView = Marionette.ItemView.extend({
     template: "#weekTpl",
     className: "week",
+    attributes: function() {
+        // Used by "jump to date" code.
+        return {'data-cid': this.model.cid};
+    },
     initialize: function(options) {
         this.weekSessions = this.model.attributes.sessions;
         this.dataset = this.model.attributes.dataset;
@@ -34,7 +38,6 @@ var WeekView = Marionette.ItemView.extend({
         Marionette.ItemView.prototype.remove.apply(this, arguments);
     },
     onBeforeRender: function() {
-        console.log('onBeforeRender');
         this.byDay = this.weekSessions.groupBy(function(session, i) {
             return session.day();
         });
@@ -317,7 +320,8 @@ var WeekView = Marionette.ItemView.extend({
         // past, we need to add a new current week.  This case is handled by the
         // model itself.
         undoManager.commit();
-        console.log('new end is', this.model.attributes.end);
+        // If we moved days from one week to another...
+        window.updateJumpToDate();
     }
 });
 
@@ -325,6 +329,13 @@ var FullView = Marionette.CollectionView.extend({
     childView: WeekView,
     initialize: function() {
         this.collection = this.model.attributes.weeks;
+    },
+    onRender: function() {
+        // May not be useful if called before show.
+        window.updateJumpToDate();
+    },
+    onShow: function() {
+        window.updateJumpToDate();
     },
 });
 

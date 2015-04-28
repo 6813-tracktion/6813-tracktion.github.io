@@ -1,4 +1,3 @@
-
 // based on: http://tutorialzine.com/2013/04/services-chooser-backbone-js/
 async.waterfall([
   // 1 = wait for DOM
@@ -81,6 +80,41 @@ async.waterfall([
             // undo/redo stack).
             undoManager.commit();
         }
+    });
+
+    // Set up "jump to date"
+    $('#jumpToDate').datepicker();
+    var BODY_PADDING_PX = 100;
+    var updateJumpToDate = function() {
+        // http://stackoverflow.com/questions/2230880/jquery-javascript-find-first-visible-element-after-scroll
+        var cutoff = $(document).scrollTop() + BODY_PADDING_PX;
+        $('div.week').each(function() {
+            if ($(this).offset().top >= cutoff) {
+                var week = dataset.attributes.weeks.get($(this).data('cid'));
+                $('#jumpToDate').val(week.attributes.end.format('L'));
+                return false;
+            }
+        });
+        // If the oldest goal period is extremely long, we could fall through
+        // without updating the field.
+    };
+    // There's no point in calling updateJumpToDate now: no weeks are rendered.
+    // The view will call it after rendering.
+    window.updateJumpToDate = updateJumpToDate;  // hack
+    $(document).scroll(_.throttle(updateJumpToDate, 100, {leading: false}));
+    $('#jumpToDate').on('change', function() {
+        var wantDate = moment($('#jumpToDate').val(), 'L');
+        var wantWeek = dataset.attributes.weeks.find(function(w) {
+            return !wantDate.isBefore(w.attributes.beginning);
+        });
+        if (!wantWeek) {
+            // If a very old date was entered, go to the oldest week.
+            // XXX: Instead should we add older weeks to let the user enter historical data?
+            wantWeek = dataset.attributes.weeks.at(dataset.attributes.weeks.length - 1);
+        }
+        var wantWeekView = $('div.week[data-cid=' + wantWeek.cid +']');
+        window.scrollTo(0, wantWeekView.offset().top - BODY_PADDING_PX);
+        updateJumpToDate();
     });
 
     // 2. Setup stuff ...

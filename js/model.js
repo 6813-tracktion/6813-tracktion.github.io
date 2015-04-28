@@ -118,7 +118,7 @@ function loadModel(){
 
     // Generate goal periods to cover all possible randomly generated sessions.
     var weekStart = moment("2015-03-23");
-    while (weekStart.isAfter(moment("2014-11-10"))) {
+    while (!weekStart.isBefore(moment("2014-11-10"))) {
         dataset.attributes.weeks.add(new Week({
             dataset: dataset,
             beginning: moment(weekStart),
