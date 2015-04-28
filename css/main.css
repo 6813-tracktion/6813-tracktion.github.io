@@ -33,6 +33,11 @@ svg text {
 svg .goalText {
   font-size: 115%;
 }
+svg .editableEndDate {
+  /* Make it look like a hyperlink.  Anyone want to implement a better decoration? */
+  fill: blue;
+  text-decoration: underline;
+}
 svg .day {
   font-size: 115%;
 }

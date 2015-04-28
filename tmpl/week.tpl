@@ -23,10 +23,17 @@
             var day = $(event.target).data('day');
         var date = this.templateHelpers().day(day);
         -->
-        <g style = "text-anchor: middle;" transform = "translate(50,27)">
+        <% if (canChangeEnd()) { %>
+          <g style = "text-anchor: middle;" transform = "translate(50,12)">
             <text class="goalText">Weekly Goal</text>
-            <!-- <text transform = "translate(0,20)"> By <%=day(6).format("MMM D")%> </text> -->
-        </g>
+            <text transform = "translate(0,20)">By <tspan class="editableEndDate"><%=end.format("ddd M/D")%></tspan></text>
+          </g>
+        <% } else { %>
+          <!-- Don't bother showing end date: it's redundant with the days. -->
+          <g style = "text-anchor: middle;" transform = "translate(50,27)">
+            <text class="goalText">Weekly Goal</text>
+          </g>
+        <% } %>
 
         <!--
             Insert the 30 min ticks
@@ -374,12 +381,12 @@
                 GREEN   -> if goal has been met
         -->
         <g class = "weekTotal" transform = "translate(100,<%=DAY_HEIGHT_PX + 7 %>)">
-            <rect class="weekTotal" height="<%= DAY_HEIGHT_PX %>" width="<%=rm2p(cumulative(6))%>"
-                style = "<%=totalBarColor(cumulative(6))%>;"
+            <rect class="weekTotal" height="<%= DAY_HEIGHT_PX %>" width="<%=rm2p(weekTotal())%>"
+                style = "<%=totalBarColor(weekTotal())%>;"
             />
-            <% if (rm2p(cumulative(6)) >= 42) { %>
-                <g transform="translate(<%=rm2p(cumulative(6)) - 6%>, <%=DAY_HEIGHT_PX / 2 + 6 %>)">
-                    <text text-anchor="end" class="totalMinutes"><%= formatDuration(cumulative(6))%></text>
+            <% if (rm2p(weekTotal()) >= 42) { %>
+                <g transform="translate(<%=rm2p(weekTotal()) - 6%>, <%=DAY_HEIGHT_PX / 2 + 6 %>)">
+                    <text text-anchor="end" class="totalMinutes"><%= formatDuration(weekTotal())%></text>
                 </g>
             <% } %>
         </g>

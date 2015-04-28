@@ -15,7 +15,8 @@ var WeekView = Marionette.ItemView.extend({
     className: "week",
     initialize: function(options) {
         this.weekSessions = this.model.attributes.sessions;
-        this.allSessions = this.model.attributes.dataset.attributes.sessions;
+        this.dataset = this.model.attributes.dataset;
+        this.allSessions = this.dataset.attributes.sessions;
         this.listenTo(this.weekSessions, 'add', this.render);
         this.listenTo(this.weekSessions, 'change', this.render);
         this.listenTo(this.weekSessions, 'remove', this.render);
@@ -33,16 +34,17 @@ var WeekView = Marionette.ItemView.extend({
         Marionette.ItemView.prototype.remove.apply(this, arguments);
     },
     onBeforeRender: function() {
+        console.log('onBeforeRender');
         this.byDay = this.weekSessions.groupBy(function(session, i) {
             return session.day();
         });
         // cache
         this.beginning = this.model.attributes.beginning;
-        this.end = +moment(this.beginning).endOf('isoWeek');
+        this.end = this.model.attributes.end;
         this.cumulativeSum = {};
         var day = moment(this.beginning);
         var sum = 0;
-        while(+day < this.end){
+        while(+day <= this.end){
             var key = dayFormat(day);
             sum += _.reduce(this.byDay[key] || [], function(sum, session) {
                 return sum + session.attributes.duration;
@@ -99,14 +101,15 @@ var WeekView = Marionette.ItemView.extend({
                 var label = session.get('label');
                 return label == 'unspecified' || !(label in DEFAULT_ACTIVITY_TYPES) ? 'bad' : 'good';
             },
-            today: this.model.attributes.dataset.attributes.today,
+            today: this.dataset.attributes.today,
             numDaysToShow: function() {
-                return this.reversedDays().length;
+                var lastDay = this.today.isBefore(this.self.end) ? this.today : this.self.end;
+                return lastDay.diff(this.self.beginning, 'days') + 1;
             },
             reversedDays: function() {
-                return _.filter([6, 5, 4, 3, 2, 1, 0], _.bind(function(i) {
-                    return !this.day(i).isAfter(this.today);
-                    }, this));
+                var ds = _.range(this.numDaysToShow());
+                ds.reverse();
+                return ds;
             },
             day: function(i){
                 return moment(this.self.beginning).add(i, 'days');
@@ -130,8 +133,15 @@ var WeekView = Marionette.ItemView.extend({
                 var m = this.day(i);
                 return this.self.cumulativeSum[dayFormat(m)];
             },
+            weekTotal: function() {
+                // There shouldn't be future sessions...
+                return this.cumulative(this.numDaysToShow() - 1);
+            },
             weekNumber: function(){
                 return this.self.beginning.format('W');
+            },
+            canChangeEnd: function(){
+                return this.self.dataset.attributes.weeks.indexOf(this.self.model) <= 1;
             },
             goalLineColor: function(px) {
                 var defaultPixel = 500;
@@ -155,7 +165,8 @@ var WeekView = Marionette.ItemView.extend({
       "mouseover g.goal":           "mouseoverGoal",
       "mouseout g.goal":            "mouseoutGoal",
       "mouseover rect.session":     "mouseoverSession",
-      "mouseout rect":              "mouseoutRect"
+      "mouseout rect":              "mouseoutRect",
+      "click .editableEndDate":     "changeEndDate"
     },
     mousedownSession: function(event){
         event.preventDefault();
@@ -270,12 +281,43 @@ var WeekView = Marionette.ItemView.extend({
         }
     },
     updateSession: function(session, isCreate, isOK){
-        if (isCreate && !isOK) {
+        if (!isOK) {
+            // If !isCreate, there normally should be nothing to roll back.
             undoManager.rollback();
-        } else if (session.attributes.duration == 0){
-            this.allSessions.remove(session);
+        } else {
+            if (session.attributes.duration == 0) {
+                this.allSessions.remove(session);
+            }
             undoManager.commit();
         }
+    },
+    changeEndDate: function(event){
+        this.$('.editableEndDate').datepicker(
+                'dialog',
+                this.model.attributes.end.format('L'),
+                _.bind(this.setEndDate, this),
+                // Do not allow making a period with less than one day.
+                {minDate: this.model.attributes.beginning.format('L')},
+                event);
+    },
+    setEndDate: function(endDateStr){
+        var endDate = moment(endDateStr, 'L');
+        this.model.set('end', endDate);
+        if (this.dataset.attributes.weeks.indexOf(this.model) == 1) {
+            var nextWeek = this.dataset.attributes.weeks.at(0);
+            if (endDate.isBefore(this.dataset.attributes.today)) {
+                // Adjust the next goal period.
+                nextWeek.set('beginning', moment(endDate).add(1, 'days'));
+            } else {
+                // The next goal period would start in the future.  Eat it.
+                this.dataset.attributes.weeks.remove(nextWeek);
+            }
+        }
+        // Conversely, if we're editing the current week so it now ends in the
+        // past, we need to add a new current week.  This case is handled by the
+        // model itself.
+        undoManager.commit();
+        console.log('new end is', this.model.attributes.end);
     }
 });
 
