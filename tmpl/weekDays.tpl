@@ -1,7 +1,17 @@
 
 <script type="text/template" id="weekDays">
+<defs>
+  <linearGradient id="Gradient<%= weekNumber() %>">
+    <stop offset="0" stop-color="white" stop-opacity="1" />
+    <stop offset="0.9" stop-color="white" stop-opacity="0" />
+  </linearGradient>
+  <mask id="Mask<%= weekNumber() %>" maskUnits="userSpaceOnUse"
+      x="-30" y="0" width="62" height="<%= DAY_HEIGHT_PX %>">
+    <rect x="-30" y="0" width="62" height="<%= DAY_HEIGHT_PX %>" fill="url(#Gradient<%= weekNumber() %>)"  />
+  </mask>
+</defs>
 <g class="days">
-<% _.each(reversedDays(), function(d, i) { %>
+  <% _.each(reversedDays(), function(d, i) { %>
   <g transform="translate(0, <%= i * DAY_HEIGHT_PX + 1 %>)" class="day">
     <!-- background for row hover -->
     <rect class="background" height="<%= DAY_HEIGHT_PX %>" width="800" />
@@ -11,9 +21,18 @@
       <% _.each(daySessions(d), function(session, j){ %>
         <g class="session" transform="translate(<%= rm2p(daySum(d, j)) %>, 0)">
           <rect class="session <%= sessionClass(session) %>" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= rm2p(attr(session, 'duration')) - 1 %>" data-cid="<%= session.cid %>"  />
-          <% if(attr(session, 'duration') >= 30){ %>
-            <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="10" width="32" height="32" y="5" />
-          <% } %>
+          <!-- activity image -->
+          <g transform="translate(3, 5)">
+            <% if(attr(session, 'duration') >= 30){ %>
+              <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="0" width="32" height="32" y="0" />
+            <% } else { %>
+              <!-- masked image with fading -->
+              <g transform="translate(<%= rm2p(attr(session, 'duration')) - 30 %>, 0)" mask="url(#Mask<%= weekNumber() %>)" >
+                <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="<%= 30 - rm2p(attr(session, 'duration')) %>" width="32" height="32" y="0" />
+              </g>
+            <% } %>
+          </g>
+          <!-- drag affordance -->
           <% if(urlVar('splitter') == 'true'){ %>
             <image xlink:href="img/splitter2.png" class="splitter" x="<%= rm2p(attr(session, 'duration')) - 24 %>" width="24" height="32" y="5" />
           <% } else if(urlVar('splitter') == 'lines') { %>
