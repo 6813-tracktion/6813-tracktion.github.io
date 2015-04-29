@@ -45,7 +45,7 @@
                         not change over time so I will hard code these for now
                         until I find a better way of for looping this thing
             -->
-            <% for (var m = 30; m <= 540; m += 30) { %>
+            <% for (var m = 30; m <= 840; m += 30) { %>
                 <line x1 = "<%= m*PX_PER_MIN %>" x2 = "<%= m*PX_PER_MIN %>" y1 = "0" y2 = "10" stroke = "black" stroke-width = "2"/>
                 <% for (var y1 = 15; y1 <= 355; y1 += 20) { %>
                     <line x1 = "<%= m*PX_PER_MIN %>" x2 = "<%= m*PX_PER_MIN %>" y1 = "<%= y1 %>" y2 = "<%= y1 + 5%>" stroke = "grey" stroke-width = "1" />
@@ -67,7 +67,7 @@
                 <g transform="translate(<%=rm2p(weekTotal()) - 6%>, <%=DAY_HEIGHT_PX / 2 + 6 %>)">
                     <text text-anchor="end" class="totalMinutes"><%= formatDuration(weekTotal())%></text>
                 </g>
-            <% } %>
+            <% } %> 
         </g>
 
         <!--
@@ -75,9 +75,16 @@
 
             NOTE: Same story as above with the for loop
         -->
+                
+        <% for (var h = 1; h <= 14; h++ ) { %>
+            <text transform = "translate(<%=h*60*PX_PER_MIN+92%>,30)"> <%=h%>h </text>
+        <% } %>
+        
+        <!--        
         <g tansform = "translate(100,0)">
-            <g transform = "translate(142,30)"><text>  </text></g>
-            <g transform = "translate(192,30)"><text>  1h </text></g>
+            <text transform = "translate(100,30)"> Hi </text>
+            <g ><text transform = "translate(142,30)" >  </text></g>
+            <g ><text transform = "translate(192,30)" >  1h </text></g>
             <g transform = "translate(242,30)"><text>  </text></g>
             <g transform = "translate(292,30)"><text>  2h </text></g>
             <g transform = "translate(338,30)"><text>  </text></g>
@@ -90,7 +97,9 @@
             <g transform = "translate(692,30)"><text>  6h </text></g>
             <g transform = "translate(738,30)"><text>  </text></g>
         </g>
-
+        -->
+                
+                
         <g class = "goal" transform = "translate(<%= weekAttr('goal') * 5 / 3 + 100 %>,0)">
             <line x1 = "0" x2 = "0" y1 = "10" y2 = "<%=DAY_HEIGHT_PX/2+22%>" stroke = "black" stroke-width = "2"/>
             <image xlink:href="img/checkered-flag.png" x = "-1" y = "-14"
