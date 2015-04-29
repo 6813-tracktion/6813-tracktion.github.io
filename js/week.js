@@ -201,22 +201,28 @@ var WeekView = Marionette.ItemView.extend({
         showToolTipForGoal(this.model.get('goal'), event.target);
     },
     mouseoutGoal: function(event) {
-        $('#durationToolTip').css('opacity', 0);
+        hideToolTipForGoal();
     },
     mouseoverSession: function(event) {
-        // TODO handle the case wherein we want to continue displaying the
-        // tooltip despite the mouse not being over the session in question
-        // (or the goal). This happens when you drag past 0 or move vertically
-        // above or below the session. To draw it such that it's centered, we
-        // need to know which DOM element is being dragged (so that we can
-        // get its position and width), but the element appears to be nulled
-        // when Marionette redraws. If we care enough to fix this, I think
-        // we'll have to include drawing the tooltip in the Marionette code.
-        var session = sessionForEvent(this, event);
+        if (this.dragInfo) {
+            return;
+        }
+        // var session = null;
+        // if (this.dragInfo) {
+        //     var cid = this.dragInfo.sessionCid;
+        //     session = sessionForCid(this, cid);
+        //     var element = elementForCid(cid);
+        //     console.log(element);
+        //     showToolTipForSession(session, element);
+        // } else {
+        //     session = sessionForEvent(this, event);
+        //     showToolTipForSession(session, event.target);
+        // }
+        session = sessionForEvent(this, event);
         showToolTipForSession(session, event.target);
     },
     mouseoutRect: function(event) {
-        $('#sessionToolTip').css('opacity', 0);
+        hideToolTipForSession();
     },
     startDragging: function(session, isCreate, event){
         this.dragInfo = {
@@ -224,7 +230,8 @@ var WeekView = Marionette.ItemView.extend({
                 isCreate: isCreate,
                 startTime: moment(),
                 origDuration: session.attributes.duration,
-                origMouseX: event.pageX
+                origMouseX: event.pageX,
+                sessionCid: cidForEvent(event)
         };
         this.render();  // update drag-target class
         window.startDrag(this);
@@ -237,6 +244,11 @@ var WeekView = Marionette.ItemView.extend({
                     (event.pageX - this.dragInfo.origMouseX) / PX_PER_MIN);
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             this.dragInfo.session.set('duration', newDuration);
+
+            var cid = this.dragInfo.sessionCid;
+            var session = sessionForCid(this, cid);
+            var element = elementForCid(cid);
+            showToolTipForSession(session, element);
         }
         if (this.dragGoalInfo) {
             var newDuration = Math.max(0,
@@ -258,7 +270,7 @@ var WeekView = Marionette.ItemView.extend({
             // like the double-click timeout.
             var isClick = moment().diff(dragInfo.startTime, 'milliseconds') < 300;
 
-            $('#sessionToolTip').css('opacity', 0); // hide session info
+            hideToolTipForSession();
 
             // if creating a session, ask for activity type and duration
             if (dragInfo.isCreate) {
@@ -292,10 +304,12 @@ var WeekView = Marionette.ItemView.extend({
 
 
             if (this.dragGoalInfo.origMouseX === event.pageX) {
+                hideToolTipForGoal();
+
                 // Make the goal box visible
                 $('#setGoalContainer').fadeIn();
                 console.log(this.model.get('goal'));
-                
+
                 var duration = this.dragGoalInfo.origDuration;
 
                 $('#setGoal').click(_.bind(function(e) {
@@ -309,7 +323,7 @@ var WeekView = Marionette.ItemView.extend({
 
                     this.model.set('goal', duration);
                     var resizeFactor = Math.ceil(duration/60.0);
-                    
+
                     $('#setGoalContainer').fadeOut();
                     PX_PER_MIN = 10 / resizeFactor;
                     this.render();
@@ -389,10 +403,29 @@ var FullView = Marionette.CollectionView.extend({
     },
 });
 
-function sessionForEvent(ths, event) {
-    var cid = $(event.target).data('cid');
+// ------------------------------------------------
+// Models <-> Views
+// ------------------------------------------------
+
+function cidForEvent(event) {
+    return $(event.target).data('cid');
+}
+
+function sessionForCid(ths, cid) {
     return ths.weekSessions.get(cid);
 }
+
+function sessionForEvent(ths, event) {
+    return sessionForCid(ths, cidForEvent(event));
+}
+
+function elementForCid(cid) {
+    return $('rect[data-cid=' + cid + ']')[0];
+}
+
+// ------------------------------------------------
+// Tooltip hiding/showing
+// ------------------------------------------------
 
 function showToolTipForSession(session, element) {
     var tip = $('#sessionToolTip');
@@ -402,7 +435,7 @@ function showToolTipForSession(session, element) {
     // ugly, and espeically ugly when the user is dragging to create a new
     // session and intends to specify something)
     var duration = session.attributes.duration;
-    var durationStr = formatDuration(duration, '(Delete)');
+    var durationStr = formatDuration(duration, 'Delete');
     if (session.attributes.label == 'unspecified') {
         $(tip).html(durationStr);
     } else {
@@ -423,6 +456,13 @@ function showToolTipForGoal(goalMins, element) {
     var durationStr = formatDuration(goalMins, '0');
     $(tip).html(durationStr);
     moveToElementPlusOffset(tip, element, -4, -38);
+}
+
+function hideToolTipForSession() {
+    $('#sessionToolTip').css('opacity', 0);
+}
+function hideToolTipForGoal() {
+    $('#durationToolTip').css('opacity', 0);
 }
 
 // ------------------------------------------------
