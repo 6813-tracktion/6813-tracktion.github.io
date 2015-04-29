@@ -208,7 +208,7 @@ var WeekView = Marionette.ItemView.extend({
             return;
         }
         session = sessionForEvent(this, event);
-        showToolTipForSession(session, event.target);
+        showToolTipForSession(session);
     },
     mouseoutRect: function(event) {
         hideToolTipForSession();
@@ -233,10 +233,7 @@ var WeekView = Marionette.ItemView.extend({
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             this.dragInfo.session.set('duration', newDuration);
 
-            var cid = this.dragInfo.session.cid;
-            var session = sessionForCid(this, cid);
-            var element = elementForCid(cid);
-            showToolTipForSession(session, element);
+            showToolTipForSession(this.dragInfo.session);
         }
         if (this.dragGoalInfo) {
             var newDuration = Math.max(0,
@@ -313,7 +310,7 @@ var WeekView = Marionette.ItemView.extend({
                     var resizeFactor = Math.ceil(duration/60.0);
 
                     $('#setGoalContainer').fadeOut();
-                    
+
                     if ( resizeFactor !== 0 && this.templateHelpers().weekTotal() < duration )
                         PX_PER_MIN = 10 / resizeFactor;
                     this.render();
@@ -409,7 +406,7 @@ function sessionForEvent(ths, event) {
     return sessionForCid(ths, cidForEvent(event));
 }
 
-function elementForCid(cid) {
+function sessionElementForCid(cid) {
     return $('rect[data-cid=' + cid + ']')[0];
 }
 
@@ -417,7 +414,7 @@ function elementForCid(cid) {
 // Tooltip hiding/showing
 // ------------------------------------------------
 
-function showToolTipForSession(session, element) {
+function showToolTipForSession(session) {
     var tip = $('#sessionToolTip');
     $(tip).css('opacity', 1);
 
@@ -434,6 +431,7 @@ function showToolTipForSession(session, element) {
     }
 
     // position tooltip
+    var element = sessionElementForCid(session.cid);
     var wSesh = element.getAttribute("width");
     var wTip = $(tip).width();
     var dx = -wTip / 2 + wSesh / 2 - 3;
