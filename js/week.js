@@ -58,6 +58,7 @@ var WeekView = Marionette.ItemView.extend({
     },
     onShow: function() {
         this.fixSVGFractionalCoordinates();
+        showIntroIfNeeded(this.allSessions);
     },
     fixSVGFractionalCoordinates: function() {
         // https://bugzilla.mozilla.org/show_bug.cgi?id=608812
@@ -160,7 +161,6 @@ var WeekView = Marionette.ItemView.extend({
       "mousedown rect.session":     "mousedownSession",
       "mousedown rect.new-session": "mousedownPlus",
       "mousedown path.new-session": "mousedownPlus",
-      "mousedown rect.new-first-session": "mousedownPlus",
       // Implicit by setting window.dragHandler = this.
       //"mousemove": "mousemove",
       //"mouseup": "mouseup",
@@ -186,9 +186,11 @@ var WeekView = Marionette.ItemView.extend({
         // The view should render synchronously, so the new rect should be
         // present in the DOM if we need it.
         this.startDragging(newSession, true, event);
+        hideAddNewHelp();
     },
     mousedownGoal: function(event) {
         event.preventDefault();
+        hideGoalHelp();
         this.dragGoalInfo = {
             origMouseX : event.pageX,
             origDuration: this.model.get('goal')
@@ -256,6 +258,8 @@ var WeekView = Marionette.ItemView.extend({
             // like the double-click timeout.
             var isClick = moment().diff(dragInfo.startTime, 'milliseconds') < 300;
 
+            $('#sessionToolTip').css('opacity', 0); // hide session info
+
             // if creating a session, ask for activity type and duration
             if (dragInfo.isCreate) {
                 if(dragInfo.session.attributes.duration <= 0){
@@ -285,43 +289,43 @@ var WeekView = Marionette.ItemView.extend({
         if (this.dragGoalInfo) {
             console.log(this.model.get('goal'));
             console.log(event.pageX);
-                 
-            
+
+
             if (this.dragGoalInfo.origMouseX === event.pageX) {
                 // Make the goal box visible
                 $('#setGoalContainer').fadeIn();
                 console.log(this.model.get('goal'));
-                    
+
                 var duration = this.dragGoalInfo.origDuration;
-                
+
                 $('#setGoal').click(function(e) {
                     var hours = parseInt($('#hourDuration').val());
                     var mins = parseInt($('#minuteDuration').val());
 
                     duration = hours * 60 + mins;
                     duration = DURATION_GRANULARITY * Math.round(duration / DURATION_GRANULARITY);
-                    
+
                     console.log("hours: " + hours + " mins: " + mins + " duration: " + duration);
-                    
+
                     // this.model is not defined in this function for some reason.
-                    
+
                     // Make the goal box invisible
                     $('#setGoalContainer').fadeOut();
                 });
-                
+
                 $('#cancelSetGoal').click(function(e) {
                     $('#setGoalContainer').fadeOut();
                 });
-                
-                
+
+
             }
             // Threshold is pageX >= 990
             if ( event.pageX >= 990 ) {
                 PX_PER_MIN = PX_PER_MIN / (1.2)
             }
             console.log(PX_PER_MIN);
-                
-            
+
+
             this.render();
             this.dragGoalInfo = null;
             undoManager.commit();
@@ -361,7 +365,7 @@ var WeekView = Marionette.ItemView.extend({
             }
         }
         // Conversely, if we're editing the current week so it now ends in the
-        // past, we need to add a new current week.  This case is handled by the
+        // past, we need to add a new current week. This case is handled by the
         // model itself.
         undoManager.commit();
         // If we moved days from one week to another...
@@ -417,4 +421,50 @@ function showToolTipForGoal(goalMins, element) {
     var durationStr = formatDuration(goalMins, '0');
     $(tip).html(durationStr);
     moveToElementPlusOffset(tip, element, -4, -38);
+}
+
+// ------------------------------------------------
+// Intro / help
+// ------------------------------------------------
+// These 4 functions work together to:
+//  1) only show *any* help if there are no sessions
+//  2) hide help for adding a new session and changing the goal independently,
+//      with the help permanently hidden once logic in the model has
+//      determined that the user has successfully carried out the appropriate
+//      actions
+//
+// We use opacity for making the tooltips visible because 'visibility',
+// 'display', and jQuery 'fade{In,Out}' don't seem to work.
+
+function showIntroIfNeeded(allSessions) {
+    if (allSessions.length == 0) {
+        showIntroElements();
+    }
+}
+
+function showIntroElements() {
+    // show the new session button even if user not mousing over the row
+    console.log('making first session stuff visible');
+    var firstSessionEls = $('.new-session[data-is-today="' + "true" + '"]');
+    $(firstSessionEls).css('visibility', 'visible');
+
+    // make help dialogs visible
+    $('.help').css('opacity', 1);
+
+    // position the goal help
+    var goal = $('.goal')[0];
+    var goalHelp = $('#goalHelp')[0];
+    moveToElementPlusOffset(goalHelp, goal, 42, -10);
+
+    // position the add new session help
+    var addNewSquare = $('path.new-session[data-is-today="' + "true" + '"]')[0];
+    var addNewHelp = $('#addNewHelp')[0];
+    moveToElementPlusOffset(addNewHelp, addNewSquare, 24, -15);
+}
+
+function hideAddNewHelp() {
+    $('#addNewHelp').css('visibility', 'hidden');
+}
+function hideGoalHelp() {
+    $('#goalHelp').css('visibility', 'hidden');
 }

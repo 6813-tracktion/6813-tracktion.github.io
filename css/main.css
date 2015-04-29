@@ -142,10 +142,10 @@ line.splitter {
 }
 
 /* adding new session */
-.new-session, .new-first-session {
+.new-session {
   visibility: hidden;
 }
-rect.new-session, path.new-session, rect.new-first-session {
+rect.new-session, path.new-session{
   fill: rgba(255, 0, 0, 0.5);
 }
 g.day:hover .new-session {
@@ -290,19 +290,43 @@ select, option {
   position: absolute;
   width: 0;
   border-style: solid;
+}
+.tooltip-above:before, .tooltip-above:after {
   left: 50%;
 }
-.tooltip:before { /* main triangle */
+.tooltip-above:before { /* main triangle */
   border-width: 6px 6px 0 6px;
   border-color: #eee transparent transparent transparent;
   margin-left: -6px;
   z-index: 2;
   top: 100%;
 }
-.tooltip:after { /* background triangle to act as border */
+.tooltip-above:after { /* background triangle to act as border */
   border-width: 7px 7px 0 7px;
   border-color: #999 transparent transparent transparent;
   margin-left: -7px;
   z-index: 1;
   top: 102%;
+}
+.tooltip-right:before, .tooltip-right:after {
+  top: 50%;
+  margin-left: -6px;
+}
+.tooltip-right:before { /* main triangle */
+  border-width: 6px 6px 6px 0;
+  border-color: transparent #eee transparent transparent;
+  margin-top: -6px;
+  z-index: 2;
+  left: 0%;
+}
+.tooltip-right:after { /* background triangle to act as border */
+  border-width: 7px 7px 7px 0;
+  border-color: transparent #999 transparent transparent;
+  margin-top: -7px;
+  z-index: 1;
+  left: -1px;
+}
+
+.help {
+  opacity: 0;
 }

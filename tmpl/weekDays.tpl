@@ -59,12 +59,13 @@
                      L-0.5,0.5
                      L-0.5,-0.5
                      Z
-                    " data-day="<%= d %>" />
+                    " data-day="<%= d %>" data-is-today="<%= day(d).isSame(today) %>"/>
             <!-- plus lines -->
-            <line class="new-session" x1="0" x2="0" y1="-0.2" y2="0.2" />
-            <line class="new-session" y1="0" y2="0" x1="-0.2" x2="0.2" />
+            <line class="new-session" x1="0" x2="0" y1="-0.2" y2="0.2" data-is-today="<%= day(d).isSame(today) %>"/>
+            <line class="new-session" y1="0" y2="0" x1="-0.2" x2="0.2" data-is-today="<%= day(d).isSame(today) %>"/>
           </g>
         </g>
+
         <!-- day sum -->
         <text x="49" y="<%= DAY_HEIGHT_PX/2 %>" dy=".35em" class="day-sum"><%= formatDuration(daySum(d), '0') %></text>
       </g>
@@ -75,16 +76,6 @@
     <% } else { %>
       <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".33em" text-anchor="end" class="day"><%= day(d).format("ddd M/D")%></text>
     <% } %>
-
-    <!-- New session box; special copy for when user is new (not the ideal solution) -->
-    <% if (day(d).isSame(today)) { %>
-      <rect class="new-first-session" x="-0.5" y="-0.5" height="1" width="1" data-day="<%= d %>" />
-      <line class="new-first-session" x1="0" x2="0" y1="-0.2" y2="0.2" />
-      <line class="new-first-session" y1="0" y2="0" x1="-0.2" x2="0.2" />
-    <% } %>
-    <!--
-
-    -->
   </g>
 <% }) %>
 <line x1="100" x2="100" y1="-100" y2="<%= 10*DAY_HEIGHT_PX %>" class="separator" />
