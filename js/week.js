@@ -298,7 +298,7 @@ var WeekView = Marionette.ItemView.extend({
 
                 var duration = this.dragGoalInfo.origDuration;
 
-                $('#setGoal').click(function(e) {
+                $('#setGoal').click(_.bind(function(e) {
                     var hours = parseInt($('#hourDuration').val());
                     var mins = parseInt($('#minuteDuration').val());
 
@@ -308,10 +308,10 @@ var WeekView = Marionette.ItemView.extend({
                     console.log("hours: " + hours + " mins: " + mins + " duration: " + duration);
 
                     // this.model is not defined in this function for some reason.
-
+                    this.model.set('goal', duration);
                     // Make the goal box invisible
                     $('#setGoalContainer').fadeOut();
-                });
+                }, this));
 
                 $('#cancelSetGoal').click(function(e) {
                     $('#setGoalContainer').fadeOut();
