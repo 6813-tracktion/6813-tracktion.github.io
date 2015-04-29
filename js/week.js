@@ -56,9 +56,12 @@ var WeekView = Marionette.ItemView.extend({
             day = day.add(1, 'days');
         }
     },
-    onShow: function() {
+    onShow: function() { // called once
         this.fixSVGFractionalCoordinates();
         showIntroIfNeeded(this.allSessions);
+    },
+    onRender: function () { // called after model changes
+        showAddNewIfNeeded(this.allSessions);
     },
     fixSVGFractionalCoordinates: function() {
         // https://bugzilla.mozilla.org/show_bug.cgi?id=608812
@@ -168,6 +171,7 @@ var WeekView = Marionette.ItemView.extend({
       // hover info callbacks
       "mouseover g.goal":           "mouseoverGoal",
       "mouseout g.goal":            "mouseoutGoal",
+      "mouseover g:not(.goal)":     "mouseoutGoal", // hack to obscure mouseout not firing
       "mouseover rect.session":     "mouseoverSession",
       "mouseout rect":              "mouseoutRect",
       "click .editableEndDate":     "changeEndDate"
@@ -198,6 +202,8 @@ var WeekView = Marionette.ItemView.extend({
         window.startDrag(this);
     },
     mouseoverGoal: function(event) {
+        // TODO would be nice to mirror pattern for session tooltip wherein
+        // we also show it when dragged, but no cid for goal elements
         showToolTipForGoal(this.model.get('goal'), event.target);
     },
     mouseoutGoal: function(event) {
@@ -256,6 +262,7 @@ var WeekView = Marionette.ItemView.extend({
             var isClick = moment().diff(dragInfo.startTime, 'milliseconds') < 300;
 
             hideToolTipForSession();
+            hideToolTipForGoal();
 
             // if creating a session, ask for activity type and duration
             if (dragInfo.isCreate) {
@@ -459,12 +466,7 @@ function hideToolTipForGoal() {
 // These 4 functions work together to:
 //  1) only show *any* help if there are no sessions
 //  2) hide help for adding a new session and changing the goal independently,
-//      with the help permanently hidden once logic in the model has
-//      determined that the user has successfully carried out the appropriate
-//      actions
-//
-// We use opacity for making the tooltips visible because 'visibility',
-// 'display', and jQuery 'fade{In,Out}' don't seem to work.
+//      with the help permanently hidden once some condition is met
 
 function showIntroIfNeeded(allSessions) {
     if (allSessions.length == 0) {
@@ -473,10 +475,7 @@ function showIntroIfNeeded(allSessions) {
 }
 
 function showIntroElements() {
-    // show the new session button even if user not mousing over the row
-    console.log('making first session stuff visible');
-    var firstSessionEls = $('.new-session[data-is-today="' + "true" + '"]');
-    $(firstSessionEls).css('visibility', 'visible');
+    showAddNewButton();
 
     // make help dialogs visible
     $('.help').css('opacity', 1);
@@ -484,12 +483,12 @@ function showIntroElements() {
     // position the goal help
     var goal = $('.goal')[0];
     var goalHelp = $('#goalHelp')[0];
-    moveToElementPlusOffset(goalHelp, goal, 42, -10);
+    moveToElementPlusOffset(goalHelp, goal, 41, 2);
 
     // position the add new session help
     var addNewSquare = $('path.new-session[data-is-today="' + "true" + '"]')[0];
     var addNewHelp = $('#addNewHelp')[0];
-    moveToElementPlusOffset(addNewHelp, addNewSquare, 24, -15);
+    moveToElementPlusOffset(addNewHelp, addNewSquare, 24, -14);
 }
 
 function hideAddNewHelp() {
@@ -497,4 +496,18 @@ function hideAddNewHelp() {
 }
 function hideGoalHelp() {
     $('#goalHelp').css('visibility', 'hidden');
+}
+
+// these two funcs are separate from the others because the add new button
+// may need to be set to visible multiple times if the end date is changed,
+// since the normal behavior is to hide it except when its row is moused over
+function showAddNewIfNeeded(allSessions) {
+    if (allSessions.length == 0) {
+        showAddNewButton();
+    }
+}
+function showAddNewButton() {
+    // show the new session button even if user not mousing over the row
+    var firstSessionEls = $('.new-session[data-is-today="' + "true" + '"]');
+    $(firstSessionEls).css('visibility', 'visible');
 }
