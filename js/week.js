@@ -325,7 +325,8 @@ var WeekView = Marionette.ItemView.extend({
                     var resizeFactor = Math.ceil(duration/60.0);
 
                     $('#setGoalContainer').fadeOut();
-                    if ( resizeFactor !== 0 )
+                    
+                    if ( resizeFactor !== 0 && this.templateHelpers().weekTotal() < duration )
                         PX_PER_MIN = 10 / resizeFactor;
                     this.render();
                 }, this));
