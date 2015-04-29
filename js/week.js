@@ -161,20 +161,24 @@ var WeekView = Marionette.ItemView.extend({
         };
     },
     events: {
+      // session creation + modification
       "mousedown rect.session":     "mousedownSession",
       "mousedown rect.new-session": "mousedownPlus",
       "mousedown path.new-session": "mousedownPlus",
-      // Implicit by setting window.dragHandler = this.
-      //"mousemove": "mousemove",
-      //"mouseup": "mouseup",
+      // goal modification
       "mousedown g.goal":           "mousedownGoal",
       // hover info callbacks
       "mouseover g.goal":           "mouseoverGoal",
       "mouseout g.goal":            "mouseoutGoal",
-      "mouseover g:not(.goal)":     "mouseoutGoal", // hack to obscure mouseout not firing
       "mouseover rect.session":     "mouseoverSession",
       "mouseout rect":              "mouseoutRect",
+      "mouseover rect.gapRemaining":   "mouseoverGap",
+      "mouseout rect.gapRemaining":    "mouseoutGap",
+      // other events
       "click .editableEndDate":     "changeEndDate"
+      // Implicit by setting window.dragHandler = this.
+      //"mousemove": "mousemove",
+      //"mouseup": "mouseup",
     },
     mousedownSession: function(event){
         event.preventDefault();
@@ -208,6 +212,14 @@ var WeekView = Marionette.ItemView.extend({
     },
     mouseoutGoal: function(event) {
         hideToolTipForGoal();
+    },
+    mouseoverGap: function(event) {
+        var weekTotal = this.templateHelpers().weekTotal();
+        var gapTime = this.model.get('goal') - weekTotal;
+        showToolTipForGap(gapTime, weekTotal, event.target);
+    },
+    mouseoutGap: function(event) {
+        hideToolTipForGap();
     },
     mouseoverSession: function(event) {
         if (this.dragInfo) {
@@ -421,6 +433,8 @@ function sessionElementForCid(cid) {
 // Tooltip hiding/showing
 // ------------------------------------------------
 
+// ------------------------ showing tooltips
+
 function showToolTipForSession(session) {
     var tip = $('#sessionToolTip');
     $(tip).css('opacity', 1);
@@ -439,25 +453,52 @@ function showToolTipForSession(session) {
 
     // position tooltip
     var element = sessionElementForCid(session.cid);
-    var wSesh = element.getAttribute("width");
-    var wTip = $(tip).width();
-    var dx = -wTip / 2 + wSesh / 2 - 3;
-    moveToElementPlusOffset(tip, element, dx, -30);
+    var offset = offsetToAboveCenterOfElement(tip, element);
+    moveToElementPlusOffset(tip, element, offset.x, offset.y);
 }
 
 function showToolTipForGoal(goalMins, element) {
-    var tip = $('#durationToolTip');
-    $(tip).css('opacity', 1);
-    var durationStr = formatDuration(goalMins, '0');
-    $(tip).html(durationStr);
-    moveToElementPlusOffset(tip, element, -4, -38);
+    showDurationToolTip(goalMins, element, -4, -30);
 }
+
+function showToolTipForGap(gapMins, weekTotal, element) {
+    var tip = $('#durationToolTip');
+    var offset = offsetToAboveCenterOfElement(tip, element);
+    var x = offset.x + weekTotal * PX_PER_MIN; // wasn't getting abs position of rect properly
+    showDurationToolTip(gapMins, element, x, offset.y);
+}
+
+// ------------------------ hiding tooltips
 
 function hideToolTipForSession() {
     $('#sessionToolTip').css('opacity', 0);
 }
 function hideToolTipForGoal() {
+    hideDurationToolTip();
+}
+function hideToolTipForGap() {
+    hideDurationToolTip();
+}
+
+// ------------------------ helper funcs
+
+// inner func for goal and gap tooltips
+function showDurationToolTip(durationMins, element, dx, dy) {
+    var tip = $('#durationToolTip');
+    $(tip).css('opacity', 1);
+    var durationStr = formatDuration(durationMins, '0');
+    $(tip).html(durationStr);
+    moveToElementPlusOffset(tip, element, dx, dy);
+}
+function hideDurationToolTip() {
     $('#durationToolTip').css('opacity', 0);
+}
+
+function offsetToAboveCenterOfElement(tip, element) {
+    var wGap = element.getAttribute("width");
+    var wTip = $(tip).width();
+    var dx = -wTip / 2 + wGap / 2 - 4;
+    return {x: dx, y: -30};
 }
 
 // ------------------------------------------------

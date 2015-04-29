@@ -34,7 +34,7 @@
             <text class="goalText">Weekly Goal</text>
           </g>
         <% } %>
-        
+
         <g transform = "translate(110,74)">
             <!--
                 Insert the 30 min ticks
@@ -67,10 +67,15 @@
                 <g transform="translate(<%=rm2p(weekTotal()) - 6%>, <%=28 / 2 + 6 %>)">
                     <text text-anchor="end" class="totalMinutes"><%= formatDuration(weekTotal())%></text>
                 </g>
-            <% } %> 
+            <% } %>
             <% if (weekTotal() < weekAttr('goal')) { %>
+                <!-- Dashed lines -->
                 <polyline points="<%=rm2p(weekTotal())%>,0 <%=rm2p(weekAttr('goal'))%>,0 <%=rm2p(weekAttr('goal'))%>,28 <%=rm2p(weekTotal())%>,28"
                     stroke-width="2" stroke="#ccc" stroke-dashoffset="<%=rm2p(weekTotal())%>" stroke-dasharray="5" fill="none"/>
+                <!-- Invisible rect to trigger mouseover -->
+                <rect class="gapRemaining" height="28" x="<%=rm2p(weekTotal())%>"
+                    width="<%=rm2p(weekAttr('goal')) - rm2p(weekTotal())%>"
+                />
             <% } %>
         </g>
 
@@ -79,12 +84,12 @@
 
             NOTE: Same story as above with the for loop
         -->
-                
+
         <% for (var h = 1; h <= 14; h++ ) { %>
             <text transform = "translate(<%=h*60*PX_PER_MIN+102%>,91)"> <%=h%>h </text>
         <% } %>
-        
-        <!--        
+
+        <!--
         <g tansform = "translate(100,0)">
             <text transform = "translate(100,30)"> Hi </text>
             <g ><text transform = "translate(142,30)" >  </text></g>
@@ -102,8 +107,8 @@
             <g transform = "translate(738,30)"><text>  </text></g>
         </g>
         -->
-                
-                
+
+
         <g class = "goal" transform = "translate(<%= weekAttr('goal') * PX_PER_MIN + 110 %>,0)">
             <line x1 = "0" x2 = "0" y1 = "20" y2 = "74" stroke = "black" stroke-width = "2"/>
             <image xlink:href="img/checkered-flag.png" x = "-1" y = "-4"
