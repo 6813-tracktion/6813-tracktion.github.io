@@ -111,9 +111,11 @@
         </g>
 
         <g transform="translate(10,96)">
+            <!--
             <g class="week-label" transform="translate(750, 100) rotate(90)">
             <text style="text-anchor: middle;">Week <%= weekNumber() %></text>
             </g>
+            -->
             <%= include #weekCumulative %>
             <%= include #weekDays %>
         </g>
