@@ -207,17 +207,6 @@ var WeekView = Marionette.ItemView.extend({
         if (this.dragInfo) {
             return;
         }
-        // var session = null;
-        // if (this.dragInfo) {
-        //     var cid = this.dragInfo.sessionCid;
-        //     session = sessionForCid(this, cid);
-        //     var element = elementForCid(cid);
-        //     console.log(element);
-        //     showToolTipForSession(session, element);
-        // } else {
-        //     session = sessionForEvent(this, event);
-        //     showToolTipForSession(session, event.target);
-        // }
         session = sessionForEvent(this, event);
         showToolTipForSession(session, event.target);
     },
@@ -230,8 +219,7 @@ var WeekView = Marionette.ItemView.extend({
                 isCreate: isCreate,
                 startTime: moment(),
                 origDuration: session.attributes.duration,
-                origMouseX: event.pageX,
-                sessionCid: cidForEvent(event)
+                origMouseX: event.pageX
         };
         this.render();  // update drag-target class
         window.startDrag(this);
@@ -245,7 +233,7 @@ var WeekView = Marionette.ItemView.extend({
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             this.dragInfo.session.set('duration', newDuration);
 
-            var cid = this.dragInfo.sessionCid;
+            var cid = this.dragInfo.session.cid;
             var session = sessionForCid(this, cid);
             var element = elementForCid(cid);
             showToolTipForSession(session, element);
