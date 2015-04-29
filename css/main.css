@@ -215,11 +215,13 @@ g.day:hover text.day-sum {
 }
 
 #hourDuration {
-    width: 50px;
+    max-width: 50px;
+    min-width: 50px;
 }
 
 #minuteDUration {
-    width: 60px;
+    max-width: 60px;
+    min-width: 60px;
 }
 
 /* Activity info dialog */
