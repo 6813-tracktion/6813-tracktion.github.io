@@ -1,6 +1,5 @@
 <script type="text/template" id="weekTpl">
-    <!-- XXX: Express 106 in terms of DAY_HEIGHT_PX -->
-    <svg class="week" height="<%= 88 + numDaysToShow() * DAY_HEIGHT_PX %>"
+    <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX %>"
     style="<%= self.svgStyleAttr %>">
 
         <!--
