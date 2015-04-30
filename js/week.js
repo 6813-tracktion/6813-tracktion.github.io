@@ -175,7 +175,7 @@ var WeekView = Marionette.ItemView.extend({
       "mouseover rect.gapRemaining":   "mouseoverGap",
       "mouseout rect.gapRemaining":    "mouseoutGap",
       // other events
-      "click .editableEndDate":     "changeEndDate"
+      "mouseup image.editIcon":     "changeEndDate"
       // Implicit by setting window.dragHandler = this.
       //"mousemove": "mousemove",
       //"mouseup": "mouseup",

@@ -1,6 +1,18 @@
 <script type="text/template" id="weekTpl">
-    <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX %>"
+    <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX + 25 %>"
     style="<%= self.svgStyleAttr %>">
+    <g transform="translate(0, 25)"> <!-- translate for title -->
+        <!--
+            Title for week
+        -->
+        <g transform="translate(420, -4)" class="weekTitle">
+            <!-- Invisible rect to robustly trigger mouseover for edit icon to appear -->
+            <rect style="opacity: 0;" height="15" x="-95" y="-18" width="220" height="24"/>
+            <!-- Start / End dates -->
+            <text style="text-anchor: middle" class="weekTitle"><%=beginning.format("ddd M/D")%> - <tspan class="editableEndDate"><%=end.format("ddd M/D")%></tspan></text>
+            <!-- Edit icon -->
+            <image xlink:href="img/flaticon/pencil.png" class="editIcon" x="98" y="-16" height="16px" width="16px" />
+        </g>
 
         <!--
             Text label for the "WEEK TOTAL" bar (currently not used)
@@ -24,9 +36,9 @@
         var date = this.templateHelpers().day(day);
         -->
         <% if (canChangeEnd()) { %>
-          <g style = "text-anchor: middle;" transform = "translate(60,42)">
-            <text class="goalText">Weekly Goal</text>
-            <text transform = "translate(0,20)">By <tspan class="editableEndDate"><%=end.format("ddd M/D")%></tspan></text>
+          <g style = "text-anchor: middle;" transform = "translate(66,42)">
+            <text class="goalText">Progress</text>
+            <text class="goalText" transform="translate(0,20)">to Goal</text>
           </g>
         <% } else { %>
           <!-- Don't bother showing end date: it's redundant with the days. -->
@@ -124,5 +136,6 @@
             <%= include #weekCumulative %>
             <%= include #weekDays %>
         </g>
+    </g> <!-- translate for title -->
     </svg>
 </script>

@@ -30,13 +30,29 @@ svg text {
   user-select: none;
   cursor: default;
 }
+svg .weekTitle {
+  font-size: 120%;
+  position: relative;
+  background-color: red;
+}
+svg .editIcon {
+  opacity: 0;
+  pointer-events: none;
+  z-index: 999;
+}
+svg .weekTitle:hover .editIcon {
+  opacity: 1;
+  pointer-events: all;
+}
+
 svg .goalText {
   font-size: 115%;
+  font-style: italic;
 }
 svg .editableEndDate {
   /* Make it look like a hyperlink.  Anyone want to implement a better decoration? */
-  fill: blue;
-  text-decoration: underline;
+  /*fill: blue;*/
+  /*text-decoration: underline;*/
 }
 svg .day {
   font-size: 115%;
