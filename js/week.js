@@ -55,7 +55,10 @@ var WeekView = Marionette.ItemView.extend({
             this.cumulativeSum[key] = sum;
             day = day.add(1, 'days');
         }
-        this.pixelsPerMin = 700.0 / Math.max(420, Math.max(this.model.get('goal'), sum) * 1.2);
+        // only update pixels per minute when not dragging
+        if(!this.dragGoalInfo && !this.dragInfo){
+            this.pixelsPerMin = 700.0 / Math.max(420, Math.max(this.model.get('goal'), sum) * 1.2);
+        }
     },
     onShow: function() { // called once
         this.fixSVGFractionalCoordinates();
@@ -357,9 +360,6 @@ var WeekView = Marionette.ItemView.extend({
            this.model.set('goal', duration);
            undoManager.commit();
         }
-
-        // reset X-Scale
-        
 
         this.throttledRender();
     },
