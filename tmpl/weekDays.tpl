@@ -73,10 +73,17 @@
     <!-- day label -->
     <% if (day(d).isSame(today)) { %>
       <!-- image indicating today -->
-      <image xlink:href="img/star.png" x="-10" y ="<%= DAY_HEIGHT_PX/2 - 11 %>" height = "15px" width = "16px" />
+      <image xlink:href="img/star.png" x="-14" y ="<%= DAY_HEIGHT_PX/2 - 9 %>" height = "16px" width = "16px" />
       <!-- label indicating today -->
-      <!-- <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today">Today</text> -->
-      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today"><%= day(d).format("ddd M/D")%></text>
+      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="7px" text-anchor="end" class="day today"><%= day(d).format("ddd M/D")%></text>
+      <!-- background highlight -->
+      <rect class="todayHighlight" x="-19" y="0" width="117" height="<%= DAY_HEIGHT_PX %>" />
+      <!-- <polygon class="todayHighlight" points="
+        -15,0
+        80,0
+        <%=80 + DAY_HEIGHT_PX/2%>,<%=DAY_HEIGHT_PX/2%>
+        80,<%=DAY_HEIGHT_PX%>
+        -15,<%=DAY_HEIGHT_PX%>" /> -->
     <% } else { %>
       <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".33em" text-anchor="end" class="day"><%= day(d).format("ddd M/D")%></text>
     <% } %>

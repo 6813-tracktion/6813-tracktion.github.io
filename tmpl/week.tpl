@@ -1,17 +1,24 @@
 <script type="text/template" id="weekTpl">
     <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX + 25 %>"
     style="<%= self.svgStyleAttr %>">
-    <g transform="translate(0, 25)"> <!-- translate for title -->
+    <g transform="translate(8, 25)"> <!-- translate for title and wider today label -->
         <!--
             Title for week
         -->
         <g transform="translate(420, -4)" class="weekTitle">
-            <!-- Invisible rect to robustly trigger mouseover for edit icon to appear -->
-            <rect style="opacity: 0;" height="15" x="-95" y="-18" width="220" height="24"/>
             <!-- Start / End dates -->
-            <text style="text-anchor: middle" class="weekTitle"><%=beginning.format("ddd M/D")%> - <tspan class="editableEndDate"><%=end.format("ddd M/D")%></tspan></text>
-            <!-- Edit icon -->
-            <image xlink:href="img/flaticon/pencil.png" class="editIcon" x="98" y="-16" height="16px" width="16px" />
+            <% if (canChangeEnd()) { %>
+                <!-- Text -->
+                <text style="text-anchor: middle" class="weekTitle"><%=beginning.format("ddd M/D")%> &ndash;
+                    <tspan class="editableEndDate">
+                        <%=end.format("ddd M/D")%>
+                    </tspan>
+                </text>
+                <!-- Edit icon -->
+                <image xlink:href="img/flaticon/pencil.png" class="editIcon" x="98" y="-16" height="16px" width="16px" />
+            <% } else { %>
+                <text style="text-anchor: middle" class="weekTitle"><%=beginning.format("ddd M/D")%> &ndash; <%=end.format("ddd M/D")%></text>
+            <% } %>
         </g>
 
         <!--
@@ -35,17 +42,10 @@
             var day = $(event.target).data('day');
         var date = this.templateHelpers().day(day);
         -->
-        <% if (canChangeEnd()) { %>
-          <g style = "text-anchor: middle;" transform = "translate(66,42)">
+        <g style = "text-anchor: middle;" transform = "translate(66,42)">
             <text class="goalText">Progress</text>
             <text class="goalText" transform="translate(0,20)">to Goal</text>
-          </g>
-        <% } else { %>
-          <!-- Don't bother showing end date: it's redundant with the days. -->
-          <g style = "text-anchor: middle;" transform = "translate(60,57)">
-            <text class="goalText">Weekly Goal</text>
-          </g>
-        <% } %>
+        </g>
 
         <g transform = "translate(110,74)">
             <!--
@@ -121,7 +121,6 @@
             <g transform = "translate(738,30)"><text>  </text></g>
         </g>
         -->
-
 
         <g class = "goal" transform = "translate(<%= rm2p(weekAttr('goal')) + 110 %>,0)">
             <line x1 = "0" x2 = "0" y1 = "20" y2 = "74" stroke = "black" stroke-width = "2"/>

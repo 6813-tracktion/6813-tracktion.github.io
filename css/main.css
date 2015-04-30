@@ -90,8 +90,6 @@ svg .weekTitle {
 svg .editIcon {
   opacity: 0;
   pointer-events: none;
-  z-index: 999;
-  cursor: pointer;
 }
 svg .weekTitle:hover .editIcon {
   opacity: 1;
@@ -104,16 +102,25 @@ svg .goalText {
 }
 svg .editableEndDate {
   /* Make it look like a hyperlink.  Anyone want to implement a better decoration? */
-  /*fill: blue;*/
-  /*text-decoration: underline;*/
+  text-decoration: underline;
+}
+svg .editableEndDate:hover {
+  fill: #555;
+}
+.editableEndDate:hover ~ editIcon {
+  opacity: 1;
 }
 svg .day {
   font-size: 115%;
 }
 svg .today {
   font-size: 115%;
-  font-style: italic;
   font-weight: bold;
+}
+svg .todayHighlight {
+  fill: #ccc;
+  opacity: .3;
+  z-index: 999;
 }
 svg .weekTotalLabel {
   font-size: 135%;
