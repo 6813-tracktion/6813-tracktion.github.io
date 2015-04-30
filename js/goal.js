@@ -30,10 +30,8 @@ function showGoalDialog(duration, callback){
     layer.stop().fadeIn();
     layer.data('callback', callback);
 
-    var hours = Math.floor(duration / 60);
-    var minutes = duration % 60;
     var goalDuration = layer.find('#goalDuration');
-    goalDuration.val(hours + ':' + (minutes < 10 ? '0' + minutes : minutes));
+    goalDuration.val(formatDuration(duration));
 
     // lock scroll
     lockScroll();
@@ -43,9 +41,7 @@ function showGoalDialog(duration, callback){
 }
 
 function submitGoalDialog(){
-    var time = $('#goalDuration').val();
-    var tokens = time.split(':');
-    var duration = parseInt(tokens[tokens.length - 1] || 0, 10) + parseInt(tokens[tokens.length - 2] || 0, 10) * 60;
+    var duration = parseDuration($('#goalDuration').val());
     // duration = DURATION_GRANULARITY * Math.round(duration / DURATION_GRANULARITY);
     if(duration > 0){
         hideGoalDialog(duration, true);
