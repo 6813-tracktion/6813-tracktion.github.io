@@ -21,11 +21,11 @@ var WeekView = Marionette.ItemView.extend({
         this.weekSessions = this.model.attributes.sessions;
         this.dataset = this.model.attributes.dataset;
         this.allSessions = this.dataset.attributes.sessions;
-        this.listenTo(this.weekSessions, 'add', this.render);
-        this.listenTo(this.weekSessions, 'change', this.render);
-        this.listenTo(this.weekSessions, 'remove', this.render);
-        this.listenTo(this.model, 'change', this.render);
-        this.listenTo(this.model.attributes.dataset, 'change:today', this.render);
+        // See comment in GR5 notes
+        this.throttledRender = _.throttle(this.render, 100);
+        this.listenTo(this.weekSessions, 'add change remove reset', this.throttledRender);
+        this.listenTo(this.model, 'change', this.throttledRender);
+        this.listenTo(this.model.attributes.dataset, 'change:today', this.throttledRender);
         this.dragInfo = null;
         this.goalDragInfo = null;
         this.svgStyleAttr = '';
@@ -71,7 +71,7 @@ var WeekView = Marionette.ItemView.extend({
             var ctm = this.$('svg')[0].getScreenCTM();
             this.svgStyleAttr = 'position: relative; ' +
                 'top: ' + -(ctm.f % 1) + 'px; left: ' + -(ctm.e % 1) + 'px;';
-            this.render();
+            this.throttledRender();
         } catch (e) {}
     },
     templateHelpers: function() {
@@ -239,7 +239,7 @@ var WeekView = Marionette.ItemView.extend({
                 origDuration: session.attributes.duration,
                 origMouseX: event.pageX
         };
-        this.render();  // update drag-target class
+        this.throttledRender();  // update drag-target class
         window.startDrag(this);
     },
     mousemove: function(event){
@@ -266,7 +266,7 @@ var WeekView = Marionette.ItemView.extend({
         if (this.dragInfo) {
             var dragInfo = this.dragInfo;
             this.dragInfo = null;
-            this.render();  // update drag-target class
+            this.throttledRender();  // update drag-target class
 
             // is it a click or a drag?
             // XXX: Ideally this time threshold would be a system setting
@@ -332,7 +332,7 @@ var WeekView = Marionette.ItemView.extend({
 
                     if ( resizeFactor !== 0 && this.templateHelpers().weekTotal() < duration )
                         PX_PER_MIN = 10 / resizeFactor;
-                    this.render();
+                    this.throttledRender();
                 }, this));
 
                 $('#cancelSetGoal').click(function(e) {
@@ -348,7 +348,7 @@ var WeekView = Marionette.ItemView.extend({
             console.log(PX_PER_MIN);
 
 
-            this.render();
+            this.throttledRender();
             this.dragGoalInfo = null;
             undoManager.commit();
         }

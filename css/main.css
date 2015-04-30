@@ -1,6 +1,7 @@
 
 body {
-  padding-top: 100px;
+  padding-top: 100px; /* toolbars */
+  padding-left: 200px; /* long-range view */
 }
 .navbar {
   font-family: "Open sans", sans-serif;
@@ -8,7 +9,7 @@ body {
 .week {
   text-align: center;
 }
-svg {
+svg.week {
   margin-top: 20px;
   margin-left: 15px;
   margin-right: 15px;
@@ -334,4 +335,10 @@ select, option {
 
 .help {
   opacity: 0;
+}
+
+#longRangeView {
+  position: fixed;
+  left: 0;
+  width: 200px;
 }

@@ -124,7 +124,7 @@ async.waterfall([
     var app = new Marionette.Application();
     app.addRegions({
         weekList: '#weeks',
-        // activityInfo: ActivityInfo
+        longRangeView: '#longRangeView',
     });
     app.on('start', function(options){
         console.log('Started Marionette application, options = %o', options);
@@ -135,6 +135,7 @@ async.waterfall([
     });
 
     app.weekList.show(new FullView({model: dataset}));
+    //app.longRangeView.show(new LongRangeView({model: dataset}));
 
     // 4. Start the application
     app.start();
