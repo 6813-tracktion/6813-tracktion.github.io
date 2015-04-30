@@ -42,7 +42,7 @@ function moveToElementPlusOffset(sel, element, dx, dy) {
 // us handle 0 or negative durations however we want
 function formatDuration(duration, negativeString) {
     if (duration <= 0) {
-		return negativeString;
+		return arguments.length > 1 ? negativeString : '0:00';
     }
     var hours = Math.floor(duration / 60);
     var minutes = duration % 60;
@@ -52,4 +52,9 @@ function formatDuration(duration, negativeString) {
 		return hours + ':0' + minutes;
     }
     return hours + ':' + minutes;
+}
+
+function parseDuration(durationString) {
+    var tokens = durationString.split(':');
+    return parseInt(tokens[tokens.length - 1] || 0, 10) + 60 * parseInt(tokens[tokens.length - 2] || 0, 10);
 }

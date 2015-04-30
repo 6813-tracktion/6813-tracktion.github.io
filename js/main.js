@@ -122,6 +122,19 @@ async.waterfall([
         placeholder: "hh:mm",
         selectOnFocus: true,
         clearIfNotMatch: true
+    }).keydown(function(e){
+      var dir = -1;
+      switch(e.which){
+        case 38:
+            dir *= -1; // going up
+        case 40: {
+            var incr = 5;
+            var duration = parseDuration($(this).val()) || 0;
+            duration = Math.round(duration / incr) * incr; // round to closest multiple of $incr
+            duration += dir * incr;
+            $(this).val(formatDuration(duration));
+        } break;
+      }
     });
 
     // 2. Setup stuff ...

@@ -124,9 +124,7 @@ function setupActivity(){
 
     // duration and <Ok/Delete> labeling
     $('#durationInput').on('change', function(){
-        var time = $('#durationInput').val();
-        var tokens = time.split(':');
-        var duration = parseInt(tokens[tokens.length - 1] || 0, 10) + parseInt(tokens[tokens.length - 2] || 0, 10) * 60;
+        var duration = parseDuration($('#durationInput').val());
         var isDelete = duration <= 0;
         $('#submitActivityInfo').text(isDelete ? 'Delete' : 'Okay');
         if(isDelete)
@@ -174,9 +172,7 @@ function showActivityInfo(session, callback, selectType) {
     // set fields according to session
     var durationInput = $('#durationInput');
     var duration = session.get('duration');
-    var hours = Math.floor(duration / 60);
-    var minutes = duration % 60;
-    durationInput.val(hours + ':' + (minutes < 10 ? '0' + minutes : minutes));
+    durationInput.val(formatDuration(duration));
 
     var activ = session.get('label');
     // let the record show that Alex wrote this line
@@ -225,9 +221,7 @@ function submitActivityInfo() {
         return;
 
     // update model (callback is responsible for the commit)
-    var time = $('#durationInput').val();
-    var tokens = time.split(':');
-    var duration = parseInt(tokens[tokens.length - 1] || 0, 10) + parseInt(tokens[tokens.length - 2] || 0, 10) * 60;
+    var duration = parseDuration($('#durationInput').val());
     session.set('duration', duration);
 
     var displayName = $('#activityTypeInput').val();
