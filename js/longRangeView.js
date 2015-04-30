@@ -7,7 +7,7 @@ var LongRangeView = Marionette.ItemView.extend({
     // TODO
     templateHelpers: function() {
         return {
-            WEEK_HEIGHT_PX: 10,
+            WEEK_HEIGHT_PX: 13,
             // Do this computation only once per render.
             PX_PER_MIN: (200 /*total width*/ / Math.max(420, _.max(this.model.attributes.weeks.pluck('total')))),
             // Round so our 1px borders are aligned with the screen pixels.
