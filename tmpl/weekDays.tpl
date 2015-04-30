@@ -25,7 +25,7 @@
           <rect class="session <%= sessionClass(session) %>" height="<%= DAY_HEIGHT_PX-1 %>" width="<%= rm2p(attr(session, 'duration')) - 1 %>" data-cid="<%= session.cid %>"  />
           <!-- activity image -->
           <g transform="translate(3, 5)">
-            <% if(attr(session, 'duration') >= 30){ %>
+            <% if(rm2p(attr(session, 'duration')) >= 42 /* 32 + 10 */){ %>
               <image xlink:href="<%= iconURL(session) %>" class="<%= iconClass(session) %>" x="0" width="32" height="32" y="0" />
             <% } else { %>
               <!-- masked image with fading -->
