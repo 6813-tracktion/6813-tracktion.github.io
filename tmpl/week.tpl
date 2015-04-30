@@ -57,10 +57,10 @@
                         not change over time so I will hard code these for now
                         until I find a better way of for looping this thing
             -->
-            <% for (var m = 30; m <= 840; m += 30) { %>
-                <line x1 = "<%= m*PX_PER_MIN %>" x2 = "<%= m*PX_PER_MIN %>" y1 = "-5" y2 = "5" stroke = "black" stroke-width = "2"/>
+            <% for (var m = 30; m <= maxMinutes(); m += 30) { %>
+                <line x1 = "<%= rm2p(m) %>" x2 = "<%= rm2p(m) %>" y1 = "-5" y2 = "5" stroke = "black" stroke-width = "2"/>
                 <% for (var y1 = 20; y1 <= 360; y1 += 20) { %>
-                    <line x1 = "<%= m*PX_PER_MIN %>" x2 = "<%= m*PX_PER_MIN %>" y1 = "<%= y1 %>" y2 = "<%= y1 + 5%>" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%= rm2p(m) %>" x2 = "<%= rm2p(m) %>" y1 = "<%= y1 %>" y2 = "<%= y1 + 5%>" stroke = "grey" stroke-width = "1" />
                 <% } %>
             <% } %>
         </g>
@@ -97,8 +97,8 @@
             NOTE: Same story as above with the for loop
         -->
 
-        <% for (var h = 1; h <= 14; h++ ) { %>
-            <text transform = "translate(<%=h*60*PX_PER_MIN+102%>,91)"> <%=h%>h </text>
+        <% for (var h = 1, H = maxHours(); h <= H; h++ ) { %>
+            <text transform = "translate(<%=h * rm2p(60) + 102 %>,91)"> <%=h%>h </text>
         <% } %>
 
         <!--
@@ -121,7 +121,7 @@
         -->
 
 
-        <g class = "goal" transform = "translate(<%= weekAttr('goal') * PX_PER_MIN + 110 %>,0)">
+        <g class = "goal" transform = "translate(<%= rm2p(weekAttr('goal')) + 110 %>,0)">
             <line x1 = "0" x2 = "0" y1 = "20" y2 = "74" stroke = "black" stroke-width = "2"/>
             <image xlink:href="img/checkered-flag.png" x = "-1" y = "-4"
                     height = "40px" width = "30px" />

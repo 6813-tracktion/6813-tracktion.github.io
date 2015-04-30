@@ -55,6 +55,7 @@ var WeekView = Marionette.ItemView.extend({
             this.cumulativeSum[key] = sum;
             day = day.add(1, 'days');
         }
+        this.pixelsPerMin = 700.0 / Math.max(420, Math.max(this.model.get('goal'), sum) * 1.2);
     },
     onShow: function() { // called once
         this.fixSVGFractionalCoordinates();
@@ -81,9 +82,18 @@ var WeekView = Marionette.ItemView.extend({
             include: function(tmpl){
                 return templates[tmpl];
             },
+            maxMinutes: function() {
+                return 700.0 / this.self.pixelsPerMin;
+            },
+            maxHours: function() {
+                return Math.ceil(this.maxMinutes() / 60.0);
+            },
+            ppm: function() {
+                return this.self.pixelsPerMin;
+            },
             // Round so our 1px borders are aligned with the screen pixels.
             rm2p: function(min) {
-                return Math.round(PX_PER_MIN * min);
+                return Math.round(min * this.self.pixelsPerMin);
             },
             weekAttr: function(name) {
                 return this.self.model.get(name);
@@ -217,7 +227,7 @@ var WeekView = Marionette.ItemView.extend({
     mouseoverGap: function(event) {
         var weekTotal = this.templateHelpers().weekTotal();
         var gapTime = this.model.get('goal') - weekTotal;
-        showToolTipForGap(gapTime, weekTotal, event.target);
+        showToolTipForGap(gapTime, weekTotal * this.pixelsPerMin, event.target);
     },
     mouseoutGap: function(event) {
         hideToolTipForGap();
@@ -248,7 +258,7 @@ var WeekView = Marionette.ItemView.extend({
         if (this.dragInfo) {
             var newDuration = Math.max(0,
                     this.dragInfo.origDuration +
-                    (event.pageX - this.dragInfo.origMouseX) / PX_PER_MIN);
+                    (event.pageX - this.dragInfo.origMouseX) / this.pixelsPerMin);
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             this.dragInfo.session.set('duration', newDuration);
 
@@ -257,7 +267,7 @@ var WeekView = Marionette.ItemView.extend({
         if (this.dragGoalInfo) {
             var newDuration = Math.max(0,
                     this.dragGoalInfo.origDuration +
-                    (event.pageX - this.dragGoalInfo.origMouseX) / PX_PER_MIN);
+                    (event.pageX - this.dragGoalInfo.origMouseX) / this.pixelsPerMin);
             newDuration = DURATION_GRANULARITY * Math.round(newDuration / DURATION_GRANULARITY);
             // move goal line and flag
             this.model.set('goal', newDuration);
@@ -318,12 +328,13 @@ var WeekView = Marionette.ItemView.extend({
                 return;
             }
             this.updateGoal();
+            /*
             // Threshold is pageX >= 990
             if ( event.pageX >= 990 ) {
                 PX_PER_MIN = PX_PER_MIN / (1.2)
             }
             console.log(PX_PER_MIN);
-
+            */
 
             this.render();
             this.dragGoalInfo = null;
@@ -453,7 +464,7 @@ function showToolTipForGoal(goalMins, element) {
 function showToolTipForGap(gapMins, weekTotal, element) {
     var tip = $('#durationToolTip');
     var offset = offsetToAboveCenterOfElement(tip, element);
-    var x = offset.x + weekTotal * PX_PER_MIN; // wasn't getting abs position of rect properly
+    var x = offset.x + weekTotal; // wasn't getting abs position of rect properly
     showDurationToolTip(gapMins, element, x, offset.y);
 }
 
