@@ -154,10 +154,17 @@ async.waterfall([
             Backbone.history.start();
         }
     });
-
     app.weekList.show(new FullView({model: dataset}));
     app.longRangeView.show(new LongRangeView({model: dataset}));
 
     // 4. Start the application
     app.start();
+     
+    // 5. We're done rendering now
+    setTimeout(function(){
+        $('#loader').fadeOut(600, function(){
+            $('.loadable').removeClass('loadable');
+        });
+        $('.loadable').fadeIn(800);
+    }, 400);
 });
