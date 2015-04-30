@@ -73,9 +73,10 @@
     <!-- day label -->
     <% if (day(d).isSame(today)) { %>
       <!-- image indicating today -->
-      <image xlink:href="img/star.png" x="13" y ="<%= DAY_HEIGHT_PX/2 - 11 %>" height = "16px" width = "16px" />
+      <image xlink:href="img/star.png" x="-10" y ="<%= DAY_HEIGHT_PX/2 - 11 %>" height = "15px" width = "15px" />
       <!-- label indicating today -->
-      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today">Today</text>
+      <!-- <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today">Today</text> -->
+      <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy="5px" text-anchor="end" class="day today"><%= day(d).format("ddd M/D")%></text>
     <% } else { %>
       <text x="88" y="<%= DAY_HEIGHT_PX/2 %>" dy=".33em" text-anchor="end" class="day"><%= day(d).format("ddd M/D")%></text>
     <% } %>

@@ -1,6 +1,18 @@
 <script type="text/template" id="weekTpl">
-    <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX %>"
+    <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX + 25 %>"
     style="<%= self.svgStyleAttr %>">
+    <g transform="translate(0, 25)"> <!-- translate for title -->
+        <!--
+            Title for week
+        -->
+        <g transform="translate(420, -4)" class="weekTitle">
+            <!-- Invisible rect to robustly trigger mouseover for edit icon to appear -->
+            <rect style="opacity: 0;" height="15" x="-95" y="-18" width="220" height="24"/>
+            <!-- Start / End dates -->
+            <text style="text-anchor: middle" class="weekTitle"><%=beginning.format("ddd M/D")%> - <tspan class="editableEndDate"><%=end.format("ddd M/D")%></tspan></text>
+            <!-- Edit icon -->
+            <image xlink:href="img/flaticon/pencil.png" class="editIcon" x="98" y="-16" height="16px" width="16px" />
+        </g>
 
         <!--
             Text label for the "WEEK TOTAL" bar (currently not used)
@@ -24,9 +36,9 @@
         var date = this.templateHelpers().day(day);
         -->
         <% if (canChangeEnd()) { %>
-          <g style = "text-anchor: middle;" transform = "translate(60,42)">
-            <text class="goalText">Weekly Goal</text>
-            <text transform = "translate(0,20)">By <tspan class="editableEndDate"><%=end.format("ddd M/D")%></tspan></text>
+          <g style = "text-anchor: middle;" transform = "translate(66,42)">
+            <text class="goalText">Progress</text>
+            <text class="goalText" transform="translate(0,20)">to Goal</text>
           </g>
         <% } else { %>
           <!-- Don't bother showing end date: it's redundant with the days. -->
@@ -45,10 +57,10 @@
                         not change over time so I will hard code these for now
                         until I find a better way of for looping this thing
             -->
-            <% for (var m = 30; m <= 840; m += 30) { %>
-                <line x1 = "<%= m*PX_PER_MIN %>" x2 = "<%= m*PX_PER_MIN %>" y1 = "-5" y2 = "5" stroke = "black" stroke-width = "2"/>
+            <% for (var m = 30; m <= maxMinutes(); m += 30) { %>
+                <line x1 = "<%= rm2p(m) %>" x2 = "<%= rm2p(m) %>" y1 = "-5" y2 = "5" stroke = "black" stroke-width = "2"/>
                 <% for (var y1 = 20; y1 <= 360; y1 += 20) { %>
-                    <line x1 = "<%= m*PX_PER_MIN %>" x2 = "<%= m*PX_PER_MIN %>" y1 = "<%= y1 %>" y2 = "<%= y1 + 5%>" stroke = "grey" stroke-width = "1" />
+                    <line x1 = "<%= rm2p(m) %>" x2 = "<%= rm2p(m) %>" y1 = "<%= y1 %>" y2 = "<%= y1 + 5%>" stroke = "grey" stroke-width = "1" />
                 <% } %>
             <% } %>
         </g>
@@ -85,8 +97,8 @@
             NOTE: Same story as above with the for loop
         -->
 
-        <% for (var h = 1; h <= 14; h++ ) { %>
-            <text transform = "translate(<%=h*60*PX_PER_MIN+102%>,91)"> <%=h%>h </text>
+        <% for (var h = 1, H = maxHours(); h <= H; h++ ) { %>
+            <text transform = "translate(<%=h * rm2p(60) + 102 %>,91)"> <%=h%>h </text>
         <% } %>
 
         <!--
@@ -109,7 +121,7 @@
         -->
 
 
-        <g class = "goal" transform = "translate(<%= weekAttr('goal') * PX_PER_MIN + 110 %>,0)">
+        <g class = "goal" transform = "translate(<%= rm2p(weekAttr('goal')) + 110 %>,0)">
             <line x1 = "0" x2 = "0" y1 = "20" y2 = "74" stroke = "black" stroke-width = "2"/>
             <image xlink:href="img/checkered-flag.png" x = "-1" y = "-4"
                     height = "40px" width = "30px" />
@@ -124,5 +136,6 @@
             <%= include #weekCumulative %>
             <%= include #weekDays %>
         </g>
+    </g> <!-- translate for title -->
     </svg>
 </script>
