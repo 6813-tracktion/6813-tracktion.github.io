@@ -62,10 +62,9 @@ var WeekView = Marionette.ItemView.extend({
     },
     onShow: function() { // called once
         this.fixSVGFractionalCoordinates();
-        showIntroIfNeeded(this.allSessions);
     },
-    onRender: function () { // called after model changes
-        showAddNewIfNeeded(this.allSessions);
+    onDomRefresh: function () { // last callback after model change
+        showIntroIfNeeded(this.allSessions);
     },
     fixSVGFractionalCoordinates: function() {
         // https://bugzilla.mozilla.org/show_bug.cgi?id=608812
@@ -456,7 +455,7 @@ function showToolTipForSession(session) {
 }
 
 function showToolTipForGoal(goalMins, element) {
-    showDurationToolTip(goalMins, element, -4, -30);
+    showDurationToolTip(goalMins, element, -7, -30);
 }
 
 function showToolTipForGap(gapMins, weekTotal, element) {
@@ -515,10 +514,20 @@ function showIntroIfNeeded(allSessions) {
 
 function showIntroElements() {
     showAddNewButton();
+    // XXX hack to make tooltips appear in right place, since views to
+    // which they move still aren't positioned properly at time of the
+    // latest marionette callback (onDomRefresh())
+    setTimeout(showHelpToolTips, 1500);
+}
 
-    // make help dialogs visible
-    $('.help').css('opacity', 1);
+function hideAddNewHelp() {
+    $('#addNewHelp').css('visibility', 'hidden');
+}
+function hideGoalHelp() {
+    $('#goalHelp').css('visibility', 'hidden');
+}
 
+function showHelpToolTips() {
     // position the goal help
     var goal = $('.goal')[0];
     var goalHelp = $('#goalHelp')[0];
@@ -528,13 +537,9 @@ function showIntroElements() {
     var addNewSquare = $('path.new-session[data-is-today="' + "true" + '"]')[0];
     var addNewHelp = $('#addNewHelp')[0];
     moveToElementPlusOffset(addNewHelp, addNewSquare, 24, -14);
-}
 
-function hideAddNewHelp() {
-    $('#addNewHelp').css('visibility', 'hidden');
-}
-function hideGoalHelp() {
-    $('#goalHelp').css('visibility', 'hidden');
+    // make help dialogs visible
+    $('.help').css('opacity', 1);
 }
 
 // these two funcs are separate from the others because the add new button
