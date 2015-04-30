@@ -9,8 +9,8 @@
              being hidden by the bars. -->
         <g transform="translate(100, <%= DAY_HEIGHT_PX * (i + 1/2) %>)">
           <% if(urlVar('cumulative') != 'line'){ %>
-            <rect class="cumulative" y="<%= -DAY_HEIGHT_PX/2 - (i == 0 ? 32 : 0) %>" height="<%= DAY_HEIGHT_PX + (i == 0 ? 32 : 0) %>" width="<%= rm2p(cumulative(d)) - 1 %>" />
-            <rect class="cumulative-curr" y="<%= -DAY_HEIGHT_PX/2 + 1 %>" height="<%= DAY_HEIGHT_PX - 1 %>" width="<%= rm2p(cumulative(d)) - 1 - rm2p(cumulative(d-1) || 0) %>" x="<%= rm2p(cumulative(d-1) || 0) %>" />
+            <rect class="cumulative" y="<%= -DAY_HEIGHT_PX/2 - (i == 0 ? 32 : 0) %>" height="<%= DAY_HEIGHT_PX + (i == 0 ? 32 : 0) %>" width="<%= Math.max(rm2p(cumulative(d)) - 1, 0) %>" />
+            <rect class="cumulative-curr" y="<%= -DAY_HEIGHT_PX/2 + 1 %>" height="<%= DAY_HEIGHT_PX - 1 %>" width="<%= Math.max(rm2p(cumulative(d)) - 1 - rm2p(cumulative(d-1) || 0), 0) %>" x="<%= rm2p(cumulative(d-1) || 0) %>" />
             <line class="cumulative end" y1="<%= -DAY_HEIGHT_PX/2 - (i == 0 ? 32 : 0) %>" y2="<%= DAY_HEIGHT_PX/2 %>" x1="<%= rm2p(cumulative(d)) - 0.5 %>" x2="<%= rm2p(cumulative(d)) - 0.5 %>" />
             <% if(cumulative(d) > cumulative(d - 1)) { %>
               <line class="cumulative end" y1="<%= DAY_HEIGHT_PX/2 + 0.5 %>" y2="<%= DAY_HEIGHT_PX/2 + 0.5 %>" x1="<%= rm2p(cumulative(d-1)) %>" x2="<%= rm2p(cumulative(d)) %>" />

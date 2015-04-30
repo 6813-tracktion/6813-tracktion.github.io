@@ -82,8 +82,10 @@
             <% } %>
             <% if (weekTotal() < weekAttr('goal')) { %>
                 <!-- Dashed lines -->
-                <polyline points="<%=rm2p(weekTotal())%>,0 <%=rm2p(weekAttr('goal'))%>,0 <%=rm2p(weekAttr('goal'))%>,28 <%=rm2p(weekTotal())%>,28"
-                    stroke-width="2" stroke="#ccc" stroke-dashoffset="<%=rm2p(weekTotal())%>" stroke-dasharray="5" fill="none"/>
+                <% _.each([0, 28], function(y) { %>
+                    <line x1="<%= rm2p(weekTotal()) %>" x2="<%= rm2p(weekAttr('goal')) %>" y1="<%= y %>" y2="<%= y %>"
+                        stroke-width="2" stroke="#ccc" stroke-dashoffset="<%= rm2p(weekTotal()) %>" stroke-dasharray="5"/>
+                <% }); %>
                 <!-- Invisible rect to trigger mouseover -->
                 <rect class="gapRemaining" height="28" x="<%=rm2p(weekTotal())%>"
                     width="<%=rm2p(weekAttr('goal')) - rm2p(weekTotal())%>"
