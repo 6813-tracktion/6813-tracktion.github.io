@@ -36,6 +36,9 @@ function showGoalDialog(duration, callback){
     goalDuration.val(hours + ':' + (minutes < 10 ? '0' + minutes : minutes));
 
     // lock scroll
+    lockScroll();
+
+    // automatic selection
     selectContentOf(goalDuration[0]);
 }
 

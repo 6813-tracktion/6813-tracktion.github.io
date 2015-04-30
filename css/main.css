@@ -39,6 +39,7 @@ svg .editIcon {
   opacity: 0;
   pointer-events: none;
   z-index: 999;
+  cursor: pointer;
 }
 svg .weekTitle:hover .editIcon {
   opacity: 1;
