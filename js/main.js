@@ -143,7 +143,7 @@ async.waterfall([
     });
 
     app.weekList.show(new FullView({model: dataset}));
-    //app.longRangeView.show(new LongRangeView({model: dataset}));
+    app.longRangeView.show(new LongRangeView({model: dataset}));
 
     // 4. Start the application
     app.start();
