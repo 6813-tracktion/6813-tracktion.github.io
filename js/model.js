@@ -35,6 +35,7 @@ var Week = Backbone.Model.extend({
             beginning: moment('2015-04-13'),
             end: moment('2015-04-19'),  // Inclusive for our convenience.
             goal: 200,
+            total: null,  // Computed field
             sessions: null,  // Set by initialize; should not be passed by the caller.
         };
     },
@@ -47,6 +48,15 @@ var Week = Backbone.Model.extend({
         }, this));
         this.listenTo(this, 'change:beginning', function() { sessions.refilter(); });
         this.listenTo(this, 'change:end', function() { sessions.refilter(); });
+        this.listenTo(this.attributes.sessions, 'add change remove reset', this.updateTotal);
+        this.updateTotal();
+    },
+    // https://github.com/alexbeletsky/backbone-computedfields is a good library
+    // but not worth the trouble for this.
+    updateTotal: function() {
+        var total = 0;
+        _.each(this.attributes.sessions.pluck('duration'), function(d) { total += d; });
+        this.set('total', total);
     }
 });
 

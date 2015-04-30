@@ -89,13 +89,18 @@
   <div id="addNewHelp" class="tooltip tooltip-right help">Drag to log a new exercise session</div>
   <div id="goalHelp" class="tooltip tooltip-right help">Drag to change your goal for the week</div>
 
+  <!-- long-range view -->
+  <div id="longRangeView"></div>
+
   <!-- weeks view -->
+  <!-- We should consider scrolling this div rather than scrolling the window and fixing everything else... -->
   <div id="weeks"></div>
 
   <!-- templates -->
   <script type="text/template" src="tmpl/week.tpl"></script>
   <script type="text/template" src="tmpl/weekDays.tpl"></script>
   <script type="text/template" src="tmpl/weekCumulative.tpl"></script>
+  <script type="text/template" src="tmpl/longRangeView.tpl"></script>
 
   <!-- libraries -->
   <script src="libs/jquery/jquery-1.11.2.js"></script>
@@ -117,6 +122,7 @@
   <script type="text/javascript" src="js/templates.js"></script>
   <script type="text/javascript" src="js/model.js"></script>
   <script type="text/javascript" src="js/week.js"></script>
+  <script type="text/javascript" src="js/longRangeView.js"></script>
   <script type="text/javascript" src="js/main.js"></script>
 </body>
 </html>
