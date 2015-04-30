@@ -362,7 +362,6 @@ var WeekView = Marionette.ItemView.extend({
         
 
         this.throttledRender();
-        undoManager.commit();
     },
     changeEndDate: function(event){
         this.$('.editableEndDate').datepicker(
