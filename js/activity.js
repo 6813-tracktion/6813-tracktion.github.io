@@ -54,10 +54,15 @@ function getAllActivities(request, response) {
     // custom types
     var customTypes = [];
     var customMap = {};
-    window.dataset.sessions.forEach(function(session){
+    window.dataset.get('sessions').forEach(function(session){
         var label = session.get('label');
         if(label.toLowerCase() in customMap)
             return;
+        if(label in DEFAULT_ACTIVITY_TYPES)
+            return;
+        if(label.length){
+            label = label.charAt(0).toUpperCase() + label.substring(1);
+        }
         customTypes.push(label);
         customMap[label.toLowerCase()] = label;
     });
@@ -72,7 +77,11 @@ function getAllActivities(request, response) {
 
 function normalizeActivity(label) {
     // @see http://www.regular-expressions.info/refcharclass.html
-    return label.replace(/[^a-zA-Z]+/g, '').toLowerCase();
+    return label.replace(/[^a-zA-Z ]+/g, '') // remove invalid characters
+                .replace(/ +/g, ' ') // remove duplicate spaces
+                .replace(/^ +/, '') // trim prepending spaces
+                .replace(/ +$/, '') // trim appending spaces
+                .toLowerCase(); // to lower case
 }
 
 ///// ACTIVITY INFO POPUP /////////////////////////////////////////////////////
@@ -183,7 +192,13 @@ function showActivityInfo(session, callback, selectType) {
     // Note: the field must be visible for that to work!
     durationInput.blur();
     activityType.blur();
-    selectContentOf(selectType ? activityType[0] : durationInput[0]);
+    if(selectType){
+        activityType.val('');
+        selectContentOf(activityType[0]);
+        activityType.autocomplete('search', '');
+    } else {
+        selectContentOf(durationInput[0]);
+    }
 }
 
 function hideActivityInfo(isOK) {
