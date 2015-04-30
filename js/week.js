@@ -201,7 +201,8 @@ var WeekView = Marionette.ItemView.extend({
         hideGoalHelp();
         this.dragGoalInfo = {
             origMouseX : event.pageX,
-            origDuration: this.model.get('goal')
+            origDuration: this.model.get('goal'),
+            startTime: moment()
         };
         window.startDrag(this);
     },
@@ -303,44 +304,20 @@ var WeekView = Marionette.ItemView.extend({
         }
 
         if (this.dragGoalInfo) {
-            console.log(this.model.get('goal'));
-            console.log(event.pageX);
+            var goalInfo = this.dragGoalInfo;
+            this.dragGoalInfo = null;
 
+            var isClick = moment().diff(goalInfo.startTime, 'millisecond') < 300;
+            var duration = goalInfo.origDuration;
 
-            if (this.dragGoalInfo.origMouseX === event.pageX) {
+            if (isClick) {
                 hideToolTipForGoal();
 
-                // Make the goal box visible
-                $('#setGoalContainer').fadeIn();
-                console.log(this.model.get('goal'));
-
-                var duration = this.dragGoalInfo.origDuration;
-
-                $('#setGoal').click(_.bind(function(e) {
-                    var hours = parseInt($('#hourDuration').val());
-                    var mins = parseInt($('#minuteDuration').val());
-
-                    duration = hours * 60 + mins;
-                    duration = DURATION_GRANULARITY * Math.round(duration / DURATION_GRANULARITY);
-
-                    console.log("hours: " + hours + " mins: " + mins + " duration: " + duration);
-
-                    this.model.set('goal', duration);
-                    var resizeFactor = Math.ceil(duration/60.0);
-
-                    $('#setGoalContainer').fadeOut();
-
-                    if ( resizeFactor !== 0 && this.templateHelpers().weekTotal() < duration )
-                        PX_PER_MIN = 10 / resizeFactor;
-                    this.render();
-                }, this));
-
-                $('#cancelSetGoal').click(function(e) {
-                    $('#setGoalContainer').fadeOut();
-                });
-
-
+                showGoalDialog(duration, this.updateGoal.bind(this));
+                event.stopPropagation(); // event outside -> close popup
+                return;
             }
+            this.updateGoal();
             // Threshold is pageX >= 990
             if ( event.pageX >= 990 ) {
                 PX_PER_MIN = PX_PER_MIN / (1.2)
@@ -363,6 +340,18 @@ var WeekView = Marionette.ItemView.extend({
             }
             undoManager.commit();
         }
+    },
+    updateGoal: function(duration, isOk){
+        if(isOk) {
+           this.model.set('goal', duration);
+           undoManager.commit();
+        }
+
+        // reset X-Scale
+        
+
+        this.render();
+        undoManager.commit();
     },
     changeEndDate: function(event){
         this.$('.editableEndDate').datepicker(

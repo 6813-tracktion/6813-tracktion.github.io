@@ -117,8 +117,16 @@ async.waterfall([
         updateJumpToDate();
     });
 
+    // duration inputs
+    $('input.duration').mask("99:90", {
+        placeholder: "hh:mm",
+        selectOnFocus: true,
+        clearIfNotMatch: true
+    });
+
     // 2. Setup stuff ...
     setupActivity();
+    setupGoal();
 
     // 3. Setup application
     var app = new Marionette.Application();

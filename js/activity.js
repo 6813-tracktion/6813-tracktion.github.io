@@ -48,9 +48,21 @@ function displayNameForLabel(lbl) {
 // }
 
 function getAllActivities(request, response) {
-    var types = Object.keys(DEFAULT_ACTIVITY_TYPES).map(function(a){
+    var baseTypes = Object.keys(DEFAULT_ACTIVITY_TYPES).map(function(a){
         return DEFAULT_ACTIVITY_TYPES[a].displayName;
-    }).filter(function(a){
+    });
+    // custom types
+    var customTypes = [];
+    var customMap = {};
+    window.dataset.sessions.forEach(function(session){
+        var label = session.get('label');
+        if(label.toLowerCase() in customMap)
+            return;
+        customTypes.push(label);
+        customMap[label.toLowerCase()] = label;
+    });
+    // final types
+    var types = baseTypes.concat(customTypes).filter(function(a){
         return a.toLowerCase().indexOf(request.term.toLowerCase()) > -1;
     });
     // TODO add all types ever, not just defaults
@@ -79,23 +91,6 @@ function setupActivity(){
     $('.dropdown-menu').click(function(e) {
           e.stopPropagation();
     });
-
-    // control numeric-only inputs
-    $(document).on('keydown', '.numeric-only', function(event) {
-        // we allow control key input
-        if(event.keyCode <= 40){
-            return;
-        }
-        // and disallow any non-numeric non-control character
-        // 0 is keycode 48, 9 is 57
-        var isNumericKey = event.which >= 48 && event.which <= 57;
-        var isModified = event.altKey || event.ctrlKey || event.shiftKey;
-        console.log('isModified: ' + isModified);
-        if (!isNumericKey || isModified) {
-            event.preventDefault();
-        }
-    });
-
     $('#cancelActivityInfo').click(function(e){
         e.preventDefault();
         hideActivityInfo(false);
@@ -120,7 +115,10 @@ function setupActivity(){
 
     // duration and <Ok/Delete> labeling
     $('#durationInput').on('change', function(){
-        var isDelete = parseInt($(this).val(), 10) <= 0;
+        var time = $('#durationInput').val();
+        var tokens = time.split(':');
+        var duration = parseInt(tokens[tokens.length - 1] || 0, 10) + parseInt(tokens[tokens.length - 2] || 0, 10) * 60;
+        var isDelete = duration <= 0;
         $('#submitActivityInfo').text(isDelete ? 'Delete' : 'Okay');
         if(isDelete)
             $('#submitActivityInfo').addClass('btn-danger');
@@ -131,7 +129,7 @@ function setupActivity(){
 
 function validateInput(){
     var duration = $('#durationInput').val();
-    if(!duration.match(/^[1-9]*[05]$/)){
+    if(!duration.match(/^[1-9]*[05]$/) && !duration.match(/[0-9]+:[0-9]{2}/)){
         // TODO maybe provide message to user
         // (though HTML-5 browsers already give a hint with red highlight and tooltip on hover)
         return false;
@@ -162,7 +160,10 @@ function showActivityInfo(session, callback, selectType) {
     layer.data('callback', callback);
     // set fields according to session
     var durationInput = $('#durationInput');
-    durationInput.val(session.get('duration'));
+    var duration = session.get('duration');
+    var hours = Math.floor(duration / 60);
+    var minutes = duration % 60;
+    durationInput.val(hours + ':' + (minutes < 10 ? '0' + minutes : minutes));
 
     var activ = session.get('label');
     // let the record show that Alex wrote this line
@@ -180,6 +181,7 @@ function showActivityInfo(session, callback, selectType) {
 
     // select duration input
     // Note: the field must be visible for that to work!
+    durationInput.blur();
     activityType.blur();
     selectContentOf(selectType ? activityType[0] : durationInput[0]);
 }
@@ -204,7 +206,10 @@ function submitActivityInfo() {
         return;
 
     // update model (callback is responsible for the commit)
-    session.set('duration', parseInt($('#durationInput').val(), 10));
+    var time = $('#durationInput').val();
+    var tokens = time.split(':');
+    var duration = parseInt(tokens[tokens.length - 1] || 0, 10) + parseInt(tokens[tokens.length - 2] || 0, 10) * 60;
+    session.set('duration', duration);
 
     var displayName = $('#activityTypeInput').val();
     var activName = DISPLAY_NAMES_2_ACTIV_NAMES[displayName] || normalizeActivity(displayName);

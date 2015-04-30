@@ -201,34 +201,8 @@ g.day:hover text.day-sum {
     cursor: move;
 }
 
-#setGoalContainer {
-    display: none;
-    position: fixed;
-    width: 350px;
-    left: 50%;
-    padding: 30px;
-    margin-left: -150px;
-    margin-top: 75px;
-    background-color: #eff;
-    border: 2px solid rgba(0, 0, 100, 0.7);
-    border-radius: 5px;
-    box-shadow: 3px 3px 10px rgba(0, 0, 100, 0.2);
-    font-size: 1.5em;
-    z-index: 9;
-}
-
-#hourDuration {
-    max-width: 50px;
-    min-width: 50px;
-}
-
-#minuteDUration {
-    max-width: 60px;
-    min-width: 60px;
-}
-
 /* Activity info dialog */
-#activityLayer {
+#activityLayer, #goalLayer {
   display: none;
   position: fixed;
   width: 100%;
@@ -238,7 +212,12 @@ g.day:hover text.day-sum {
   z-index: 10;
   background: rgba(0, 0, 0, 0.3);
 }
-#activityInfoView {
+#durationInput {
+  margin-bottom: 6px;
+}
+
+/* all dialog windows */
+.dialog {
   position: absolute;
   width: 350px;
   left: 50%;
@@ -251,18 +230,15 @@ g.day:hover text.day-sum {
   box-shadow: 3px 3px 10px rgba(0, 0, 100, 0.2);
   font-size: 1.5em;
 }
-#activityInfoView input, #activityInfoView select {
+.dialog input, .dialog select {
   height: 2em;
   line-height: 1em;
   font-size: 1em;
 }
-#durationInput {
-  margin-bottom: 6px;
-}
-#activityInfoView .form-group {
+.dialog .form-group {
   clear: left;
 }
-#activityInfoView .buttons {
+.dialog .buttons {
   margin-top: 30px;
   padding-top: 30px;
 }

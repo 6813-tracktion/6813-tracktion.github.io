@@ -47,28 +47,11 @@
     </div>
   </div>
 
-<!--   <div class="activityInfoDropdown dropdown">
-    <a href="#" data-toggle="dropdown" class="dropdown-toggle">Show ActivityInfo</a>
-    <ul class="dropdown-menu">
-      <li>
-        <p align="center">Duration (m)</p>
-        <input id="durationInput" class="numeric-only">
-        <p align="center">Activity Type:</p> -->
-        <!-- <input id="activityTypeInput"> --> <!-- autocomplete -->
-        <!-- <ul id="activityTypeMenu"></ul> --> <!-- menu -->
-<!--         <select id="activityTypeSelect" name="activityTypeSelect"></select>
-        <div>
-          <button id="submitActivityInfo" class="btn btn-default">Okay</button>
-        </div>
-      </li>
-    </ul>
-  </div> -->
-
   <div id="activityLayer">
-    <div id="activityInfoView" class="fluid-container">
+    <div id="activityInfoView" class="dialog fluid-container">
       <div class="form-group">
         <div class="control-label col-xs-12">Minutes:</div>
-        <input type="number" id="durationInput" class="numeric-only col-xs-12" min="0" step="5" />
+        <input id="durationInput" class="duration col-xs-12" min="0" step="1" />
       </div>
       <div class="form-group">
         <div class="control-label col-xs-12">Activity Type:</div>
@@ -83,15 +66,19 @@
     </div>
   </div>
 
-    <div id = "setGoalContainer">
-        Set Weekly Goal To: <br/>
-        &nbspHrs &nbsp  &nbsp Mins <br/>
-        <input type ="number" id = "hourDuration" class = "numeric-only" value = "0" min = "0" step = "1"> 
-        :
-        <input type = "number" id ="minuteDuration" class = "numeric-only" value = "0" min = "0" max = "55" step = "5">
-        <button id ="setGoal">SET</button>
-        <button id= "cancelSetGoal">CANCEL</button>
+  <div id="goalLayer">
+    <div id = "setGoalContainer" class="dialog fluid-container">
+      <p>Set Weekly Goal</p>
+      <div class="form-group">
+        <div class="control-label col-xs-12">Duration Goal:</div>
+        <input id="goalDuration" class="duration col-xs-12" value="3:00" min="0" step = "1" /> 
+      </div>
+      <div class="form-group buttons">
+        <button id="setGoal" class="col-xs-6 btn btn-default">Okay</button>
+        <button id="cancelSetGoal" class="col-xs-6 btn btn-default">Cancel</button>
+      </div>
     </div>
+  </div>
 
   <!-- Popovers to indicate number of minutes -->
   <div id="durationToolTip" class="tooltip tooltip-above"></div>
@@ -121,10 +108,11 @@
   <script src="libs/backbone.undo/Backbone.Undo.js"></script>
   <script src="libs/moment/moment.min.js"></script>
   <script src="libs/async/lib/async.js"></script>
-
+  <script src="libs/jquery-mask/dist/jquery.mask.js"></script>
   <!-- custom JS -->
   <script type="text/javascript" src="js/utils.js"></script>
   <script type="text/javascript" src="js/activity.js"></script>
+  <script type="text/javascript" src="js/goal.js"></script>
   <script type="text/javascript" src="js/templates.js"></script>
   <script type="text/javascript" src="js/model.js"></script>
   <script type="text/javascript" src="js/week.js"></script>
