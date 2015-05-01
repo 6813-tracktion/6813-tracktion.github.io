@@ -48,13 +48,9 @@ var LongRangeView = Marionette.ItemView.extend({
 
 function showToolTipForWeek(week, element) {
     var attrs = week.attributes;
-    // TODO total is correct, but start and end are the same across many weeks...
-    // console.log(attrs.beginning.format("ddd M/d"));
-    // console.log(attrs.end.format("ddd M/d"));
-    // console.log(attrs.total);
 
-    var beginStr = attrs.beginning.format("M/d");
-    var endStr = attrs.end.format("M/d");
+    var beginStr = attrs.beginning.format("M/D");
+    var endStr = attrs.end.format("M/D");
     var totalStr = formatDuration(attrs.total);
     var goalStr = formatDuration(attrs.goal);
     var success = attrs.total > attrs.goal;
@@ -76,5 +72,5 @@ function showToolTipForWeek(week, element) {
 }
 
 function hideTooltipForWeek() {
-    $(tip).css('opacity', 0);
+    $('#historyToolTip').css('opacity', 0);
 }
