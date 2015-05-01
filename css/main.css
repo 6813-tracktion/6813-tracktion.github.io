@@ -5,7 +5,7 @@ body {
 }
 
 .navbar {
-  background-color: whitesmoke;
+  background-color: #eee;
   margin-bottom: 0px;
 }
 .navbar-header a.navbar-brand {
@@ -443,10 +443,10 @@ select, option {
 #longRangeSection {
   position: fixed;
   left: 0;
-  top: 53px; /* navbar */
+  top: 51px; /* navbar - roughly, different platforms */
   bottom: 0;
   width: 230px;
-  background-color: whitesmoke;
+  background-color: #eee;
   /*padding: 15px;*/
   padding: 15px 15px 15px 0px; /* padding on all sides but left */
 }

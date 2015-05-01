@@ -34,8 +34,13 @@
 
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class = "nav navbar-nav">
+                            <li style="padding: 11px 15px; color: #9d9d9d;">
+                                <label for="jumpToDate">Jump to date:</label> <input id="jumpToDate" type="text" style="color: black;" size="12"/>
+                            </li>
+                        </ul>
+
+                        <ul class = "nav navbar-nav">
                             <li style="padding: 10px 15px; color: #9d9d9d;">
-                                <label for="jumpToDate">Jump to date:</label> <input id="jumpToDate" type="text" style="color: black;"/>
                                 <button class ="undoRedoButton" id="undo"><img class = "undoRedoImg" src ="img/undo.png" alt="Undo" /></button>
                                 <button class ="undoRedoButton" id="redo"><img class = "undoRedoImg" src ="img/redo.png" alt="Redo" /></button>
                             </li>
@@ -50,7 +55,7 @@
                             <!-- type="date" does not work yet in Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=825294 -->
                             <li style="padding: 11px 15px; color: #9d9d9d;">
                                 <label for="mockToday">Simulated current date:</label>
-                                <input id="mockToday" type="text" style="color: black;"/>
+                                <input id="mockToday" type="text" style="color: black;" size="12"/>
                             </li>
                         </ul>
 
