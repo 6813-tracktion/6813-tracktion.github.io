@@ -370,6 +370,11 @@ select, option {
 .ui-autocomplete-input, .ui-menu, .ui-menu-item {
   font-size: 15pt;
 }
+.ui-autocomplete {
+  max-height: 200px;
+  overflow-x: hidden; /* weird bug? */
+  overflow-y: auto;
+}
 .ui-datepicker {
   z-index: 9999 !important;
 }
