@@ -72,5 +72,5 @@ function showToolTipForWeek(week, element) {
 }
 
 function hideTooltipForWeek() {
-    $(tip).css('opacity', 0);
+    $('#historyToolTip').css('opacity', 0);
 }
