@@ -105,6 +105,7 @@ function setupActivity(){
         hideActivityInfo(false);
     });
     $('#submitActivityInfo').click(submitActivityInfo);
+    $('#deleteSession').click(deleteSession);
 
     $('#activityLayer').click(function(e){
         if(e.target != e.currentTarget)
@@ -126,11 +127,16 @@ function setupActivity(){
     $('#durationInput').on('change', function(){
         var duration = parseDuration($('#durationInput').val());
         var isDelete = duration <= 0;
+        // The Delete button is right there... do we need to do anything else
+        // besides disable the Okay button?
+        $('#submitActivityInfo').prop('disabled', isDelete);
+        /*
         $('#submitActivityInfo').text(isDelete ? 'Delete' : 'Okay');
         if(isDelete)
             $('#submitActivityInfo').addClass('btn-danger');
         else
             $('#submitActivityInfo').removeClass('btn-danger');
+        */
     });
 }
 
@@ -160,7 +166,7 @@ function selectContentOf(node){
     }
 }
 
-function showActivityInfo(session, callback, selectType) {
+function showActivityInfo(session, callback, selectType, isCreate) {
     var layer = $('#activityLayer');
     // bind edited data
     layer.data('session', session);
@@ -179,8 +185,17 @@ function showActivityInfo(session, callback, selectType) {
     var activityType = $('#activityTypeInput');
     activityType.val((DEFAULT_ACTIVITY_TYPES[activ] || {displayName: activ}).displayName);
 
-    // since we are showing => duration > 0 => no delete yet
-    $('#submitActivityInfo').text('Okay').removeClass('btn-danger');
+    // since we are showing => duration > 0 => can save without deleting
+    $('#submitActivityInfo').prop('disabled', false);
+
+    // show delete button iff editing an existing session; update layout
+    if (isCreate) {
+        $('#deleteSession').hide();
+        $('#activityInfoView button').removeClass('col-xs-4').addClass('col-xs-6');
+    } else {
+        $('#deleteSession').show();
+        $('#activityInfoView button').removeClass('col-xs-6').addClass('col-xs-4');
+    }
 
     // show layer
     layer.stop().fadeIn();
@@ -229,6 +244,14 @@ function submitActivityInfo() {
     session.set('label', activName);
 
     // hide
+    hideActivityInfo(true);
+}
+
+function deleteSession() {
+    var layer = $('#activityLayer');
+    var session = layer.data('session');
+    // Easiest to let the caller take care of the actual deletion.
+    session.set('duration', 0);
     hideActivityInfo(true);
 }
 

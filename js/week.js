@@ -297,7 +297,7 @@ var WeekView = Marionette.ItemView.extend({
                   // just delete, do not show
                   this.updateSession(dragInfo.session, dragInfo.isCreate, false); // equivalent to showing and canceling
                 } else {
-                  showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate), !isClick);
+                  showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate), !isClick, true);
                 }
                 event.stopPropagation();
                 // TODO set duration to activity's current duration (some
@@ -308,7 +308,7 @@ var WeekView = Marionette.ItemView.extend({
 
             if (isClick) {
                 undoManager.rollback();  // in case there was a short drag before the click
-                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate));
+                showActivityInfo(dragInfo.session, this.updateSession.bind(this, dragInfo.session, dragInfo.isCreate), false);
                 event.stopPropagation(); // event outside -> close popup
                 return;
             }
