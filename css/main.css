@@ -16,9 +16,13 @@ body {
 
 #rightNav {
     max-height: 50px;
-    max-width: 150px;
+    max-width: 200px;
     position: relative;
     float: right;
+}
+
+#userName {
+    border-bottom: 2px solid grey;
 }
 
 .undoRedoButton {
