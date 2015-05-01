@@ -253,7 +253,8 @@ var WeekView = Marionette.ItemView.extend({
                 isCreate: isCreate,
                 startTime: moment(),
                 origDuration: session.attributes.duration,
-                origMouseX: event.pageX
+                origMouseX: event.pageX,
+                hasMoved: false
         };
         this.throttledRender();  // update drag-target class
         window.startDrag(this);
@@ -261,6 +262,7 @@ var WeekView = Marionette.ItemView.extend({
     mousemove: function(event){
         event.preventDefault();
         if (this.dragInfo) {
+            this.dragInfo.hasMoved |= (event.pageX != this.dragInfo.origMouseX);
             var newDuration = Math.max(0,
                     this.dragInfo.origDuration +
                     (event.pageX - this.dragInfo.origMouseX) / this.pixelsPerMin);
@@ -290,7 +292,7 @@ var WeekView = Marionette.ItemView.extend({
             // Some clicks are being treated as drags, we suspect because the
             // application is too slow.  Check the location too.
             var isClick = (moment().diff(dragInfo.startTime, 'milliseconds') < 300 ||
-                    event.pageX == dragInfo.origMouseX);
+                    !dragInfo.hasMoved);
 
             hideToolTipForSession();
             hideToolTipForGoal();
