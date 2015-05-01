@@ -173,7 +173,7 @@ function showActivityInfo(session, callback, selectType, isCreate) {
     layer.data('callback', callback);
 
     // set date
-    layer.find('#activityDate').text(moment(session.get('date')).format('dddd, MMMM D'));
+    layer.find('#activityDate').text(moment(session.get('date')).format('ddd, MMM D'));
 
     // set fields according to session
     var durationInput = $('#durationInput');
