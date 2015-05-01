@@ -22,13 +22,15 @@ var WeekView = Marionette.ItemView.extend({
         this.dataset = this.model.attributes.dataset;
         this.allSessions = this.dataset.attributes.sessions;
         // See comment in GR5 notes
-        this.throttledRender = _.throttle(this.render, 100);
+        this.throttledRender = _.throttle(this.render, 100, {leading: false});
         this.listenTo(this.weekSessions, 'add change remove reset', this.throttledRender);
         this.listenTo(this.model, 'change', this.throttledRender);
         this.listenTo(this.model.attributes.dataset, 'change:today', this.throttledRender);
         this.dragInfo = null;
         this.goalDragInfo = null;
-        this.svgStyleAttr = '';
+        // If this was initialized to the empty string, the view would disappear
+        // in Firefox the first time the translation was added.  Firefox bug?
+        this.fractionalCoordinatesFix = 'translate(0,0)';
         // http://stackoverflow.com/questions/14460855/backbone-js-listento-window-resize-throwing-object-object-has-no-method-apply
         this.resizeCallback = _.bind(this.fixSVGFractionalCoordinates, this);
         $(window).on('resize', this.resizeCallback);
@@ -70,11 +72,11 @@ var WeekView = Marionette.ItemView.extend({
         // https://bugzilla.mozilla.org/show_bug.cgi?id=608812
         // Not sure if this works in all browsers.
         try {
-            this.$('svg').attr('style', '');
             var ctm = this.$('svg')[0].getScreenCTM();
-            this.svgStyleAttr = 'position: relative; ' +
-                'top: ' + -(ctm.f % 1) + 'px; left: ' + -(ctm.e % 1) + 'px;';
-            this.throttledRender();
+            this.fractionalCoordinatesFix = 'translate(' + -(ctm.e % 1) + ',' + -(ctm.f % 1) + ')';
+            // Faster than re-rendering.
+            this.$('.fractionalCoordinatesFixer').attr('transform', this.fractionalCoordinatesFix);
+            //this.$('.fractionalCoordinatesFixer')[0].transform.baseVal[0].setTranslate(-(ctm.e % 1), -(ctm.f % 1));
         } catch (e) {}
     },
     templateHelpers: function() {

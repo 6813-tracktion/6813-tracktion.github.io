@@ -1,6 +1,6 @@
 <script type="text/template" id="weekTpl">
-    <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX + 25 %>"
-    style="<%= self.svgStyleAttr %>">
+    <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX + 25 %>">
+    <g class="fractionalCoordinatesFixer" transform="<%= self.fractionalCoordinatesFix %>">
     <g transform="translate(8, 25)"> <!-- translate for title and wider today label -->
         <!--
             Title for week
@@ -138,5 +138,6 @@
             <%= include #weekDays %>
         </g>
     </g> <!-- translate for title -->
+    </g> <!-- fractionalCoordinatesFixer -->
     </svg>
 </script>
