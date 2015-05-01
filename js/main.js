@@ -170,4 +170,10 @@ async.waterfall([
         });
         $('.loadable').fadeIn(800);
     }, 400);
+    
+    var settings = $('#settingsPic');
+    $(settings).click(function(e) {
+        // Show our internal options
+        console.log(e);
+    });
 });

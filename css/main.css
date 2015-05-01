@@ -344,6 +344,9 @@ select, option {
 .ui-autocomplete-input, .ui-menu, .ui-menu-item {
   font-size: 15pt;
 }
+.ui-datepicker {
+  z-index: 9999 !important;
+}
 
 .tooltip {
   pointer-events:none;
