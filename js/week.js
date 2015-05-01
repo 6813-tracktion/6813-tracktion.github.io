@@ -58,9 +58,9 @@ var WeekView = Marionette.ItemView.extend({
             day = day.add(1, 'days');
         }
         // only update pixels per minute when not dragging
-        if(!this.dragGoalInfo && !this.dragInfo){
+        // if(!this.dragGoalInfo && !this.dragInfo){
             this.pixelsPerMin = 700.0 / Math.max(420, Math.max(this.model.get('goal'), sum) * 1.2);
-        }
+        // }
     },
     onShow: function() { // called once
         this.fixSVGFractionalCoordinates();
