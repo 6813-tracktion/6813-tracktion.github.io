@@ -20,6 +20,15 @@ body {
     float: right;
 }
 
+#undo {
+    min-width: 30px;
+}
+
+.undoRedo {
+    max-height: 15px;
+    max-width: 35px;
+}
+
 #settingsPic {
     max-width: 25px;
     max-height: 25px;
