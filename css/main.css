@@ -3,8 +3,14 @@ body {
   padding-top: 100px; /* toolbars */
   padding-left: 230px; /* long-range view */
 }
+
 .navbar {
   font-family: "Open sans", sans-serif;
+  background-color: whitesmoke;
+}
+
+.navbar-brand {
+    font-variant: small-caps;
 }
 
 #loader {
