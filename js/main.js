@@ -179,10 +179,9 @@ async.waterfall([
      
     // 5. We're done rendering now
     setTimeout(function(){
-        $('#loader').fadeOut(600, function(){
-            $('.loadable').removeClass('loadable');
-        });
-        $('.loadable').fadeIn(800);
+        $('#loader').fadeOut(600);
+        // fadeIn doesn't seem to work when we don't use "display: none;".
+        $('.loadable').css('opacity', 0).removeClass('.loadable').fadeTo(800, 1.0);
     }, 400);
     
     var settings = $('#settingsPic');
