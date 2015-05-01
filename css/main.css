@@ -9,9 +9,12 @@ body {
   background-color: whitesmoke;
   margin-bottom: 0px;
 }
-
-.navbar-brand {
+.navbar-header a.navbar-brand {
     font-variant: small-caps;
+    font-weight: bold;
+}
+.navbar-header a.navbar-brand:hover {
+    color: #222;
 }
 
 #rightNav {
