@@ -55,6 +55,20 @@ async.waterfall([
     var updateUndoButtons = function() {
         $('#undo').prop('disabled', !undoManager.isAvailable('undo'));
         $('#redo').prop('disabled', !undoManager.isAvailable('redo'));
+        
+        if( !undoManager.isAvailable('undo') ) {
+            $('#undo').css('opacity', 0.4);
+        }
+        else {
+            $('#undo').css('opacity', 1);
+        }
+        
+        if( !undoManager.isAvailable('redo') ) {
+            $('#redo').css('opacity', 0.4);
+        }
+        else {
+            $('#redo').css('opacity', 1);
+        }
     };
     updateUndoButtons();
     undoManager.on('availabilityMayHaveChanged', updateUndoButtons);
