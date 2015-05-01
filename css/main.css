@@ -20,8 +20,15 @@ body {
     float: right;
 }
 
-#undo {
-    min-width: 30px;
+.undoRedoButton {
+    min-width: 50px;
+    min-height: 30px;
+}
+
+.undoRedoImg {
+    min-width: 10px;
+    max-width: 20px;
+    max-height: 20px;
 }
 
 .undoRedo {
