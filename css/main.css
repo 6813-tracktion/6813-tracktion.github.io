@@ -132,7 +132,7 @@ svg .totalMinutes {
   fill: #222;
 }
 line.separator {
-  stroke: rgba(0, 0, 0, 0.5);
+  stroke: black;
   stroke-width: 2px;
   pointer-events: none;
 }
