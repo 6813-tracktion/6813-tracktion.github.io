@@ -417,3 +417,22 @@ g.longRangeWeek:hover .longRangeBarIncomplete {
 g.longRangeWeek:hover .background {
   fill: #ddd;
 }
+
+p.historyWeekTitle {
+  font-size: 90%;
+  font-style: italic;
+  font-weight: bold;
+  margin: 0;
+  /*line-height: 90%;*/
+}
+p.historyWeekProgress {
+  margin: 0;
+  line-height: 80%;
+  padding-bottom: 5px;
+}
+p.success {
+  color: rgb(0,150,0);
+}
+p.failure {
+  color: rgb(100, 20, 20);
+}

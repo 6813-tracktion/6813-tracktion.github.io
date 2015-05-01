@@ -29,10 +29,52 @@ var LongRangeView = Marionette.ItemView.extend({
         };
     },
     events: {
-        "click g.longRangeWeek": "jumpToWeek",
+        "click g.longRangeWeek":        "jumpToWeek",
+        "mouseover g.longRangeWeek":    "mouseoverHistoryBar"
     },
     jumpToWeek: function(event) {
         var cid = $(event.currentTarget).data('cid');
         window.scrollToWeek(this.model.attributes.weeks.get(cid));
+    },
+    mouseoverHistoryBar: function(event) {
+        var weeks = this.model.attributes.weeks;
+        var cid = $(event.currentTarget).data('cid');
+        showToolTipForWeek(weeks.get(cid), event.target);
+    },
+    mouseoutHistoryBar: function(event) {
+        hideTooltipForWeek();
     }
 });
+
+function showToolTipForWeek(week, element) {
+    var attrs = week.attributes;
+    // TODO total is correct, but start and end are the same across many weeks...
+    // console.log(attrs.beginning.format("ddd M/d"));
+    // console.log(attrs.end.format("ddd M/d"));
+    // console.log(attrs.total);
+
+    var beginStr = attrs.beginning.format("M/d");
+    var endStr = attrs.end.format("M/d");
+    var totalStr = formatDuration(attrs.total);
+    var goalStr = formatDuration(attrs.goal);
+    var success = attrs.total > attrs.goal;
+    var content = '<p class="historyWeekTitle">' + beginStr + '–' + endStr + ':</p>';
+    if (success) {
+        content += '<p class="historyWeekProgress success">Success!</p>';
+        content += '<p class="historyWeekProgress">Did ';
+    } else {
+        content += '<p class="historyWeekProgress failure">Failure</p>';
+        content += '<p class="historyWeekProgress">Only did ';
+    }
+    content += totalStr + ' out of ' + goalStr + '</p>';
+
+    var tip = $('#historyToolTip');
+    $(tip).css('opacity', 1);
+    $(tip).html(content);
+
+    moveToElementPlusOffset(tip, element, 215, -26);
+}
+
+function hideTooltipForWeek() {
+    $(tip).css('opacity', 0);
+}
