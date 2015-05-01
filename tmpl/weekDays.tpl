@@ -89,6 +89,5 @@
     <% } %>
   </g>
 <% }) %>
-<line x1="100" x2="100" y1="-100" y2="<%= 10*DAY_HEIGHT_PX %>" class="separator" />
 </g>
 </script>
