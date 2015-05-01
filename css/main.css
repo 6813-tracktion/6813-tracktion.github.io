@@ -79,10 +79,7 @@ body {
   z-index: 2;
 }
 .loadable {
-  /* The weeks view expects to be laid out when onShow is called so it can
-   * compute the fractional coordinates correction.  "display: none" broke that. */
-  /*visibility: hidden;*/
-  opacity: 0;
+  display: none;
 }
 
 @-moz-keyframes spin {
