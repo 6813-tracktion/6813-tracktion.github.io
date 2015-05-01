@@ -1,7 +1,7 @@
 <script type="text/template" id="longRangeViewTpl">
   <svg width="200" height="<%= weeks.length * WEEK_HEIGHT_PX %>">
   <% weeks.each(function(week, i){ %>
-  <g transform="translate(0, <%= i * WEEK_HEIGHT_PX + 1 %>)" class="day longRangeDay">
+  <g transform="translate(0, <%= i * WEEK_HEIGHT_PX + 1 %>)" class="longRangeWeek" data-cid="<%= week.cid %>">
     <!-- So that hovering anywhere in the row counts as a hover on the g.day
          element, which we can check for in CSS for the bar. -->
     <rect class="background" x="0" y="0" width="200" height="<%= WEEK_HEIGHT_PX - 1 %>"/>

@@ -18,5 +18,12 @@ var LongRangeView = Marionette.ItemView.extend({
                         "longRangeBarComplete" : "longRangeBarIncomplete");
             }
         };
+    },
+    events: {
+        "click g.longRangeWeek": "jumpToWeek",
+    },
+    jumpToWeek: function(event) {
+        var cid = $(event.currentTarget).data('cid');
+        window.scrollToWeek(this.model.attributes.weeks.get(cid));
     }
 });

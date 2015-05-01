@@ -136,7 +136,7 @@ line.separator {
   stroke-width: 2px;
   pointer-events: none;
 }
-g.day {
+g.day, g.longRangeWeek {
   pointer-events: all;
 }
 rect.background {
@@ -408,12 +408,12 @@ select, option {
 .longRangeBarIncomplete {
   fill: rgba(182,182,18,0.5);
 }
-g.day:hover .longRangeBarComplete {
+g.longRangeWeek:hover .longRangeBarComplete {
   fill: rgb(0,150,0);
 }
-g.day:hover .longRangeBarIncomplete {
+g.longRangeWeek:hover .longRangeBarIncomplete {
   fill: rgb(182,182,18);
 }
-g.longRangeDay:hover .background {
+g.longRangeWeek:hover .background {
   fill: #ddd;
 }

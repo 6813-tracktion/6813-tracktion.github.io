@@ -102,6 +102,11 @@ async.waterfall([
     // The view will call it after rendering.
     window.updateJumpToDate = updateJumpToDate;  // hack
     $(document).scroll(_.throttle(updateJumpToDate, 100, {leading: false}));
+    window.scrollToWeek = function(week) {
+        var weekView = $('div.week[data-cid=' + week.cid +']');
+        window.scrollTo(0, weekView.offset().top - BODY_PADDING_PX);
+        updateJumpToDate();
+    };
     $('#jumpToDate').on('change', function() {
         var wantDate = moment($('#jumpToDate').val(), 'L');
         var wantWeek = dataset.attributes.weeks.find(function(w) {
@@ -112,9 +117,7 @@ async.waterfall([
             // XXX: Instead should we add older weeks to let the user enter historical data?
             wantWeek = dataset.attributes.weeks.at(dataset.attributes.weeks.length - 1);
         }
-        var wantWeekView = $('div.week[data-cid=' + wantWeek.cid +']');
-        window.scrollTo(0, wantWeekView.offset().top - BODY_PADDING_PX);
-        updateJumpToDate();
+        window.scrollToWeek(wantWeek);
     });
 
     // duration inputs
