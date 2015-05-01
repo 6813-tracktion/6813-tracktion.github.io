@@ -12,11 +12,15 @@
         <link rel="stylesheet" href="libs/jquery-ui/jquery-ui.css">
 
     </head>
+    
     <body style="zoom: 1;">
+        
+        <!-- Navigation Container div -->
         <div style="position: fixed; left: 0; right: 0; top: 0; z-index: 8; background-color: #eee;">
             <!-- navbar -->
             <nav class="navbar navbar-inverse navbar-static-top">
                 <div class="container">
+                    
                     <div class="navbar-header">
                         <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                             <span class="sr-only">Toggle navigation</span>
@@ -26,6 +30,7 @@
                         </button>
                         <a class="navbar-brand" href="#"><b>Tracktion</b></a>
                     </div>
+                    
                     <div id="navbar" class="collapse navbar-collapse">
                         <ul class = "nav navbar-nav">
                             <li style="padding: 10px 15px; color: #5d5d5d;">
@@ -42,18 +47,29 @@
                               <li><a href="#contact">Contact</a></li>
                             -->
                             <!-- type="date" does not work yet in Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=825294 -->
-                            <li style="padding: 10px 15px; color: #9d9d9d;">
+                            <li style="padding: 11px 15px; color: #9d9d9d;">
                                 <label for="mockToday">Simulated current date:</label>
                                 <input id="mockToday" type="text" style="color: black;"/>
                             </li>
                         </ul>
-
                         
-
+                        <div id ="rightNav">
+                            <ul class ="nav navbar-nav">
+                                    <li style ="padding: 11px 15px 0px 0px; color: #9d9d9d;">
+                                        <label for="UserName"> Hello <span id="userName"> Bob </span> </label>
+                                        <img id = "settingsPic" src ="img/cogwheel.png" alt ="settings"/>
+                                    </li>
+                            </ul>
+                        </div>
+                        
                     </div><!--/.nav-collapse -->
+                    
+                    
                 </div>
+                
+                
+                
             </nav>
-
         </div>
 
         <div id="loader">

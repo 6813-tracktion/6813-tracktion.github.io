@@ -13,6 +13,18 @@ body {
     font-variant: small-caps;
 }
 
+#rightNav {
+    max-height: 50px;
+    max-width: 150px;
+    position: relative;
+    float: right;
+}
+
+#settingsPic {
+    max-width: 25px;
+    max-height: 25px;
+}
+
 #loader {
   background-color: transparent;
   position: absolute;
