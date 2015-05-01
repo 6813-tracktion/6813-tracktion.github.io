@@ -146,6 +146,8 @@
                     height = "40px" width = "30px" />
         </g>
 
+        <line x1="110" x2="110" y1="-4" y2="<%= 96 + 10*DAY_HEIGHT_PX %>" class="separator" />
+
     </g> <!-- translate for title -->
     </g> <!-- fractionalCoordinatesFixer -->
     </svg>
