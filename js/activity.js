@@ -144,7 +144,7 @@ function setupActivity(){
 
 function validateInput(){
     var duration = $('#durationInput').val();
-    if(!duration.match(/^[1-9]*[05]$/) && !duration.match(/[0-9]+:[0-9]{2}/)){
+    if(!duration.match(/^[0-9]+$/) && !duration.match(/[0-9]+:[0-9]+/)){
         // TODO maybe provide message to user
         // (though HTML-5 browsers already give a hint with red highlight and tooltip on hover)
         return false;

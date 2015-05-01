@@ -135,10 +135,19 @@ async.waterfall([
     });
 
     // duration inputs
-    $('input.duration').mask("99:90", {
+    $('input.duration').mask("90:99", {
         placeholder: "hh:mm",
         selectOnFocus: true,
-        clearIfNotMatch: true
+        // clearIfNotMatch: true,
+        reverse: true
+         /*
+        onKeyPress: function(cep, e, field, options){
+            if(cep.indexOf(':') >= 0){
+                $(field).mask('99:90', options); // recursive!
+            } else {
+                $(field).mask('90:', options);
+            }
+        } */
     }).keydown(function(e){
       var dir = -1;
       switch(e.which){
