@@ -4,7 +4,6 @@ var LongRangeView = Marionette.ItemView.extend({
         this.throttledRender = _.throttle(this.render, 100);
         this.listenTo(this.model.attributes.weeks, 'add change:goal change:total remove reset', this.throttledRender);
     },
-    // TODO
     templateHelpers: function() {
         return {
             WEEK_HEIGHT_PX: 13,
@@ -14,9 +13,9 @@ var LongRangeView = Marionette.ItemView.extend({
             rm2p: function(min) {
                 return Math.round(this.PX_PER_MIN * min);
             },
-            totalBarStyle: function(week) {
-                // Colors copied from week.js, but lighter to make the goal line easier to see.
-                return week.attributes.total >= week.attributes.goal ? "fill:rgba(0,150,0,0.5);":"fill:rgba(227,227,22,0.5);";
+            totalBarClass: function(week) {
+                return (week.attributes.total >= week.attributes.goal ?
+                        "longRangeBarComplete" : "longRangeBarIncomplete");
             }
         };
     }
