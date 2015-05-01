@@ -57,7 +57,7 @@ function showToolTipForWeek(week, element, today) {
     var endStr = attrs.end.format("M/D");
     var totalStr = formatDuration(attrs.total);
     var goalStr = formatDuration(attrs.goal);
-    var success = attrs.total > attrs.goal;
+    var success = attrs.total >= attrs.goal;
     var content = '<p class="historyWeekTitle">' + beginStr + '–' + endStr + ':</p>';
 
     if (success) {
@@ -70,18 +70,24 @@ function showToolTipForWeek(week, element, today) {
         content += '<p class="historyWeekProgress">Only ' + remainingStr;
         content += ' to go!</p>';
     } else {
-        content += '<p class="historyWeekProgress failure">Failure</p>';
+        // content += '<p class="historyWeekProgress failure">Failure</p>';
         content += '<p class="historyWeekProgress">Only did ';
         content += totalStr + ' out of ' + goalStr + '</p>';
     }
 
     var tip = $('#historyToolTip');
     $(tip).css('opacity', 1);
+    $(tip).css('position', 'absolute');
     $(tip).html(content);
 
-    moveToElementPlusOffset(tip, element, 215, -26);
+    var dx = 215;
+    var dy = -26 - $(window).scrollTop();
+    moveToElementPlusOffset(tip, element, dx, dy);
+    $(tip).css('position', 'fixed');
 }
 
 function hideTooltipForWeek() {
-    $('#historyToolTip').css('opacity', 0);
+    var tip = $('#historyToolTip');
+    $(tip).css('position', 'absolute');
+    $(tip).css('opacity', 0);
 }
