@@ -125,11 +125,13 @@ function setupActivity(){
 
     // duration and <Ok/Delete> labeling
     $('#durationInput').on('change', function(){
+        var valid = validateInput();
         var duration = parseDuration($('#durationInput').val());
         var isDelete = duration <= 0;
         // The Delete button is right there... do we need to do anything else
         // besides disable the Okay button?
-        $('#submitActivityInfo').prop('disabled', isDelete);
+        $('#submitActivityInfo').prop('disabled', isDelete || !valid)
+                                .toggleClass('disabled', isDelete || !valid);
         /*
         $('#submitActivityInfo').text(isDelete ? 'Delete' : 'Okay');
         if(isDelete)
@@ -232,8 +234,9 @@ function submitActivityInfo() {
     var session = layer.data('session');
 
     // don't submit unless it's valid
-    if(!validateInput())
+    if(!validateInput()){
         return;
+    }
 
     // update model (callback is responsible for the commit)
     var duration = parseDuration($('#durationInput').val());

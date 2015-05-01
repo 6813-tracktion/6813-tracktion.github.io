@@ -150,6 +150,7 @@ async.waterfall([
             duration = Math.round(duration / incr) * incr; // round to closest multiple of $incr
             duration += dir * incr;
             $(this).val(formatDuration(duration));
+            $(this).trigger('change');
         } break;
       }
     });
