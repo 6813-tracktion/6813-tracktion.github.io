@@ -464,11 +464,14 @@ p.historyWeekTitle {
 }
 p.historyWeekProgress {
   margin: 0;
-  line-height: 80%;
+  line-height: 85%;
   padding-bottom: 5px;
 }
 p.success {
   color: rgb(0,150,0);
+}
+p.pending {
+  color: rgb(160,160,18);
 }
 p.failure {
   color: rgb(100, 20, 20);

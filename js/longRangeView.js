@@ -30,24 +30,28 @@ var LongRangeView = Marionette.ItemView.extend({
     },
     events: {
         "click g.longRangeWeek":        "jumpToWeek",
-        "mouseover g.longRangeWeek":    "mouseoverHistoryBar"
+        "mouseover g.longRangeWeek":    "mouseoverHistoryBar",
+        "mouseout g.longRangeWeek":     "mouseoutHistoryBar"
     },
     jumpToWeek: function(event) {
         var cid = $(event.currentTarget).data('cid');
         window.scrollToWeek(this.model.attributes.weeks.get(cid));
     },
     mouseoverHistoryBar: function(event) {
+        var today = this.model.attributes.today;
         var weeks = this.model.attributes.weeks;
         var cid = $(event.currentTarget).data('cid');
-        showToolTipForWeek(weeks.get(cid), event.target);
+        showToolTipForWeek(weeks.get(cid), event.target, today);
     },
     mouseoutHistoryBar: function(event) {
         hideTooltipForWeek();
     }
 });
 
-function showToolTipForWeek(week, element) {
+function showToolTipForWeek(week, element, today) {
     var attrs = week.attributes;
+
+    var notOver =  !today.isAfter(attrs.end);
 
     var beginStr = attrs.beginning.format("M/D");
     var endStr = attrs.end.format("M/D");
@@ -55,14 +59,21 @@ function showToolTipForWeek(week, element) {
     var goalStr = formatDuration(attrs.goal);
     var success = attrs.total > attrs.goal;
     var content = '<p class="historyWeekTitle">' + beginStr + '–' + endStr + ':</p>';
+
     if (success) {
         content += '<p class="historyWeekProgress success">Success!</p>';
         content += '<p class="historyWeekProgress">Did ';
+        content += totalStr + ' out of ' + goalStr + '</p>';
+    } else if (notOver) {
+        var remainingStr = formatDuration(attrs.goal - attrs.total);
+        content += '<p class="historyWeekProgress pending">In progress</p>';
+        content += '<p class="historyWeekProgress">Only ' + remainingStr;
+        content += ' to go!</p>';
     } else {
         content += '<p class="historyWeekProgress failure">Failure</p>';
         content += '<p class="historyWeekProgress">Only did ';
+        content += totalStr + ' out of ' + goalStr + '</p>';
     }
-    content += totalStr + ' out of ' + goalStr + '</p>';
 
     var tip = $('#historyToolTip');
     $(tip).css('opacity', 1);
