@@ -2,6 +2,16 @@
     <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX + 25 %>">
     <g class="fractionalCoordinatesFixer" transform="<%= self.fractionalCoordinatesFix %>">
     <g transform="translate(8, 25)"> <!-- translate for title and wider today label -->
+
+        <!-- Vertical dotted lines per hour: below the days. -->
+        <g transform = "translate(110,74)">
+            <% for (var m = 30; m <= maxMinutes(); m += 30) { %>
+                <% for (var y1 = 20; y1 <= 360; y1 += 20) { %>
+                    <line x1 = "<%= rm2p(m) %>" x2 = "<%= rm2p(m) %>" y1 = "<%= y1 %>" y2 = "<%= y1 + 5%>" stroke = "grey" stroke-width = "1" />
+                <% } %>
+            <% } %>
+        </g>
+
         <g transform="translate(10,96)">
             <!--
             <g class="week-label" transform="translate(750, 100) rotate(90)">
@@ -69,11 +79,9 @@
             -->
             <% for (var m = 30; m <= maxMinutes(); m += 30) { %>
                 <line x1 = "<%= rm2p(m) %>" x2 = "<%= rm2p(m) %>" y1 = "-5" y2 = "5" stroke = "black" stroke-width = "2"/>
-                <% for (var y1 = 20; y1 <= 360; y1 += 20) { %>
-                    <line x1 = "<%= rm2p(m) %>" x2 = "<%= rm2p(m) %>" y1 = "<%= y1 %>" y2 = "<%= y1 + 5%>" stroke = "grey" stroke-width = "1" />
-                <% } %>
             <% } %>
         </g>
+
         <!--
             Draws the Week Total bar showing the total number of minutes
                 worked out this particular week.
