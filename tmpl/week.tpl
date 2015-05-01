@@ -2,6 +2,16 @@
     <svg class="week" height="<%= 98 + numDaysToShow() * DAY_HEIGHT_PX + 25 %>">
     <g class="fractionalCoordinatesFixer" transform="<%= self.fractionalCoordinatesFix %>">
     <g transform="translate(8, 25)"> <!-- translate for title and wider today label -->
+        <g transform="translate(10,96)">
+            <!--
+            <g class="week-label" transform="translate(750, 100) rotate(90)">
+            <text style="text-anchor: middle;">Week <%= weekNumber() %></text>
+            </g>
+            -->
+            <%= include #weekCumulative %>
+            <%= include #weekDays %>
+        </g>
+
         <!--
             Title for week
         -->
@@ -128,15 +138,6 @@
                     height = "40px" width = "30px" />
         </g>
 
-        <g transform="translate(10,96)">
-            <!--
-            <g class="week-label" transform="translate(750, 100) rotate(90)">
-            <text style="text-anchor: middle;">Week <%= weekNumber() %></text>
-            </g>
-            -->
-            <%= include #weekCumulative %>
-            <%= include #weekDays %>
-        </g>
     </g> <!-- translate for title -->
     </g> <!-- fractionalCoordinatesFixer -->
     </svg>
