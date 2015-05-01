@@ -12,6 +12,7 @@ body {
   font-family: "Open sans", sans-serif;
   font-variant: small-caps;
   font-weight: bold;
+  cursor: pointer;
 }
 .navbar-header a.navbar-brand:hover {
     color: #222;
