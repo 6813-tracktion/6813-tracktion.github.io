@@ -55,14 +55,14 @@ async.waterfall([
     var updateUndoButtons = function() {
         $('#undo').prop('disabled', !undoManager.isAvailable('undo'));
         $('#redo').prop('disabled', !undoManager.isAvailable('redo'));
-        
+
         if( !undoManager.isAvailable('undo') ) {
             $('#undo').css('opacity', 0.4);
         }
         else {
             $('#undo').css('opacity', 1);
         }
-        
+
         if( !undoManager.isAvailable('redo') ) {
             $('#redo').css('opacity', 0.4);
         }
@@ -99,27 +99,35 @@ async.waterfall([
     // Set up "jump to date"
     $('#jumpToDate').datepicker();
     var BODY_PADDING_PX = 100;
-    var updateJumpToDate = function() {
+    var updateCurrentWeek = function() {
         // http://stackoverflow.com/questions/2230880/jquery-javascript-find-first-visible-element-after-scroll
         var cutoff = $(document).scrollTop() + BODY_PADDING_PX;
+        $('.longRangeWeek .indicator').attr('class', 'indicator');
         $('div.week').each(function() {
             if ($(this).offset().top >= cutoff) {
-                var week = dataset.attributes.weeks.get($(this).data('cid'));
+                var cid = $(this).data('cid');
+                var week = dataset.attributes.weeks.get(cid);
+
+                // update the jumpToDate field
                 $('#jumpToDate').val(week.attributes.end.format('L'));
+
+                // update the "current" week in the history
+                $('.longRangeWeek .indicator[data-cid=' + cid + ']').attr('class', 'indicator current');
+
                 return false;
             }
         });
         // If the oldest goal period is extremely long, we could fall through
         // without updating the field.
     };
-    // There's no point in calling updateJumpToDate now: no weeks are rendered.
+    // There's no point in calling updateCurrentWeek now: no weeks are rendered.
     // The view will call it after rendering.
-    window.updateJumpToDate = updateJumpToDate;  // hack
-    $(document).scroll(_.throttle(updateJumpToDate, 100, {leading: false}));
+    window.updateCurrentWeek = updateCurrentWeek;  // hack
+    $(document).scroll(_.throttle(updateCurrentWeek, 100, {leading: false}));
     window.scrollToWeek = function(week) {
         var weekView = $('div.week[data-cid=' + week.cid +']');
         window.scrollTo(0, weekView.offset().top - BODY_PADDING_PX);
-        updateJumpToDate();
+        updateCurrentWeek();
     };
     $('#jumpToDate').on('change', function() {
         var wantDate = moment($('#jumpToDate').val(), 'L');
@@ -189,7 +197,7 @@ async.waterfall([
 
     // 4. Start the application
     app.start();
-     
+
     // 5. We're done rendering now
     setTimeout(function(){
         $('#loader').fadeOut(600, function(){
@@ -198,7 +206,7 @@ async.waterfall([
         $('.loadable').fadeIn(800);
         window.dispatcher.trigger('fixFractionalCoordinates');
     }, 400);
-    
+
     var settings = $('#settingsPic');
     $(settings).click(function(e) {
         // Show our internal options

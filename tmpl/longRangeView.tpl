@@ -1,5 +1,6 @@
 <script type="text/template" id="longRangeViewTpl">
-  <svg width="200" height="<%= 21 + weeks.length * WEEK_HEIGHT_PX %>"><g transform="translate(1,21)">
+  <svg width="215" height="<%= 21 + weeks.length * WEEK_HEIGHT_PX %>">
+  <g transform="translate(<%= 1 + 15 %>,21)">
   <% for (var i = 1; 60*i*hoursPerTick <= maxMinutes; i++) { %>
     <line x1="<%= rm2p(60*i*hoursPerTick) %>" x2="<%= rm2p(60*i*hoursPerTick) %>" y1="-7" y2="-2" stroke="black" stroke-width="2px"/>
     <text style="text-anchor: middle;" x="<%= rm2p(60*i*hoursPerTick) %>" y="-10"><%= i*hoursPerTick %>h</text>
@@ -9,6 +10,15 @@
   <line x1="-1" x2="199" y1="-2" y2="-2" stroke="black" stroke-width="2px"/>
   <% weeks.each(function(week, i){ %>
   <g transform="translate(0, <%= i * WEEK_HEIGHT_PX + 1 %>)" class="longRangeWeek" data-cid="<%= week.cid %>">
+    <% if(urlVar('currentWeek') == 'circle') { %>
+      <circle class="indicator <%= i == 0 ? 'current' : '' %>" cx="-8" cy="5" r="3" fill="black" data-cid="<%= week.cid %>" />
+    <% } else { %>
+      <polygon class="indicator <%= i == 0 ? 'current' : '' %>" points="
+        0,0
+        0,<%= WEEK_HEIGHT_PX-1 %>
+        -8,<%= WEEK_HEIGHT_PX * 0.5 - 0.5 %>
+      " data-cid="<%= week.cid %>" />
+    <% } %>
     <!-- So that hovering anywhere in the row counts as a hover on the g.day
          element, which we can check for in CSS for the bar. -->
     <rect class="background" x="0" y="0" width="200" height="<%= WEEK_HEIGHT_PX - 1 %>"/>
