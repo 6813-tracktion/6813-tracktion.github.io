@@ -22,6 +22,9 @@ var LongRangeView = Marionette.ItemView.extend({
             rm2p: function(min) {
                 return Math.round(this.PX_PER_MIN * min);
             },
+            urlVar: function(name){
+                return getUrlParameter(name);
+            },
             totalBarClass: function(week) {
                 return (week.attributes.total >= week.attributes.goal ?
                         "longRangeBarComplete" : "longRangeBarIncomplete");

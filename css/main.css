@@ -5,13 +5,13 @@ body {
 }
 
 .navbar {
-  font-family: "Open sans", sans-serif;
   background-color: whitesmoke;
   margin-bottom: 0px;
 }
 .navbar-header a.navbar-brand {
-    font-variant: small-caps;
-    font-weight: bold;
+  font-family: "Open sans", sans-serif;
+  font-variant: small-caps;
+  font-weight: bold;
 }
 .navbar-header a.navbar-brand:hover {
     color: #222;
@@ -22,10 +22,12 @@ body {
     max-width: 200px;
     position: relative;
     float: right;
+    padding-top: 4px;
 }
 
 #userName {
-    border-bottom: 2px solid grey;
+    color: gray;
+    /* border-bottom: 2px solid grey; */
 }
 
 .undoRedoButton {
@@ -440,7 +442,8 @@ select, option {
   bottom: 0;
   width: 230px;
   background-color: whitesmoke;
-  padding: 15px;
+  /*padding: 15px;*/
+  padding: 15px 15px 15px 0px; /* padding on all sides but left */
 }
 
 /* Colors copied from week.js, but lighter to make the goal line easier to see. */
@@ -458,6 +461,14 @@ g.longRangeWeek:hover .longRangeBarIncomplete {
 }
 g.longRangeWeek:hover .background {
   fill: #ddd;
+}
+
+g.longRangeWeek .indicator {
+  opacity: 0.0;
+  pointer-events: none;
+}
+g.longRangeWeek .indicator.current {
+  opacity: 1.0;
 }
 
 p.historyWeekTitle {

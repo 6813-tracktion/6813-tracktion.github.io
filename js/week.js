@@ -396,7 +396,7 @@ var WeekView = Marionette.ItemView.extend({
         // model itself.
         undoManager.commit();
         // If we moved days from one week to another...
-        window.updateJumpToDate();
+        window.updateCurrentWeek();
     }
 });
 
@@ -407,10 +407,10 @@ var FullView = Marionette.CollectionView.extend({
     },
     onRender: function() {
         // May not be useful if called before show.
-        window.updateJumpToDate();
+        window.updateCurrentWeek();
     },
     onShow: function() {
-        window.updateJumpToDate();
+        window.updateCurrentWeek();
     },
 });
 
