@@ -22,7 +22,7 @@ var WeekView = Marionette.ItemView.extend({
         this.dataset = this.model.attributes.dataset;
         this.allSessions = this.dataset.attributes.sessions;
         // See comment in GR5 notes
-        this.throttledRender = _.throttle(this.render, 100);
+        this.throttledRender = _.throttle(this.render, 100, {leading: false});
         this.listenTo(this.weekSessions, 'add change remove reset', this.throttledRender);
         this.listenTo(this.model, 'change', this.throttledRender);
         this.listenTo(this.model.attributes.dataset, 'change:today', this.throttledRender);

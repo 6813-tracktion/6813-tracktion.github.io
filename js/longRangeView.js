@@ -1,7 +1,7 @@
 var LongRangeView = Marionette.ItemView.extend({
     template: '#longRangeViewTpl',
     initialize: function(options) {
-        this.throttledRender = _.throttle(this.render, 100);
+        this.throttledRender = _.throttle(this.render, 100, {leading: false});
         this.listenTo(this.model.attributes.weeks, 'add change:goal change:total remove reset', this.throttledRender);
     },
     templateHelpers: function() {
