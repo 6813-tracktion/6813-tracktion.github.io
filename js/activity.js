@@ -10,7 +10,7 @@
 // });
 
 var DEFAULT_ACTIVITY_TYPES = {
-    "unspecified":  {displayName:"Unspecified",icon: "who-knows"},
+    "unspecified":  {displayName:"",icon: "who-knows"},
 
     "baseball":     {displayName: "Baseball",  icon: "baseball"},
     // "basketball":   {displayName: "Basketball",icon: "basketball"},
@@ -50,7 +50,7 @@ function displayNameForLabel(lbl) {
 function getAllActivities(request, response) {
     var baseTypes = Object.keys(DEFAULT_ACTIVITY_TYPES).map(function(a){
         return DEFAULT_ACTIVITY_TYPES[a].displayName;
-    });
+    }).filter(function(n) { return n != ''; });
     // custom types
     var customTypes = [];
     var customMap = {};
@@ -94,6 +94,11 @@ function setupActivity(){
         source: getAllActivities,
         appendTo: '#activityInfoView',
         minLength: 0
+    });
+    $('#activityTypeInput').focus(function(e) {
+        if ($(this).val() == '') {
+            $(this).autocomplete('search');
+        }
     });
 
     // don't close the popup when clicked

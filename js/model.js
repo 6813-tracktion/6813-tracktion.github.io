@@ -117,7 +117,7 @@ function loadModel(){
     for(var i = 0; i < 100; ++i){
         var m = moment("2015-04-04")
               .subtract(7 + Math.round(i / 3 + Math.random() * i), 'days');
-        var label = labels[Math.floor(Math.random() * (labels.length + 1))] || 'random';
+        var label = labels[Math.floor(Math.random() * labels.length)];
         list.push(new Session({ date: m, duration: Math.ceil(1 + Math.random() * 10) * 5, label: label}));
     }
     list.sort(function(a, b){
