@@ -468,6 +468,7 @@ g.longRangeWeek:hover .background {
 
 g.longRangeWeek .indicator {
   opacity: 0.0;
+  pointer-events: none;
 }
 g.longRangeWeek .indicator.current {
   opacity: 1.0;
