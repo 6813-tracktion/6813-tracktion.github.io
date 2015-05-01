@@ -1,6 +1,6 @@
 
 body {
-  padding-top: 100px; /* toolbars */
+  padding-top: 53px; /* navbar */
   padding-left: 230px; /* long-range view */
 }
 
@@ -436,13 +436,10 @@ select, option {
 #longRangeSection {
   position: fixed;
   left: 0;
-  /* Keep the longRangeSection roughly out of the way of the toolbars for now.
-   * TODO: Change to 50px once we have only the Bootstrap navbar, or calculate
-   * it dynamically in main.js if necessary. */
-  top: 100px;
+  top: 53px; /* navbar */
   bottom: 0;
   width: 230px;
-  background-color: #eee;
+  background-color: whitesmoke;
   padding: 15px;
 }
 

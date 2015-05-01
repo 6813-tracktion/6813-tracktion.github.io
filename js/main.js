@@ -98,7 +98,7 @@ async.waterfall([
 
     // Set up "jump to date"
     $('#jumpToDate').datepicker();
-    var BODY_PADDING_PX = 100;
+    var BODY_PADDING_PX = 53;
     var updateJumpToDate = function() {
         // http://stackoverflow.com/questions/2230880/jquery-javascript-find-first-visible-element-after-scroll
         var cutoff = $(document).scrollTop() + BODY_PADDING_PX;
