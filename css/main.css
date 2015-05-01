@@ -44,7 +44,7 @@ body {
 
 #loader {
   background-color: transparent;
-  position: absolute;
+  position: fixed;
   top: 150px;
   left: 50%;
   margin-left: -150px;
