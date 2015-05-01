@@ -1,139 +1,148 @@
 <!DOCTYPE html>
 <html lang="en" data-framework="marionettejs">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Tracktion</title>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Tracktion</title>
 
-	<!-- CSS -->
-	<link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="css/main.css" />
-  <link rel="stylesheet" href="libs/jquery-ui/jquery-ui.css">
+        <!-- CSS -->
+        <link href="libs/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="css/main.css" />
+        <link rel="stylesheet" href="libs/jquery-ui/jquery-ui.css">
 
-</head>
-<body style="zoom: 1;">
-  <div style="position: fixed; left: 0; right: 0; top: 0; z-index: 8; background-color: #eee;">
-  <!-- navbar -->
-	<nav class="navbar navbar-inverse navbar-static-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Tracktion</a>
+    </head>
+    <body style="zoom: 1;">
+        <div style="position: fixed; left: 0; right: 0; top: 0; z-index: 8; background-color: #eee;">
+            <!-- navbar -->
+            <nav class="navbar navbar-inverse navbar-static-top">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#"><b>Tracktion</b></a>
+                    </div>
+                    <div id="navbar" class="collapse navbar-collapse">
+                        <ul class = "nav navbar-nav">
+                            <li style="padding: 10px 15px; color: #5d5d5d;">
+                                <label for="jumpToDate">Jump to date:</label> <input id="jumpToDate" type="text"/>
+                                <button id="undo">Undo</button>
+                                <button id="redo">Redo</button>
+                            </li>
+                        </ul>
+                        
+                        <ul class="nav navbar-nav">
+                            <!--
+                              <li class="active"><a href="#">Home</a></li>
+                              <li><a href="#about">About</a></li>
+                              <li><a href="#contact">Contact</a></li>
+                            -->
+                            <!-- type="date" does not work yet in Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=825294 -->
+                            <li style="padding: 10px 15px; color: #9d9d9d;">
+                                <label for="mockToday">Simulated current date:</label>
+                                <input id="mockToday" type="text" style="color: black;"/>
+                            </li>
+                        </ul>
+
+                        
+
+                    </div><!--/.nav-collapse -->
+                </div>
+            </nav>
+
         </div>
-        <div id="navbar" class="collapse navbar-collapse">
-          <ul class="nav navbar-nav">
-          <!--
-            <li class="active"><a href="#">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-          -->
-            <!-- type="date" does not work yet in Firefox: https://bugzilla.mozilla.org/show_bug.cgi?id=825294 -->
-            <li style="padding: 10px 15px; color: #9d9d9d;"><label for="mockToday">Simulated current date:</label>
-            <input id="mockToday" type="text" style="color: black;"/></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div>
-    </nav>
-    <div>
-      <label for="jumpToDate">Jump to date:</label> <input id="jumpToDate" type="text"/>
-      <button id="undo">Undo</button>
-      <button id="redo">Redo</button>
-    </div>
-  </div>
 
-  <div id="loader">
-    <div class="load-circle"></div>
-    <div class="load-text">Loading Data</div>
-  </div>
+        <div id="loader">
+            <div class="load-circle"></div>
+            <div class="load-text">Loading Data</div>
+        </div>
 
-  <div id="activityLayer">
-    <div id="activityInfoView" class="dialog fluid-container">
-      <p>Activity of <span id="activityDate">February 15</span></p>
-      <div class="form-group">
-        <div class="control-label col-xs-12">Minutes:</div>
-        <input id="durationInput" class="duration col-xs-12" min="0" step="1" />
-      </div>
-      <div class="form-group">
-        <div class="control-label col-xs-12">Activity Type:</div>
-        <input id="activityTypeInput" class="col-xs-12">
-        <!-- <select id="activityTypeSelect" name="activityTypeSelect"> -->
-        </select>
-      </div>
-      <div class="form-group buttons">
-        <button id="submitActivityInfo" class="col-xs-6 btn btn-default">Okay</button>
-        <button id="cancelActivityInfo" class="col-xs-6 btn btn-default">Cancel</button>
-      </div>
-    </div>
-  </div>
+        <div id="activityLayer">
+            <div id="activityInfoView" class="dialog fluid-container">
+                <p>Activity of <span id="activityDate">February 15</span></p>
+                <div class="form-group">
+                    <div class="control-label col-xs-12">Minutes:</div>
+                    <input id="durationInput" class="duration col-xs-12" min="0" step="1" />
+                </div>
+                <div class="form-group">
+                    <div class="control-label col-xs-12">Activity Type:</div>
+                    <input id="activityTypeInput" class="col-xs-12">
+                    <!-- <select id="activityTypeSelect" name="activityTypeSelect"> -->
+                    </select>
+                </div>
+                <div class="form-group buttons">
+                    <button id="submitActivityInfo" class="col-xs-6 btn btn-default">Okay</button>
+                    <button id="cancelActivityInfo" class="col-xs-6 btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
 
-  <div id="goalLayer">
-    <div id = "setGoalContainer" class="dialog fluid-container">
-      <p>Set Weekly Goal</p>
-      <div class="form-group">
-        <div class="control-label col-xs-12">Duration Goal:</div>
-        <input id="goalDuration" class="duration col-xs-12" value="3:00" min="0" step = "1" />
-      </div>
-      <div class="form-group buttons">
-        <button id="setGoal" class="col-xs-6 btn btn-default">Okay</button>
-        <button id="cancelSetGoal" class="col-xs-6 btn btn-default">Cancel</button>
-      </div>
-    </div>
-  </div>
+        <div id="goalLayer">
+            <div id = "setGoalContainer" class="dialog fluid-container">
+                <p>Set Weekly Goal</p>
+                <div class="form-group">
+                    <div class="control-label col-xs-12">Duration Goal:</div>
+                    <input id="goalDuration" class="duration col-xs-12" value="3:00" min="0" step = "1" />
+                </div>
+                <div class="form-group buttons">
+                    <button id="setGoal" class="col-xs-6 btn btn-default">Okay</button>
+                    <button id="cancelSetGoal" class="col-xs-6 btn btn-default">Cancel</button>
+                </div>
+            </div>
+        </div>
 
-  <!-- Popovers to indicate number of minutes -->
-  <div id="durationToolTip" class="loadable tooltip tooltip-above"></div>
-  <div id="sessionToolTip" class="loadable tooltip tooltip-above"></div>
+        <!-- Popovers to indicate number of minutes -->
+        <div id="durationToolTip" class="loadable tooltip tooltip-above"></div>
+        <div id="sessionToolTip" class="loadable tooltip tooltip-above"></div>
 
-  <!-- Tooltip for history info -->
-  <div id="historyToolTip" class="loadable tooltip tooltip-right"></div>
+        <!-- Tooltip for history info -->
+        <div id="historyToolTip" class="loadable tooltip tooltip-right"></div>
 
-  <!-- Popovers to guide new users -->
-  <div id="addNewHelp" class="loadable tooltip tooltip-right help">Drag to log a new exercise session</div>
-  <div id="goalHelp" class="loadable tooltip tooltip-right help">Drag to change your goal for the week</div>
+        <!-- Popovers to guide new users -->
+        <div id="addNewHelp" class="loadable tooltip tooltip-right help">Drag to log a new exercise session</div>
+        <div id="goalHelp" class="loadable tooltip tooltip-right help">Drag to change your goal for the week</div>
 
-  <!-- long-range view -->
-  <div id="longRangeSection">
-    <div style="text-align: center; font-size: 120%; margin-bottom: 10px;">History</div>
-    <div id="longRangeView" class="loadable"></div>
-  </div>
+        <!-- long-range view -->
+        <div id="longRangeSection">
+            <div style="text-align: center; font-size: 120%; margin-bottom: 10px;">History</div>
+            <div id="longRangeView" class="loadable"></div>
+        </div>
 
-  <!-- weeks view -->
-  <!-- We should consider scrolling this div rather than scrolling the window and fixing everything else... -->
-  <div id="weeks" class="loadable"></div>
+        <!-- weeks view -->
+        <!-- We should consider scrolling this div rather than scrolling the window and fixing everything else... -->
+        <div id="weeks" class="loadable"></div>
 
-  <!-- templates -->
-  <script type="text/template" src="tmpl/week.tpl"></script>
-  <script type="text/template" src="tmpl/weekDays.tpl"></script>
-  <script type="text/template" src="tmpl/weekCumulative.tpl"></script>
-  <script type="text/template" src="tmpl/longRangeView.tpl"></script>
+        <!-- templates -->
+        <script type="text/template" src="tmpl/week.tpl"></script>
+        <script type="text/template" src="tmpl/weekDays.tpl"></script>
+        <script type="text/template" src="tmpl/weekCumulative.tpl"></script>
+        <script type="text/template" src="tmpl/longRangeView.tpl"></script>
 
-  <!-- libraries -->
-  <script src="libs/jquery/jquery-1.11.2.js"></script>
-  <script src="libs/jquery-ui/jquery-ui.js"></script>
-  <script src="libs/bootstrap/js/bootstrap.min.js"></script>
-  <script src="libs/underscore/underscore.js"></script>
-  <script src="libs/backbone/backbone.js"></script>
-  <script src="libs/backbone.localstorage/backbone.localStorage.js"></script>
-  <script src="libs/backbone.marionette/lib/backbone.marionette.js"></script>
-  <script src="libs/backbone.filtered-collection/backbone-filtered-collection.js"></script>
-  <script src="libs/backbone.undo/Backbone.Undo.js"></script>
-  <script src="libs/moment/moment.min.js"></script>
-  <script src="libs/async/lib/async.js"></script>
-  <script src="libs/jquery-mask/dist/jquery.mask.js"></script>
-  <!-- custom JS -->
-  <script type="text/javascript" src="js/utils.js"></script>
-  <script type="text/javascript" src="js/activity.js"></script>
-  <script type="text/javascript" src="js/goal.js"></script>
-  <script type="text/javascript" src="js/templates.js"></script>
-  <script type="text/javascript" src="js/model.js"></script>
-  <script type="text/javascript" src="js/week.js"></script>
-  <script type="text/javascript" src="js/longRangeView.js"></script>
-  <script type="text/javascript" src="js/main.js"></script>
-</body>
+        <!-- libraries -->
+        <script src="libs/jquery/jquery-1.11.2.js"></script>
+        <script src="libs/jquery-ui/jquery-ui.js"></script>
+        <script src="libs/bootstrap/js/bootstrap.min.js"></script>
+        <script src="libs/underscore/underscore.js"></script>
+        <script src="libs/backbone/backbone.js"></script>
+        <script src="libs/backbone.localstorage/backbone.localStorage.js"></script>
+        <script src="libs/backbone.marionette/lib/backbone.marionette.js"></script>
+        <script src="libs/backbone.filtered-collection/backbone-filtered-collection.js"></script>
+        <script src="libs/backbone.undo/Backbone.Undo.js"></script>
+        <script src="libs/moment/moment.min.js"></script>
+        <script src="libs/async/lib/async.js"></script>
+        <script src="libs/jquery-mask/dist/jquery.mask.js"></script>
+        <!-- custom JS -->
+        <script type="text/javascript" src="js/utils.js"></script>
+        <script type="text/javascript" src="js/activity.js"></script>
+        <script type="text/javascript" src="js/goal.js"></script>
+        <script type="text/javascript" src="js/templates.js"></script>
+        <script type="text/javascript" src="js/model.js"></script>
+        <script type="text/javascript" src="js/week.js"></script>
+        <script type="text/javascript" src="js/longRangeView.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
+    </body>
 </html>
