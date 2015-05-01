@@ -21,6 +21,10 @@ body {
     float: right;
 }
 
+#userName {
+    border-bottom: 2px solid grey;
+}
+
 .undoRedoButton {
     min-width: 50px;
     min-height: 30px;
