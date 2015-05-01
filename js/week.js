@@ -287,7 +287,10 @@ var WeekView = Marionette.ItemView.extend({
             // is it a click or a drag?
             // XXX: Ideally this time threshold would be a system setting
             // like the double-click timeout.
-            var isClick = moment().diff(dragInfo.startTime, 'milliseconds') < 300;
+            // Some clicks are being treated as drags, we suspect because the
+            // application is too slow.  Check the location too.
+            var isClick = (moment().diff(dragInfo.startTime, 'milliseconds') < 300 ||
+                    event.pageX == dragInfo.origMouseX);
 
             hideToolTipForSession();
             hideToolTipForGoal();
