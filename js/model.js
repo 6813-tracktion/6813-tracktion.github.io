@@ -76,7 +76,7 @@ var DataSet = Backbone.Model.extend({
             weeks.add(new Week({
                 dataset: this,
                 beginning: beginning,
-                end: moment(beginning).add(6, 'days'),
+                end: moment(beginning).startOf('isoWeek').add(6, 'days'),
             }));
         } else {
             this.extendToToday();
