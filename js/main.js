@@ -172,6 +172,13 @@ async.waterfall([
       }
     });
 
+    // make logo link to top
+    $('a.navbar-brand').click(function() {
+        // $('html, body').animate({scrollTop:0});
+        window.scrollTo(0,0);
+        return false;
+    });
+
     // 2. Setup stuff ...
     setupActivity();
     setupGoal();
