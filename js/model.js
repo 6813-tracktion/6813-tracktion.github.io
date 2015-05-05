@@ -72,8 +72,7 @@ var DataSet = Backbone.Model.extend({
     initialize: function() {
         var weeks = this.attributes.weeks;
         if (weeks.length == 0) {
-            // XXX Should be based on user's locale week.
-            var beginning = moment(this.attributes.today).startOf('isoWeek');
+            var beginning = this.attributes.today;
             weeks.add(new Week({
                 dataset: this,
                 beginning: beginning,
@@ -101,7 +100,7 @@ var DataSet = Backbone.Model.extend({
 
 function loadFreshModel() {
     var sessions = new Backbone.Collection([]);
-    return new DataSet({today: moment('2015-04-04'), sessions: sessions});
+    return new DataSet({today: moment('2015-03-30'), sessions: sessions});
 }
 
 function loadModel(){
@@ -125,6 +124,7 @@ function loadModel(){
     });
     var sessions = new Backbone.Collection(list);
     var dataset = new DataSet({today: moment('2015-04-04'), sessions: sessions});
+    dataset.attributes.weeks.at(0).set('beginning', moment('2015-03-30'));
 
     // Generate goal periods to cover all possible randomly generated sessions.
     var weekStart = moment("2015-03-23");
