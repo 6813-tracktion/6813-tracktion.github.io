@@ -11,9 +11,9 @@
   <% weeks.each(function(week, i){ %>
   <g transform="translate(0, <%= i * WEEK_HEIGHT_PX + 1 %>)" class="longRangeWeek" data-cid="<%= week.cid %>">
     <% if(urlVar('currentWeek') == 'circle') { %>
-      <circle class="indicator <%= i == 0 ? 'current' : '' %>" cx="-8" cy="5" r="3" fill="black" data-cid="<%= week.cid %>" />
+      <circle class="indicator <%= week.cid == scrollWeekCid ? 'current' : '' %>" cx="-8" cy="5" r="3" fill="black" data-cid="<%= week.cid %>" />
     <% } else { %>
-      <polygon class="indicator <%= i == 0 ? 'current' : '' %>" points="
+      <polygon class="indicator <%= week.cid == scrollWeekCid ? 'current' : '' %>" points="
         0,0
         0,<%= WEEK_HEIGHT_PX-1 %>
         -8,<%= WEEK_HEIGHT_PX * 0.5 - 0.5 %>

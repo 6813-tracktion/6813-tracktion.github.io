@@ -3,6 +3,8 @@ var LongRangeView = Marionette.ItemView.extend({
     initialize: function(options) {
         this.throttledRender = _.throttle(this.render, 100, {leading: false});
         this.listenTo(this.model.attributes.weeks, 'add change:goal change:total remove reset', this.throttledRender);
+        window.longRangeView = this;  // hack for scrollWeekCid
+        this.scrollWeekCid = null;
     },
     templateHelpers: function() {
         // Do this computation only once per render.
@@ -14,6 +16,7 @@ var LongRangeView = Marionette.ItemView.extend({
         // Choose an integer number of hours at which we can draw a tick.
         var hoursPerTick = Math.floor(maxMinutes / 60 / (maxTicks+1)) + 1;
         return {
+            scrollWeekCid: this.scrollWeekCid,
             WEEK_HEIGHT_PX: 13,
             PX_PER_MIN: PX_PER_MIN,
             maxMinutes: maxMinutes,

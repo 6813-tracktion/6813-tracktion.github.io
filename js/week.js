@@ -34,7 +34,7 @@ var WeekView = Marionette.ItemView.extend({
         // http://stackoverflow.com/questions/14460855/backbone-js-listento-window-resize-throwing-object-object-has-no-method-apply
         this.resizeCallback = _.bind(this.fixSVGFractionalCoordinates, this);
         $(window).on('resize', this.resizeCallback);
-        this.listenTo(window.dispatcher, 'fixFractionalCoordinates', this.resizeCallback);
+        this.listenTo(window.dispatcher, 'layout', this.resizeCallback);
     },
     remove: function() {
         $(window).off('resize', this.resizeCallback);
@@ -410,6 +410,7 @@ var FullView = Marionette.CollectionView.extend({
         window.updateCurrentWeek();
     },
     onShow: function() {
+        // No longer helps because of loading animation...
         window.updateCurrentWeek();
     },
 });

@@ -113,6 +113,7 @@ async.waterfall([
 
                 // update the "current" week in the history
                 $('.longRangeWeek .indicator[data-cid=' + cid + ']').attr('class', 'indicator current');
+                window.longRangeView.scrollWeekCid = cid;  // save for future render
 
                 return false;
             }
@@ -211,7 +212,8 @@ async.waterfall([
             $('.loadable').removeClass('loadable');
         });
         $('.loadable').fadeIn(800);
-        window.dispatcher.trigger('fixFractionalCoordinates');
+        window.dispatcher.trigger('layout');
+        window.updateCurrentWeek();
     }, 400);
 
     var settings = $('#settingsPic');
