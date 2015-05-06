@@ -121,14 +121,15 @@ async.waterfall([
         // If the oldest goal period is extremely long, we could fall through
         // without updating the field.
     };
+    var throttledUpdateCurrentWeek = _.throttle(updateCurrentWeek, 100, {leading: false});
     // There's no point in calling updateCurrentWeek now: no weeks are rendered.
     // The view will call it after rendering.
-    window.updateCurrentWeek = updateCurrentWeek;  // hack
-    $(document).scroll(_.throttle(updateCurrentWeek, 100, {leading: false}));
+    window.throttledUpdateCurrentWeek = throttledUpdateCurrentWeek;  // hack
+    $(document).scroll(throttledUpdateCurrentWeek);
     window.scrollToWeek = function(week) {
         var weekView = $('div.week[data-cid=' + week.cid +']');
         window.scrollTo(0, weekView.offset().top - BODY_PADDING_PX);
-        updateCurrentWeek();
+        throttledUpdateCurrentWeek();
     };
     $('#jumpToDate').on('change', function() {
         var wantDate = moment($('#jumpToDate').val(), 'L');
@@ -213,7 +214,7 @@ async.waterfall([
         });
         $('.loadable').fadeIn(800);
         window.dispatcher.trigger('layout');
-        window.updateCurrentWeek();
+        window.throttledUpdateCurrentWeek();
     }, 400);
 
     var settings = $('#settingsPic');

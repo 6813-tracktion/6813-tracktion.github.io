@@ -63,6 +63,9 @@ var WeekView = Marionette.ItemView.extend({
             this.pixelsPerMin = 700.0 / Math.max(420, Math.max(this.model.get('goal'), sum) * 1.2);
         // }
     },
+    onRender: function() {
+        window.throttledUpdateCurrentWeek();
+    },
     onShow: function() { // called once
         this.fixSVGFractionalCoordinates();
     },
@@ -392,8 +395,6 @@ var WeekView = Marionette.ItemView.extend({
         // past, we need to add a new current week. This case is handled by the
         // model itself.
         undoManager.commit();
-        // If we moved days from one week to another...
-        window.updateCurrentWeek();
     }
 });
 
@@ -404,11 +405,11 @@ var FullView = Marionette.CollectionView.extend({
     },
     onRender: function() {
         // May not be useful if called before show.
-        window.updateCurrentWeek();
+        window.throttledUpdateCurrentWeek();
     },
     onShow: function() {
         // No longer helps because of loading animation...
-        window.updateCurrentWeek();
+        window.throttledUpdateCurrentWeek();
     },
 });
 
