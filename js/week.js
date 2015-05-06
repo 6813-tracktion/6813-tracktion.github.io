@@ -162,9 +162,6 @@ var WeekView = Marionette.ItemView.extend({
             weekNumber: function(){
                 return this.self.beginning.format('W');
             },
-            canChangeEnd: function(){
-                return this.self.dataset.attributes.weeks.indexOf(this.self.model) <= 1;
-            },
             goalLineColor: function(px) {
                 var defaultPixel = 500;
                 return px >= defaultPixel ? "rgb(0,150,0)":"rgb(225,0,0)";

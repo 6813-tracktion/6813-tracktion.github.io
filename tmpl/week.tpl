@@ -27,7 +27,7 @@
         -->
         <g transform="translate(420, -4)" class="weekTitle">
             <!-- Start / End dates -->
-            <% if (canChangeEnd()) { %>
+            <% if (canChangeEnd) { %>
                 <!-- Text -->
                 <text style="text-anchor: middle" class="weekTitle"><%=beginning.format("ddd M/D")%> &ndash;
                     <tspan class="editableEndDate">

@@ -36,6 +36,7 @@ var Week = Backbone.Model.extend({
             end: moment('2015-04-19'),  // Inclusive for our convenience.
             goal: 200,
             total: null,  // Computed field
+            canChangeEnd: null,  // Computed field
             sessions: null,  // Set by initialize; should not be passed by the caller.
         };
     },
@@ -50,6 +51,8 @@ var Week = Backbone.Model.extend({
         this.listenTo(this, 'change:end', function() { sessions.refilter(); });
         this.listenTo(this.attributes.sessions, 'add change remove reset', this.updateTotal);
         this.updateTotal();
+        this.listenTo(this.attributes.dataset.attributes.weeks, 'add sort remove reset', this.updateCanChangeEnd);
+        this.updateCanChangeEnd();
     },
     // https://github.com/alexbeletsky/backbone-computedfields is a good library
     // but not worth the trouble for this.
@@ -57,6 +60,10 @@ var Week = Backbone.Model.extend({
         var total = 0;
         _.each(this.attributes.sessions.pluck('duration'), function(d) { total += d; });
         this.set('total', total);
+    },
+    updateCanChangeEnd: function() {
+        var index = this.attributes.dataset.attributes.weeks.indexOf(this);
+        this.set('canChangeEnd', index == 0 || index == 1);
     }
 });
 
