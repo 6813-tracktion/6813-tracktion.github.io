@@ -114,9 +114,10 @@ function loadModel(){
     // fake model
     //
     var list = [
+        new Session({ date: "2015-03-30", duration: 30,   label: 'running'}),
         new Session({ date: "2015-04-01", duration: 60,   label: 'polka'}),
-        new Session({ date: "2015-04-01", duration: 100,  label: 'running'}),
-        new Session({ date: "2015-04-02", duration: 30,   label: 'sitting'}),
+        new Session({ date: "2015-04-01", duration: 50,   label: 'running'}),
+        new Session({ date: "2015-04-02", duration: 45,   label: 'sitting'}),
         new Session({ date: "2015-04-04", duration: 40,   label: 'swimming'})
     ];
     var labels = Object.keys(DEFAULT_ACTIVITY_TYPES);
@@ -132,17 +133,20 @@ function loadModel(){
     var sessions = new Backbone.Collection(list);
     var dataset = new DataSet({today: moment('2015-04-04'), sessions: sessions});
     dataset.attributes.weeks.at(0).set('beginning', moment('2015-03-30'));
+    dataset.attributes.weeks.at(0).set('goal', 270);
 
     // Generate goal periods to cover all possible randomly generated sessions.
     var weekStart = moment("2015-03-23");
+    var g = 260;
     while (!weekStart.isBefore(moment("2014-11-10"))) {
         dataset.attributes.weeks.add(new Week({
             dataset: dataset,
             beginning: moment(weekStart),
             end: moment(weekStart).add(6, 'days'),
-            goal: 200,
+            goal: g,
         }));
         weekStart.subtract(1, 'weeks');
+        g -= 10;
     }
 
     return dataset;
