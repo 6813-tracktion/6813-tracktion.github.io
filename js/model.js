@@ -107,7 +107,7 @@ var DataSet = Backbone.Model.extend({
 
 function loadFreshModel() {
     var sessions = new Backbone.Collection([]);
-    return new DataSet({today: moment('2015-03-30'), sessions: sessions});
+    return new DataSet({today: moment(getUrlParameter('today') || '2015-03-30'), sessions: sessions});
 }
 
 function loadModel(){

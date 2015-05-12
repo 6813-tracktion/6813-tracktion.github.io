@@ -288,7 +288,7 @@ function lockScroll(){
     $body.css({'margin-right': marginR,'margin-bottom': marginB});
 
     // special fixed elements
-    $('.navbar-fixed-top').css({ 'padding-right': marginR });
+    $('#header > nav').css({ 'padding-right': marginR });
 }
 function unlockScroll(){
     var $html = $('html');
@@ -300,5 +300,5 @@ function unlockScroll(){
     $body.css({'margin-right': 0, 'margin-bottom': 0});
 
     // fixed elements
-    $('.navbar-fixed-top').css({ 'padding-right': 0 });
+    $('#header > nav').css({ 'padding-right': 0 });
 }
