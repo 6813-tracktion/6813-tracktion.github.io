@@ -95,6 +95,16 @@ async.waterfall([
             undoManager.commit();
         }
     });
+    if(getUrlParameter('nextday')){
+        $(window).on('keypress', function(event){
+            // increase today's date when pressing PageUp (33)
+            if(event.keyCode == 33){
+                var today = dataset.get('today');
+                dataset.set('today', moment(today).add(1, 'days'));
+                undoManager.commit();
+            }
+        });
+    }
 
     // Set up "jump to date"
     $('#jumpToDate').datepicker();
